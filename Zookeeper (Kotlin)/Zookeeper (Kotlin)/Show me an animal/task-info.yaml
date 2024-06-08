@@ -1,0 +1,15 @@
+type: edu
+custom_name: Show me an animal!
+files:
+  - name: src/Zookeeper.kt
+    visible: true
+    learner_created: false
+  - name: test/ZookeeperTest.kt
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/196/stages/976/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 08 Jun 2024 19:14:48 UTC"
+record: 2

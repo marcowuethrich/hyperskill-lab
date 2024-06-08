@@ -1,0 +1,126 @@
+<div class="step-text">
+<p>As you know, Kotlin has a lot of <a class="theory-lookup not-relevant" href="/learn/step/12553" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a data type is a classification that specifies the kind of value that a variable, expression, or function parameter can hold. | It is an essential aspect of a statically-typed language like Kotlin, which requires explicit or implicit type declarations for variables and function parameters. For instance, Kotlin has various data types, such as integers, floating-point numbers, characters, booleans, and strings. Among these, strings are a widely-used data type that represents a sequence of zero or more characters enclosed by double quotes. Strings are often used in conditional statements and regular expressions, and they have various operations, such as getting the length or concatenating two strings. Moreover, type inference is a helpful feature in Kotlin that allows the compiler to deduce the data type of a variable, expression, or function parameter automatically, making the code more concise and readable.">data types</a> such as <code class="language-kotlin">String</code>, <code class="language-kotlin">Int</code>, and <code class="language-kotlin">Double</code>. In this topic, we will focus on the <code class="language-kotlin">String</code> type. This is a very useful type as even a simple "Hello world!" program uses strings. A string is a sequence of zero or more characters enclosed by double quotes e.g. "John", "". You will surely use strings on a regular basis in your future projects. In this topic, we will look at some important basics of working with strings.</p>
+<h5 id="the-length-of-a-string">The length of a string</h5>
+<p>You will often need  to get the length of a <code class="language-kotlin">String</code>. The length of the string is determined by the number of characters that are enclosed between the double quotes. To do this, simply use <code class="language-kotlin">.length</code> which gives a value of the <code class="language-kotlin">Int</code> type:</p>
+<pre><code class="language-kotlin">val language = "Kotlin"
+println(language.length) // 6
+
+val empty = ""
+println(empty.length) // 0</code></pre>
+<h5 id="concatenating-strings">Concatenating strings</h5>
+<p>Another common operation with <code class="language-kotlin">String</code> is <strong><a class="theory-lookup not-relevant" href="/learn/step/12553" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, concatenation refers to the process of combining two or more strings into a single string. | This is a common operation when working with strings and is often used to build larger strings from smaller ones. The concatenation operator in Kotlin is the `+` symbol, which can be used to combine any two strings. When concatenating strings, the order of the strings matters, and the resulting string will be in the same order as they are arranged. Concatenation is not the same as addition, because it is not a commutative operation. The `+` operator can also be used to append values of different types to a string. In this case, the value is automatically converted to a string and then concatenated to the target. An expression must start with a string, and if it starts with a different type, it will be converted to a string using the `toString()` function. There are two main ways to construct a string object in Kotlin: using the constructor or using the `StringBuffer` class and its `append()` method. When using the `+` operator, new memory is allocated to store the combined string. However, when using the `StringBuffer` class and its `append()` method, no new memory is allocated.">concatenation</a></strong>. It is used to construct one string out of other strings.</p>
+<p>Two strings can be concatenated with the <code class="language-kotlin">+</code>:</p>
+<pre><code class="language-kotlin">val str1 = "ab"
+val str2 = "cde"
+val result = str1 + str2 // "abcde"</code></pre>
+<p> When we concatenate two strings, a new string is created.</p>
+<pre><code class="language-kotlin">val one = "1"
+val two = "2"
+val twelve = one + two 
+println(one)      // 1, no changes
+println(two)      // 2, no changes
+println(twelve)   // 12</code></pre>
+<p>You can concatenate multiple strings in the same expression:</p>
+<pre><code class="language-kotlin">val firstName = "John"
+val lastName = "Smith"
+val fullName = firstName + " " + lastName</code></pre>
+<p></p>
+<div class="alert alert-warning"><p>Pay attention<strong>, </strong><code class="language-kotlin">str1 + str2</code> is not the same as <code class="language-kotlin">str2 + str1</code> because the concatenation is not a commutative operation, unlike addition.</p></div>
+<p></p>
+<h5 id="appending-values-to-strings">Appending values to strings</h5>
+<p>The <code class="language-kotlin">+</code> also works for <a class="theory-lookup not-relevant" href="/learn/step/12553" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, the term append refers to the process of adding elements or values to a string. | The `append` function can be used to add values of different types to a string, which are then automatically converted to strings and concatenated to the target. It's important to note that an expression must start with a string for appending to work. Appending can be useful in various scenarios, such as string concatenation, logging and formatting, generating HTML or XML markup, concurrent data processing, multi-threaded text generation, and thread-safe string manipulation.">appending</a> values of different types to a <code class="language-kotlin">String</code>. The value is automatically converted to a <code class="language-kotlin">String</code> and then concatenated to the target <code class="language-kotlin">String</code>:</p>
+<pre><code class="language-kotlin">val stringPlusBoolean = "abc" + 10 + true
+println(stringPlusBoolean) // abc10true
+
+val code = "123" + 456 + "789"
+println(code) // 123456789</code></pre>
+<p></p>
+<div class="alert alert-warning"><p>An expression must start with a <code class="language-kotlin">String</code>.</p></div>
+<p></p>
+<p>Take a look at the example below. It wouldn't work because the first operand is a number:</p>
+<pre><code class="language-kotlin">val errorString = 10 + "abc" // an error here!</code></pre>
+<p>Let's consider a different situation:</p>
+<pre><code class="language-kotlin">val stringAndNumbers = "abc" + 11 + 22
+println(stringAndNumbers) // abc1122</code></pre>
+<p>Why did that work? First, it appends <code class="language-kotlin">11</code> to the string <code class="language-kotlin">"abc"</code>, and then it appends <code class="language-kotlin">22</code> to the string <code class="language-kotlin">"abc11"</code>.</p>
+<p>You may concatenate a character with a <code class="language-kotlin">String</code> to get a new <code class="language-kotlin">String</code>:</p>
+<pre><code class="language-kotlin">val charPlusString = 'a' + "bc"
+println(charPlusString) // abc
+val stringPlusChar = "de" + 'f'
+println(stringPlusChar) // def</code></pre>
+<p>Also, you may append any value to the result, because characters plus a string gives you a <code class="language-kotlin">String</code>:</p>
+<pre><code class="language-kotlin">val charPlusStringPlusInt = 'a' + "bc" + 123
+println(charPlusStringPlusInt) // abc123</code></pre>
+<p>We will discuss how to work with characters later, but for now, just remember that you can concatenate characters and strings to get a <code class="language-kotlin">String</code> value. If you are interested in how <a class="theory-lookup not-relevant" href="/learn/step/12553" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a character is a single symbol, such as a letter, digit, or other symbol, represented by the char data type. | Characters can be enclosed in single quotes, and they can represent any symbol including special characters and Unicode characters. A character can also be represented by its hexadecimal code in the Unicode table. It's important to note that a character literal can only represent a single symbol, and should not be confused with a number or a string, which are sequences of characters.">characters</a> operate with integers, look at this <a href="https://hyperskill.org/learn/step/4680" rel="noopener noreferrer nofollow" target="_blank">topic</a>.</p>
+<h5 id="repeating-the-string">Repeating the string</h5>
+<p>If you need to repeat one string two or more times, then hold your loops: Kotlin provides the <code class="language-kotlin">repeat</code> function:</p>
+<pre><code class="language-kotlin">print("Hello".repeat(4)) // HelloHelloHelloHello
+</code></pre>
+<p>Now, imagine your friend senior developer gave you a secret on how to become the best programmer:</p>
+<p> <source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><picture><source media="(max-width: 480px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><img alt="To do: eat, sleep, code, repeat" height="740" src="https://ucarecdn.com/a9643a6b-016f-4d99-8892-0c3d2bfe10f2/" width="578"/></picture></p>
+<p> </p>
+<p>Let's try to transform this piece of paper to a code snippet that prints your schedule for every day of the week:</p>
+<pre><code class="language-kotlin">println("Eat. Sleep. Code.\n".repeat(7)) // \n gives you a line feed (new line)</code></pre>
+<p>  And here you have your week schedule:</p>
+<pre><code class="language-no-highlight">Eat. Sleep. Code.
+Eat. Sleep. Code.
+Eat. Sleep. Code.
+Eat. Sleep. Code.
+Eat. Sleep. Code.
+Eat. Sleep. Code.
+Eat. Sleep. Code.</code></pre>
+<p>No time for procrastination!</p>
+<h5 id="raw-string"> Raw string</h5>
+<p>Sometimes you need some special symbols like tabs or quote marks in your string. You can do it with the help of <strong>escape sequences</strong>. For example:</p>
+<pre><code class="language-kotlin">// prints 'H' is the first letter of "Hello world!" string.
+println("\'H\' is the first letter of \"Hello world!\" string.")</code></pre>
+<p>This looks a little heavy. If you need to write a fairly large text with newlines and special characters, it can be difficult to read. </p>
+<p>For these cases, you can use a <strong><a class="theory-lookup not-relevant" href="/learn/step/12553" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a raw string is a string literal that does not treat escape sequences as special characters. | This means that backslashes (\) and other special characters are treated as literal characters within the string, rather than being used to represent things like line breaks or quotes. Raw strings are enclosed in triple quotes (), and can span multiple lines. They are useful when you want to include literal backslashes or other special characters in a string, without having to escape them.">raw string</a></strong>. A raw string can contain newlines and any other characters. You just need to wrap the text in triple quotes (<code class="language-kotlin">"""</code>):</p>
+<pre><code class="language-kotlin">val largeString = """
+    This is the house that Jack built.
+      
+    This is the malt that lay in the house that Jack built.
+       
+    This is the rat that ate the malt
+    That lay in the house that Jack built.
+       
+    This is the cat
+    That killed the rat that ate the malt
+    That lay in the house that Jack built.
+""".trimIndent() // removes the first and the last lines and trims indents
+print(largeString)</code></pre>
+<p>This text prints:</p>
+<pre><code class="language-no-highlight">This is the house that Jack built.
+
+This is the malt that lay in the house that Jack built.
+
+This is the rat that ate the malt
+That lay in the house that Jack built.
+
+This is the cat
+That killed the rat that ate the malt
+That lay in the house that Jack built.</code></pre>
+<p>As you can see, we also used the function <code class="language-kotlin">.trimIndent()</code>. It cuts off all the lines of the common minimal indent and removes the first and last lines if they are empty. For example:</p>
+<pre><code class="language-kotlin">val unevenString = """
+        123
+         456
+          789""".trimIndent()
+print(unevenString)
+println()
+
+val rawString = """123
+         456
+          789
+""".trimIndent()
+print(rawString )</code></pre>
+<p>This code prints:</p>
+<pre><code class="language-no-highlight">123
+ 456
+  789
+
+123
+         456
+          789</code></pre>
+<h5 id="conclusion">Conclusion</h5>
+<p>Now you know the most basic <code class="language-kotlin">String</code> operations! These functions are pretty simple but absolutely crucial in programming. There are actually many other useful <code class="language-kotlin">String</code> operations, but you will learn about them a little later. Good luck with your tasks!</p>
+</div>

@@ -1,0 +1,23 @@
+type: matching
+captions:
+  - ===
+  - '!=='
+  - ==
+  - '!='
+options:
+  - Points to the same object
+  - Different inner structure
+  - Points to different objects
+  - Equal inner structure
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11239#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3

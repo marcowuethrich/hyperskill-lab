@@ -1,0 +1,16 @@
+type: code
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7626#comment
+status: Solved
+feedback:
+  message: |-
+    <html>[+] Test #1. OK
+    [+] Test #2. OK
+
+    2 of 2 test(s) passed.</html>
+  time: "Thu, 06 Jun 2024 12:29:02 UTC"
+record: -1
+submission_language: kotlin

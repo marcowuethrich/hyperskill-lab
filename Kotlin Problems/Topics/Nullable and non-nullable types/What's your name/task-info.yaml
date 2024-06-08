@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: 4 null
+  - text: null null
+  - text: Compile-time error
+  - text: 4
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20495#comment
+status: Solved
+record: -1
+custom_name: What's your name?
+local_check: false

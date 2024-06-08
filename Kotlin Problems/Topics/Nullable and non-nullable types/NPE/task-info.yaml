@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Access to a property of a null object
+  - text: "Bad initializations, for example, in constructors"
+  - text: Explicit throwing of a NullPointerException
+  - text: '!! syntax'
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7614#comment
+status: Solved
+record: -1
+local_check: false

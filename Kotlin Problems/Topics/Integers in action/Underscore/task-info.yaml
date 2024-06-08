@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "only every three digits, counting from the right."
+  - text: ' before or after a number.'
+  - text: "in any place inside a number, but not near other underscores."
+  - text: in any place inside a number.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/5978#comment
+status: Solved
+record: -1
+local_check: false

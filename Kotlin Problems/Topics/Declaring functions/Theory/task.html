@@ -1,0 +1,72 @@
+<div class="step-text">
+<p>In Kotlin, functions form the bedrock of your code. They define blocks of code that you can execute and reuse throughout your program. You declare functions in Kotlin using the <code class="language-kotlin">fun</code> <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a keyword is a word that has a special meaning in the language and cannot be changed by the programmer. | It is used to define the structure and behavior of the code. Examples of keywords in Kotlin include `fun` (used to define a function), `var` (used to define a variable), and `if` (used to define a conditional statement). Keywords are reserved words in Kotlin and cannot be used as identifiers.">keyword</a>, a name, a list of parameters (if needed), the <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a return type is the type of value that a function returns. | If a function does not return a value, its return type is denoted as `Unit`, which is a subtype of every known type in Kotlin. This is useful in situations where a function cannot return a value, such as when calculating a percentage with a denominator of zero. In such cases, returning `Nothing` indicates that the function will not return a value, rather than returning a null or other arbitrary value.">return type</a>, and the function body.</p>
+<p>Functions play a critical role because they organize code into manageable chunks. They enable code reuse, lighten redundancies, and enhance readability. When you wrap specific operations inside functions, you build more modular and maintainable codebases.</p>
+<p>Let's look at a simple example of a Kotlin <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a function declaration is a named sequence of instructions that performs a specific action, such as printing data to standard output or calculating a square root. | It is declared using the fun keyword followed by the function name, input parameters (if any), and the function body enclosed in curly braces. The function name is mandatory and cannot be changed once declared. A file can contain multiple function declarations, but there can only be one entry point function, either with the signature fun main(args: Array&lt;String&gt;) or fun main().">function declaration</a>:</p>
+<pre><code class="language-kotlin">fun greet(name: String): String {
+    return "Hello, $name!"
+}</code></pre>
+<p>In this <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an instance refers to an object or an instance of a class that is created during runtime. | It is a subtype of every known type in Kotlin, meaning it can represent a value of any type in terms of type checking. This is particularly useful in situations where a function demands a return type, but it is impossible to return a value, such as when calculating a percentage if the value is zero. In such cases, a function that returns `Instance` can be used. The concept of instance is also related to threading, where only one thread can execute code in a synchronized method of a particular instance. This means that different threads can execute methods of different objects at the same time, a concept that can be summarized as one thread per instance.">instance</a>, <code class="language-kotlin">greet</code> is a function that accepts one parameter <code class="language-kotlin">name</code> of type <code class="language-kotlin">String</code> and gives back a greeting message as a <code class="language-kotlin">String</code>. To use this function, you only need to pass in a name:</p>
+<pre><code class="language-kotlin">val message = greet("Alice")
+println(message) // Output: Hello, Alice!
+</code></pre>
+<p>Kotlin also includes support for <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, named arguments are a way to pass arguments to functions by specifying the name of the parameter rather than its position. | This can improve code readability and allow for reordering of arguments, especially when some parameters have default values. Named arguments can be used in function calls, including overridden functions, by specifying the name of the argument before its value. This can be useful when redefining functions in derived classes, as it allows for the preservation of argument names. However, it is important to use named arguments wisely to avoid unnecessary complexity and maintain code clarity.">named arguments</a> and default parameter values, which bring added flexibility to functions:</p>
+<pre><code class="language-kotlin">fun greet(name: String, greeting: String = "Hello"): String {
+    return "$greeting, $name!"
+}
+
+val customGreeting = greet(name = "Bob", greeting = "Welcome")
+println(customGreeting) // Output: Welcome, Bob!
+</code></pre>
+<p>Knowing how to declare and use functions is paramount for working with Kotlin, as they're commonly used in all types of applications.</p>
+<p>In Kotlin, the fundamental <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a syntax refers to the set of rules and conventions that dictate how a program should be written in the language. | It includes the structure of statements, expressions, and keywords, as well as the use of indentation, whitespace, and comments. An expression, for example, is a type of syntax that evaluates to a single value, such as a literal value, variable, function call, or a combination of these elements using operators. Understanding the syntax of Kotlin is essential for writing clear, maintainable, and error-free code.">syntax</a> for declaring a function is as follows:</p>
+<pre><code class="language-kotlin">fun functionName(param1: Type1, param2: Type2, ...): ReturnType {
+    // Function body
+    return value
+}</code></pre>
+<p>Here's a breakdown of the syntax:</p>
+<ul><li><p><code class="language-kotlin">fun</code>: This keyword declares a function.</p></li><li><p><code class="language-kotlin">functionName</code>: This is the name you give to your function. Make it descriptive and adhere to the camelCase naming convention.</p></li><li><p><code class="language-kotlin">param1</code>, <code class="language-kotlin">param2</code>, ..., <code class="language-kotlin">Type1</code>, <code class="language-kotlin">Type2</code>, ...: These represent the function's parameters. Each parameter consists of a name followed by a colon and its type. Functions can be without parameters.</p></li><li><p><code class="language-kotlin">ReturnType</code>: This labels the type of value the function will give back. If the function does not return a value, the return type is <code class="language-kotlin">Unit</code>, which you can omit.</p></li></ul>
+<p>Here's a simple function example that takes two integers and returns their sum:</p>
+<pre><code class="language-kotlin">fun addNumbers(a: Int, b: Int): Int {
+    return a + b
+}</code></pre>
+<p>Kotlin provides a more tidy syntax for functions with a single expression using the <code class="language-kotlin">=</code> sign:</p>
+<pre><code class="language-kotlin">fun multiplyNumbers(a: Int, b: Int): Int = a * b
+</code></pre>
+<p>In this case, you can omit the return type if the compiler can discern it:</p>
+<pre><code class="language-kotlin">fun multiplyNumbers(a: Int, b: Int) = a * b
+</code></pre>
+<p>In Kotlin, when defining a function, you can specify parameters that the function will accept. Parameters are outlined within the parentheses after the function name, and each parameter entails a name, a colon, and its type. Here's a basic example:</p>
+<pre><code class="language-kotlin">fun greet(name: String) {
+    println("Hello, $name!")
+}</code></pre>
+<p>You can assign default values for function parameters. This capability allows you to <a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, invoke refers to the action of calling or using a function. | When we want to use a function, we can invoke it by using its name followed by parentheses. If a function takes one or more arguments (input data), they should be passed inside the parentheses. For example, if a function takes a single-string argument, it can be invoked like this: `functionName(string)`. Some functions not only take arguments but also produce a result, which can be assigned to a variable. Function arguments and producing a result are fundamental concepts when working with functions in Kotlin.">invoke</a> the function without having to pass all arguments explicitly, resorting to the default values. Default values are noted using the <code class="language-kotlin">=</code> operator after the type:</p>
+<pre><code class="language-kotlin">fun greet(name: String, greeting: String = "Hello") {
+    println("$greeting, $name!")
+}</code></pre>
+<p>With the function above, you can call <code class="language-kotlin">greet("Alice")</code> and it will print "Hello, Alice!" because the default value for <code class="language-kotlin">greeting</code> is used.</p>
+<p>Kotlin also supports named arguments, allowing you to note the names of the parameters when invoking the function. This feature is especially helpful when a function has numerous parameters with default values and you want to provide a non-default value for a parameter that isn't the last one on the list:</p>
+<pre><code class="language-kotlin">greet(name = "Bob", greeting = "Hi")</code></pre>
+<p>Named arguments amplify code readability and enable calling functions with parameters in an order different from how they were defined.</p>
+<h5 id="return-types-and-unit-in-kotlin-functions">Return Types and Unit in Kotlin Functions</h5>
+<p>In Kotlin, functions can return different types of values, specified following the function name and parameters, preceded by a colon. For instance, a function that returns an <code class="language-kotlin">Int</code> would be declared like this:</p>
+<pre><code class="language-kotlin">
+fun sum(a: Int, b: Int): Int {
+    return a + b
+}
+    </code></pre>
+<p>The return type can be clearly seen in the function signature. However, if the function doesn't return any valuable value, Kotlin provides the <code class="language-kotlin">Unit</code> type, comparable to <code class="language-kotlin">void</code> in languages like Java or C++. It's unnecessary to specify <code class="language-kotlin">Unit</code> as the return type because it's the default return type if none is declared:</p>
+<pre><code class="language-kotlin">
+fun printSum(a: Int, b: Int): Unit {
+    println("Sum is ${a + b}")
+}
+
+// is equivalent to
+
+fun printSum(a: Int, b: Int) {
+    println("Sum is ${a + b}")
+}
+    </code></pre>
+<p>When a function returns <code class="language-kotlin">Unit</code>, it implies that the function is invoked for its side effects (like printing to the console), not for the result it returns.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>Overall, understanding how to declare and use functions in Kotlin is vital for generating clear, efficient, and maintainable code. The language's features such as default values, named arguments, and single-<a class="theory-lookup not-relevant" href="/learn/step/4580" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an expression is a piece of code that evaluates to a value. | It can be a simple literal value, a variable, a function call, or a more complex combination of these elements using operators or other language constructs. Expressions are used to compute and return values from functions, assign values to variables, and perform calculations or operations in conditionals. For example, 2 \* 2 is an expression, and it produces a single value.">expression</a> functions, enhance Kotlin's expressiveness and brevity.</p>
+</div>

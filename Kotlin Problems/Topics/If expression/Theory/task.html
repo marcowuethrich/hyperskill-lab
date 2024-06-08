@@ -1,0 +1,78 @@
+<div class="step-text">
+<p>In this topic, we'll explore Kotlin's <a class="theory-lookup not-relevant" href="/learn/step/4625" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a conditional expression is a construct that allows a program to perform different computations based on the value of a boolean expression. | It is an expression-style construct, meaning it can return a value as a result of computation, with the result being the last expression in the body. There are various forms of conditional expressions, such as the single if case, if-else case, if-else-if case, and nested if's. Unlike some other programming languages, Kotlin's if expression is an expression, not a statement. In this topic, we'll explore Kotlin's conditional expression, focusing on the various forms of the expression and its usage as an expression-style construct.">conditional expressions</a>, focusing on the various forms of the <code class="language-kotlin">if</code> expression and its usage as an expression-style construct.</p>
+<h5 id="conditional-expressions">Conditional expressions</h5>
+<p>Conditional expressions allow a program to perform different computations based on the value of a <a class="theory-lookup not-relevant" href="/learn/step/4625" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a boolean expression is a type of expression that evaluates to a boolean value, either true or false. | These expressions are often used in programming to make decisions based on two boolean conditions. They can include logical operators such as 'not', 'and', 'or', and 'xor' that allow for complex value matching and can help make the code easier to understand. In Kotlin, boolean values are often used to represent two opposite states, such as whether a store is open or closed, and they can only take on two possible values: true or false.">boolean expression</a>. There are different forms of conditional expressions, such as the <strong>single if </strong>case, <strong>if-else </strong>cases, <strong>if-else-if </strong>cases, and nested <strong>if</strong>'s.</p>
+<h5 id="expression-style-if">Expression-style "if"</h5>
+<p>Unlike the case of some other programming languages, Kotlin's <code class="language-kotlin">if</code> is an expression, not a <a class="theory-lookup not-relevant" href="/learn/step/4625" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a statement is a single command to be executed, such as printing a text or assigning a value to a variable. | Unlike expressions, which produce a single value as a result of computation, statements are standalone commands that have a side effect, like changing the state of the program. The result of a statement is not used in the program, whereas the result of an expression often is. For example, in the statement `val x = 2 * 2`, the expression `2 * 2` is evaluated, and its result is assigned to the variable `x`. However, the result of the statement itself is not used in the program. In contrast, if you write `println(2 * 2)`, the expression `2 * 2` is evaluated, and its result is passed directly to the `println` function, which then prints the result. It's important to note that a statement can be an expression, but not all expressions are statements. For instance, `2 * 2` is an expression, but it's not a statement because it doesn't change the state of the program.">statement</a>. This means it can return a value as a result of computations. The result must be the last expression in the body. For example:</p>
+<pre><code class="language-kotlin">val max = if (a &gt; b) {
+    println("Choose a")
+    a
+} else {
+    println("Choose b")
+    b
+}</code></pre>
+<p>In the above example, the variable <code class="language-kotlin">max</code> is assigned the value of the last expression in the body. It's important to note that if you use an expression-style <code class="language-kotlin">if</code>, it must have an <code class="language-kotlin">else</code> branch.</p>
+<p>You can skip braces if all the bodies contain only a single statement:</p>
+<pre><code class="language-kotlin">val max = if (a &gt; b) a else b
+</code></pre>
+<p>There are cases when you don't need to declare a new variable for storing a result. For instance, consider the following example:</p>
+<pre><code class="language-kotlin">fun main() {
+    val a = readln().toInt()
+    val b = readln().toInt()
+
+    println(if (a == b) {
+        "a equal b"
+    } else if (a &gt; b) {
+        "a is greater than b"
+    } else {
+        "a is less than b"
+    })
+}</code></pre>
+<p>In the example above, the <code class="language-kotlin">if</code> expression is passed directly to the <code class="language-kotlin">println()</code> function without declaring a variable, and <code class="language-kotlin">println()</code> prints the result.</p>
+<h5 id="idiom">Idiom</h5>
+<p>Prefer using the expression-style <code class="language-kotlin">if</code> when you need to get results, as it can help avoid potential issues caused by mutable variables or forgotten changes. For example:</p>
+<pre><code class="language-kotlin">val max = if (a &gt; b) a else b // one line</code></pre>
+<p> </p>
+<p>In summary, Kotlin's <code class="language-kotlin">if</code> expression provides a powerful and flexible way to handle conditional execution of code. By using expression-style <code class="language-kotlin">if</code>, you can take advantage of its ability to return values and simplify your code. If you know Java, you could map it to a ternary operator:</p>
+<pre><code class="language-java">final String msg = num &gt; 10 
+  ? "Number is greater than 10" 
+  : "Number is less than or equal to 10";</code></pre>
+<h5 id="using-when-as-a-more-powerful-alternative-to-if-else-if-chains">Using "when" as a more powerful alternative to "if-else-if" chains</h5>
+<p>Kotlin provides a more powerful and expressive alternative to <strong>if-else-if</strong> chains called the <code class="language-kotlin">when</code> expression. The <code class="language-kotlin">when</code> expression simplifies the process of handling multiple conditions and makes the code more readable.</p>
+<p>Here's an example of how to use <code class="language-kotlin">when</code>:</p>
+<pre><code class="language-kotlin">val number = 5
+
+when (number) {
+    1 -&gt; println("One")
+    2 -&gt; println("Two")
+    3 -&gt; println("Three")
+    4 -&gt; println("Four")
+    else -&gt; println("Number is greater than four")
+}</code></pre>
+<p>In this example, the <code class="language-kotlin">when</code> expression checks the value of the <code class="language-kotlin">number</code> variable against different conditions. If the value matches one of the conditions, the corresponding block of code will be executed.</p>
+<h5 id="using-when-as-an-expression">Using "when" as an expression</h5>
+<p>Similar to the <code class="language-kotlin">if</code> expression, <code class="language-kotlin">when</code> can also be used as an expression that returns a value. The value returned by the <code class="language-kotlin">when</code> expression is the result of the last expression in the matching branch.</p>
+<pre><code class="language-kotlin">val number = 3
+val message = when (number) {
+    1 -&gt; "One"
+    2 -&gt; "Two"
+    3 -&gt; "Three"
+    4 -&gt; "Four"
+    else -&gt; "Number is greater than four"
+}
+
+println(message) // Output: Three</code></pre>
+<h5 id="using-when-with-ranges-and-conditions">Using "when" with ranges and conditions</h5>
+<p><code class="language-kotlin">when</code><strong> </strong>expressions can also be used with ranges and more complex conditions. Here's an example:</p>
+<pre><code class="language-kotlin">val number = 15
+
+when {
+    number &lt; 0 -&gt; println("Negative number")
+    number in 1..10 -&gt; println("Number between 1 and 10")
+    number % 2 == 0 -&gt; println("Even number")
+    else -&gt; println("Odd number greater than 10")
+}</code></pre>
+<p>In this example, the <code class="language-kotlin">when</code> expression checks the value of <code class="language-kotlin">number</code> against different conditions, including <a class="theory-lookup not-relevant" href="/learn/step/4625" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a range is a sequence of values that can be iterated over, compared, and used in various operations. | There are two types of ranges in Kotlin: closed-ended and open-ended. A closed-ended range includes both the start and end values, while an open-ended range excludes the end value. For example, you can create a range of numbers from 1 to 5 (inclusive) using the syntax 1..5 or a range of numbers from 1 to 5 (exclusive) using the syntax 1 until 5. You can use ranges in for loops, array indexing, and other operations. Ranges can be assigned to variables, combined using logical operators, and negated to check if a value is not within a range.">ranges</a> and custom conditions.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>In conclusion, Kotlin provides powerful constructs like the <code class="language-kotlin">if</code> and <code class="language-kotlin">when</code> expressions to handle conditional execution of code. These expressions can <a class="theory-lookup not-relevant" href="/learn/step/4625" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a return value is the result produced by a function after it has completed its execution. | It is determined by the last expression in the function's body, which must be an expression-style statement. If a function has a specified return type, it indicates that the function will not return a value under any circumstance, such as when it throws an exception or enters an infinite loop. Understanding return values is important for writing clean, readable, and robust code in Kotlin.">return values</a>, making the code more concise and expressive. Using these constructs effectively will help you write more readable and maintainable code in Kotlin.</p>
+</div>

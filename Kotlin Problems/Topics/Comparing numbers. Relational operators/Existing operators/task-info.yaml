@@ -1,0 +1,19 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: '&gt;'
+  - text: ==
+  - text: '!='
+  - text: '&lt;&gt;'
+  - text: '&gt;&gt;&gt;'
+  - text: '&lt;='
+  - text: '&lt;&lt;'
+  - text: =
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4529#comment
+status: Solved
+record: -1
+local_check: false

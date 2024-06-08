@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Unit
+  - text: Void
+  - text: Nothing
+  - text: Boolean
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/9695#comment
+status: Solved
+record: -1
+custom_name: Can it go through?
+local_check: false

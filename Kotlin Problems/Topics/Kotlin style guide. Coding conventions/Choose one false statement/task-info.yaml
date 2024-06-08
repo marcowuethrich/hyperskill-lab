@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "The conventions are recommendations, not rules."
+  - text: Kotlin has its own coding style conventions.
+  - text: "If you do not follow the conventions, your program will not work."
+  - text: "If you follow the conventions, it will be easier for others to read your\
+    \ code."
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4426#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,11 @@
+content:
+  - Theory
+  - Converting an integer to string and long
+  - Existing functions
+  - Sum of Longs
+  - Reasons
+  - Overflow and crash
+  - Converting a Long value to Double and Byte in Kotlin
+  - Where is type overflow possible
+  - Cutting the fraction
+  - Program result

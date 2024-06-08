@@ -1,0 +1,25 @@
+type: matching
+captions:
+  - '!'
+  - xor
+  - '&amp;&amp;'
+  - '||'
+options:
+  - "A binary operator that returns true if at least one operand is true, otherwise,\
+  \ false."
+  - "A binary operator that returns true if both operands are true, otherwise, false."
+  - A unary operator that reverses a boolean value.
+  - "A binary operator that returns true if boolean operands have different values,\
+  \ otherwise, false."
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4518#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3

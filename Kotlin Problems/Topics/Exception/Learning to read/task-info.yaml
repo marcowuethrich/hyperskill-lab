@@ -1,0 +1,35 @@
+type: matching
+captions:
+  - Exception in thread &quot;main&quot;
+  - kotlin.NotImplementedError
+  - "An operation is not implemented: Remove this line and write your solution here"
+  - "at MainKt.main(Main.kt:2), at MainKt.main(Main.kt)"
+  - main
+  - Main.kt
+  - 2
+  - Isn&#x27;t presented in the text
+options:
+  - Stack trace
+  - Thread name
+  - Exception message
+  - Line number
+  - Exception name
+  - File name
+  - Function name
+  - Exception cause
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7246#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7

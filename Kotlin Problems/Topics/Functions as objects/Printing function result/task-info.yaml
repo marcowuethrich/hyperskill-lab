@@ -1,0 +1,17 @@
+type: matching
+captions:
+  - q
+  - m
+options:
+  - Int
+  - () -&gt; Int
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/5995#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1

@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: It's a list of method calls
+  - text: It's a list of all methods in a program
+  - text: It's a report of thrown exceptions
+  - text: It's a method which describes all elements of a program
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20653#comment
+status: Solved
+record: -1
+custom_name: What is a stack trace?
+local_check: false

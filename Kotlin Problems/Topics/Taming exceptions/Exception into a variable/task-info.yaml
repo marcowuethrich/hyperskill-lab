@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: val throwException = throw Exception()
+  - text: val newException = throw new Exception("Throw me!")
+  - text: val blankException = Exception()
+  - text: val anException = Exception("New exception")
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/18768#comment
+status: Solved
+record: -1
+local_check: false

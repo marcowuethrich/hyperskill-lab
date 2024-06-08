@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: To prevent a sudden shutdown of the program
+  - text: To signal that something went wrong during program execution
+  - text: To provide control over your program
+  - text: To handle errors
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/18770#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,83 @@
+<div class="step-text">
+<p>In this topic, we'll talk about <strong>Booleans</strong>. Boolean values are often used in programming. Basically, they represent two opposite states. For example, a boolean value can indicate:</p>
+<ul><li><p>whether a store is open;</p></li><li><p>whether a plane is up in the sky;</p></li><li><p>whether travelling is allowed;</p></li><li><p>whether an option is enabled, and so on.</p></li></ul>
+<h5 id="boolean-variables">Boolean variables</h5>
+<p><strong>Boolean</strong> is a special data type that has only two possible values — <code class="language-kotlin">true</code> and <code class="language-kotlin">false</code>:</p>
+<pre><code class="language-kotlin">val t = true  // t is true
+val f = false // f is false
+
+println(t) // true
+println(f) // false</code></pre>
+<p> </p>
+<p></p>
+<div class="alert alert-warning"><p></p><p>You cannot assign an integer value to a <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a boolean variable is a special data type that can only take two possible values: true or false. | They are often used to represent two opposite states, such as whether a store is open, whether a plane is up in the sky, or whether an option is enabled. In Kotlin, you can read a boolean value in a case-insensitive manner, and since Kotlin 1.6, you can use the `xor` logical operator, which returns true if exactly one of its operands is true and the other is false.">Boolean variable</a>. In Kotlin, <code class="language-kotlin">0</code> is not the same as <code class="language-kotlin">false</code>.</p><p></p></div>
+<p></p>
+<p> </p>
+<p style="text-align: center;"><picture><img alt="True or False" height="150" src="https://ucarecdn.com/50cbf6b2-6d44-44d6-b5ef-b1426bdde305/" width="150"/></picture></p>
+<h5 id="reading-boolean-values">Reading Boolean values</h5>
+<p>Since Kotlin 1.4, you can read a Boolean value like this:</p>
+<pre><code class="language-kotlin">val b: Boolean = readLine().toBoolean()</code></pre>
+<p>and since Kotlin 1.6,  you can read a Boolean value like this:</p>
+<pre><code class="language-kotlin">val b: Boolean = readln().toBoolean()</code></pre>
+<p><code class="language-kotlin">toBoolean()</code> returns <code class="language-kotlin">true</code> if the input is "true", case insensitive. Otherwise, it will return <code class="language-kotlin">false</code>.</p>
+<p>So, suppose you have the following input:</p>
+<pre><code class="language-kotlin">true
+True
+TRuE
+T
+false</code></pre>
+<p>The output will be as follows:</p>
+<pre><code class="language-kotlin">println(readln().toBoolean()) // true
+println(readln().toBoolean()) // true
+println(readln().toBoolean()) // true
+println(readln().toBoolean()) // false
+println(readln().toBoolean()) // false</code></pre>
+<p>You can use <code class="language-kotlin">readLine()!!.toBoolean()</code> with the Kotlin compiler version 1.3 or older:</p>
+<pre><code class="language-kotlin">val b: Boolean = readLine()!!.toBoolean()</code></pre>
+<p>Since Kotlin 1.5, you can use other functions to convert <code class="language-kotlin">String</code> to <code class="language-kotlin">Boolean</code>. The function <code class="language-kotlin">toBooleanStrict()</code> returns <code class="language-kotlin">true</code> if the string is equal to the word "true", case sensitive, and <code class="language-kotlin">false</code> if the string is equal to "false"; otherwise, your program will crash with an <code class="language-kotlin">java.lang.IllegalArgumentException</code>. The function <code class="language-kotlin">toBooleanStrictOrNull()</code> returns <code class="language-kotlin">true</code> if the string is equal to the word "true", case sensitive, and <code class="language-kotlin">false</code> if the string is equal to "false"; otherwise, it returns a special value <code class="language-kotlin">null</code>. We will discuss it later.</p>
+<pre><code class="language-kotlin">println("true".toBooleanStrict())     // true
+// println("True".toBooleanStrict())  // program crashes
+println("false".toBooleanStrict())    // false
+// println("faLse".toBooleanStrict()) // program crashes
+
+println("true".toBooleanStrictOrNull())  // true
+println("false".toBooleanStrictOrNull()) // false
+println("faLse".toBooleanStrictOrNull()) // null</code></pre>
+<h5 id="logical-operators">Logical operators</h5>
+<p>Boolean type variables construct logical <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a statement is a single command to be executed, such as printing a text or assigning a value to a variable. | Unlike expressions, which produce a single value as a result of computation, statements are standalone commands that have a side effect, like changing the state of the program. The result of a statement is not used in the program, whereas the result of an expression often is. For example, in the statement `val x = 2 * 2`, the expression `2 * 2` is evaluated, and its result is assigned to the variable `x`. However, the result of the statement itself is not used in the program. In contrast, if you write `println(2 * 2)`, the expression `2 * 2` is evaluated, and its result is passed directly to the `println` function, which then prints the result. It's important to note that a statement can be an expression, but not all expressions are statements. For instance, `2 * 2` is an expression, but it's not a statement because it doesn't change the state of the program.">statements</a> with the help of <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a logical operator is a type of operator used to combine one or more boolean values and provide a resulting boolean value. | There are four main logical operators in Kotlin: not, exclusive or (xor), and, and or. Logical operators allow you to join a sequence of relational operations in a single expression. They have a higher priority than relational operators. For example, the expression a &gt; b &amp;&amp; c &lt; d means a is greater than b and c is less than d. Parentheses can be used to change the order of execution.">logical operators</a>. Kotlin has four logical operators: <strong>NOT</strong>, <strong>AND</strong>, <strong>OR</strong>, and <strong>XOR:</strong></p>
+<ul><li><p>NOT is a <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a unary operator is a type of operator that operates on only one operand or value. | It is different from a binary operator, which operates on two operands. Unary operators can be either unary prefix operators, which are placed before the operand (such as the increment and decrement operators), or unary postfix operators, which are placed after the operand. To customize a unary operator in Kotlin, you need to provide a member function or an extension function with a specific name for the corresponding type. This type becomes the left-hand side type for binary operation and the argument type for the unary one. To mark the function as an operator, you should use the `operator` modifier. It is important to note that unary prefix operator expressions are translated to function calls with a single parameter, while increment and decrement expressions are translated to function calls with no parameters. Unary operators are part of operator overloading in Kotlin, which allows you to change the way operators work for a specific type.">unary operator</a> that reverses the Boolean value. It can be denoted with <code class="language-kotlin">!</code>.</p></li></ul>
+<pre><code class="language-kotlin">val f = false // f is false
+val t = !f    // t is true</code></pre>
+<ul><li><p>AND is a <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a binary operator is a symbol that takes two operands and performs a specific operation on them. | Examples of binary operators in Kotlin include `&amp;&amp;` (logical AND), `` (logical OR), `xor` (exclusive OR), and bitwise operators such as `&amp;` (bitwise AND), `` (bitwise OR), and `^` (bitwise XOR). These operators can be applied to both integer and boolean operands, with different operations performed depending on the data type of the operands. When using binary operators, it is important to consider their precedence, as it determines the order in which operations are performed in the absence of parentheses.">binary operator</a> that returns <code class="language-kotlin">true</code> if both <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an operand is a value or variable that an operator is being applied to. | For example, in the expression 1 + 3, 1 and 3 are the operands and + is the operator. Operands can be either literals, variables, or more complex expressions. In Kotlin, there are five arithmetic operators: addition (+), subtraction (-), multiplication (*), division (/), and modulus (%). These operators are binary, meaning they take two operands. Operands are evaluated and the operator is applied according to a set of rules called operator precedence.">operands</a> are <code class="language-kotlin">true</code>. Otherwise, it returns <code class="language-kotlin">false</code>. It can be denoted with <code class="language-kotlin">&amp;&amp;</code>.</p></li></ul>
+<pre><code class="language-kotlin">val b1 = false &amp;&amp; false // false
+val b2 = false &amp;&amp; true // false
+val b3 = true &amp;&amp; false // false
+val b4 = true &amp;&amp; true  // true </code></pre>
+<ul><li><p>OR is a binary operator that returns <code class="language-kotlin">true</code> if at least one operand is <code class="language-kotlin">true</code>. Otherwise, it returns <code class="language-kotlin">false</code>. It can be denoted with <code class="language-kotlin">||</code>.</p></li></ul>
+<pre><code class="language-kotlin">val b1 = false || false // false
+val b2 = false || true  // true
+val b3 = true || false  // true
+val b4 = true || true   // true</code></pre>
+<ul><li><p>XOR (exclusive OR) is a binary operator that returns <code class="language-kotlin">true</code> if the Boolean operands have different values. Otherwise, it is <code class="language-kotlin">false</code>.</p></li></ul>
+<pre><code class="language-kotlin">val b1 = false xor false // false
+val b2 = false xor true  // true
+val b3 = true xor false  // true
+val b4 = true xor true   // false</code></pre>
+<p>The XOR operator is not as popular as the other logical operators. But you can still use it, just in case.</p>
+<h5 id="logical-operator-precedence">Logical operator precedence</h5>
+<p>Take a look at the <strong>precedence</strong> of logical operations in Kotlin below. Precedence determines how other variables are grouped in the absence of parentheses:</p>
+<ol><li><p><code class="language-kotlin">!</code> for NOT</p></li><li><p><code class="language-kotlin">xor</code> for XOR</p></li><li><p><code class="language-kotlin">&amp;&amp;</code> for AND</p></li><li><p><code class="language-kotlin">||</code> for OR</p></li></ol>
+<p>So, the variable below is <code class="language-kotlin">true</code>:</p>
+<pre><code class="language-kotlin">val bool = true &amp;&amp; !false // true because !false is evaluated first
+</code></pre>
+<p>You can use parentheses <code class="language-kotlin">(...)</code> to change the order of execution.</p>
+<p>For example, let's write a <a class="theory-lookup not-relevant" href="/learn/step/4515" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a boolean expression is a type of expression that evaluates to a boolean value, either true or false. | These expressions are often used in programming to make decisions based on two boolean conditions. They can include logical operators such as 'not', 'and', 'or', and 'xor' that allow for complex value matching and can help make the code easier to understand. In Kotlin, boolean values are often used to represent two opposite states, such as whether a store is open or closed, and they can only take on two possible values: true or false.">Boolean expression</a> that determines the possibility of going on a hike during the summer and in other seasons:</p>
+<pre><code class="language-kotlin">val cold = false
+val dry = true
+val summer = false // suppose it is autumn now
+
+val hiking = dry &amp;&amp; (!cold || summer) // true, let's go hiking!</code></pre>
+<p>Do not get carried away by the expression above. A good programmer should understand not only arithmetic rules but also logical operations. Otherwise, you can end up hiking in bad weather.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>In this topic, we have discussed the four main Kotlin logical operators — <code class="language-kotlin">!</code> (NOT), <code class="language-kotlin">xor</code> (exclusive OR), <code class="language-kotlin">&amp;&amp;</code> (AND), and <code class="language-kotlin">||</code> (OR). You need to understand them well to master Kotlin. They also comply with a special order of their execution, called precedence. It may seem confusing at first, but practice makes perfect. Speaking of which, let's solve some tasks!</p>
+</div>

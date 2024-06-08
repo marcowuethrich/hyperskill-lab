@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: <code>!!</code> operator
+  - text: Elvis operator
+  - text: <code>?.</code> operator
+  - text: Wrapping variables with if-else checks
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7623#comment
+status: Solved
+record: -1
+local_check: false

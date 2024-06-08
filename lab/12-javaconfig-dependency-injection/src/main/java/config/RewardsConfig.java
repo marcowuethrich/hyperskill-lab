@@ -1,5 +1,16 @@
 package config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import rewards.RewardNetwork;
+import rewards.internal.RewardNetworkImpl;
+import rewards.internal.account.AccountRepository;
+import rewards.internal.account.JdbcAccountRepository;
+import rewards.internal.restaurant.JdbcRestaurantRepository;
+import rewards.internal.restaurant.RestaurantRepository;
+import rewards.internal.reward.JdbcRewardRepository;
+import rewards.internal.reward.RewardRepository;
+
 import javax.sql.DataSource;
 
 /**
@@ -10,10 +21,10 @@ import javax.sql.DataSource;
  * - Injecting dependencies through constructor injection
  * - Creating Spring application context in the test code
  *   (WITHOUT using Spring testContext framework)
- *
+ * <p>
  * TODO-01: Make this class a Spring configuration class
  * - Use an appropriate annotation.
- *
+ * <p>
  * TODO-02: Define four empty @Bean methods, one for the
  *          reward-network and three for the repositories.
  * - The names of the beans should be:
@@ -21,7 +32,7 @@ import javax.sql.DataSource;
  *   - accountRepository
  *   - restaurantRepository
  *   - rewardRepository
- *
+ * <p>
  * TODO-03: Inject DataSource through constructor injection
  * - Each repository implementation has a DataSource
  *   property to be set, but the DataSource is defined
@@ -29,7 +40,7 @@ import javax.sql.DataSource;
  *   will need to define a constructor for this class
  *   that accepts a DataSource parameter.
  * - As it is the only constructor, @Autowired is optional.
- *
+ * <p>
  * TODO-04: Implement each @Bean method to contain the code
  *          needed to instantiate its object and set its
  *          dependencies
@@ -42,9 +53,40 @@ import javax.sql.DataSource;
  *   not an implementation.
  */
 
+@Configuration
 public class RewardsConfig {
 
 	// Set this by adding a constructor.
 	private DataSource dataSource;
+
+	public RewardsConfig(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	@Bean
+	AccountRepository accountRepository() {
+		JdbcAccountRepository jdbcAccountRepository = new JdbcAccountRepository();
+		jdbcAccountRepository.setDataSource(dataSource);
+		return jdbcAccountRepository;
+	}
+
+	@Bean
+	RestaurantRepository restaurantRepository() {
+		JdbcRestaurantRepository jdbcRestaurantRepository = new JdbcRestaurantRepository();
+		jdbcRestaurantRepository.setDataSource(dataSource);
+		return jdbcRestaurantRepository;
+	}
+
+	@Bean
+	RewardRepository rewardRepository() {
+		JdbcRewardRepository jdbcRewardRepository = new JdbcRewardRepository();
+		jdbcRewardRepository.setDataSource(dataSource);
+		return jdbcRewardRepository;
+	}
+
+	@Bean("rewardNetwork")
+	RewardNetwork rewardNetwork() {
+		return new RewardNetworkImpl(accountRepository(), restaurantRepository(), rewardRepository());
+	}
 
 }

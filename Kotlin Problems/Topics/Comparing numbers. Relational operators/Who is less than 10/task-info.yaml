@@ -1,0 +1,13 @@
+type: code
+custom_name: Who is less than 10?
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4531#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 05 Jun 2024 16:09:13 UTC"
+record: -1
+submission_language: kotlin

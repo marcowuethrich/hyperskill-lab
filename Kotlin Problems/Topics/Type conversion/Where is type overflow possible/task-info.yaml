@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: val dl = n.toDouble()
+  - text: val lg = n.toLong()
+  - text: val bt = n.toByte()
+  - text: val st = n.toString()
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4673#comment
+status: Solved
+record: -1
+custom_name: Where is type overflow possible?
+local_check: false

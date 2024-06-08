@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Exception
+  - text: RuntimeException
+  - text: IllegalArgumentException
+  - text: UnsupportedOperationException
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/47651#comment
+status: Solved
+record: -1
+custom_name: "Zeroing In on Costs: The Exceptional Dilemma"
+local_check: false

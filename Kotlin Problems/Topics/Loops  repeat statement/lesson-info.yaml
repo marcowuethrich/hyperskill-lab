@@ -1,0 +1,9 @@
+custom_name: "Loops: repeat statement"
+content:
+  - Theory
+  - Print a string exactly ten times
+  - Repeat by value
+  - Sum of squares of even numbers up to a limit
+  - Decrement in loops
+  - Grades
+  - Kotlin x5

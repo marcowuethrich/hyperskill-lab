@@ -1,0 +1,13 @@
+type: code
+custom_name: The sequence 1 2 2 3 3 3 ...
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4668#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Thu, 06 Jun 2024 14:18:02 UTC"
+record: -1
+submission_language: kotlin

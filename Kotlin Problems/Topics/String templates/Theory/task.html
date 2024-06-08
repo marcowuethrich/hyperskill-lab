@@ -1,0 +1,49 @@
+<div class="step-text">
+<p>Sometimes, you need to put the values of variables in a text. Luckily for you, Kotlin can help you with that using <strong><a class="theory-lookup not-relevant" href="/learn/step/4547" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a string template is a powerful tool for formatting strings, allowing for the insertion of variable or expression values directly into a string. | It is a convenient way to create dynamic strings, eliminating the need for manual string concatenation. String templates can be defined using double quotes, and the value of a variable or expression can be inserted using the $ operator. For example, to add a variable value to a string, you can write the dollar sign before a variable name, making the code more readable. Both of the following code snippets print the same message:
+
+```
+println(Hello, $name!) println(Hello,  + name + !) ```
+
+If you do not want to print a string, you can create a variable instead. It is recommended to use string templates to build strings with variable values, instead of string concatenation.">string templates</a></strong>. In this topic, we will discuss their purpose.</p>
+<p>Suppose we need to display a message about today's temperature in Celsius:</p>
+<pre><code class="language-no-highlight">The temperature in ... is ... degrees Celsius.</code></pre>
+<p>Instead of <code class="language-kotlin">...</code> we need to display certain values.</p>
+<p>If we have two variables <code class="language-kotlin">city</code> and <code class="language-kotlin">temp</code>, we can build the resulting string with <a class="theory-lookup not-relevant" href="/learn/step/4547" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, concatenation refers to the process of combining two or more strings into a single string. | This is a common operation when working with strings and is often used to build larger strings from smaller ones. The concatenation operator in Kotlin is the `+` symbol, which can be used to combine any two strings. When concatenating strings, the order of the strings matters, and the resulting string will be in the same order as they are arranged. Concatenation is not the same as addition, because it is not a commutative operation. The `+` operator can also be used to append values of different types to a string. In this case, the value is automatically converted to a string and then concatenated to the target. An expression must start with a string, and if it starts with a different type, it will be converted to a string using the `toString()` function. There are two main ways to construct a string object in Kotlin: using the constructor or using the `StringBuffer` class and its `append()` method. When using the `+` operator, new memory is allocated to store the combined string. However, when using the `StringBuffer` class and its `append()` method, no new memory is allocated.">concatenations</a>:</p>
+<pre><code class="language-kotlin">val city = "Paris"
+val temp = "24"
+
+println("The temperature in " + city + " is " + temp + " degrees Celsius.")</code></pre>
+<p>It is a simple solution. But is it perfect? No. It's rather awkward.</p>
+<p>Kotlin provides a more convenient way to do the same thing using string templates. How do they work? To add a variable value to a string, write the dollar sign <code class="language-kotlin">$</code> before a variable name:</p>
+<pre><code class="language-kotlin">val city = "Paris"
+val temp = "24"
+
+println("The temperature in $city is $temp degrees Celsius.")</code></pre>
+<p>The code becomes more readable. Both code snippets print the same message:</p>
+<pre><code class="language-no-highlight">The temperature in Paris is 24 degrees Celsius.
+</code></pre>
+<p>If we do not want to print a string, we can create a variable:</p>
+<pre><code class="language-kotlin">val value = "55"
+val currency = "dollars"
+val price = "$value $currency" // "55 dollars"
+</code></pre>
+<p>We recommend using string templates to build strings with variable values. Try using it instead of string concatenation.</p>
+<h5 id="templates-for-expressions">Templates for expressions</h5>
+<p>You can use string templates to put the result of an arbitrary expression in a string. To do that, include the entire expression in curly braces <code class="language-kotlin">{...}</code> after the dollar sign <code class="language-kotlin">$</code>. For example:</p>
+<pre><code class="language-kotlin">val language = "Kotlin"
+println("$language has ${language.length} letters in the name")</code></pre>
+<p>It prints:</p>
+<pre><code class="language-no-highlight">Kotlin has 6 letters in the name</code></pre>
+<p>Here <code class="language-kotlin">{language.length}</code> is an <a class="theory-lookup not-relevant" href="/learn/step/4547" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an expression is a piece of code that evaluates to a value. | It can be a simple literal value, a variable, a function call, or a more complex combination of these elements using operators or other language constructs. Expressions are used to compute and return values from functions, assign values to variables, and perform calculations or operations in conditionals. For example, 2 \* 2 is an expression, and it produces a single value.">expression</a> that will be evaluated. If you skip the braces, it will output something different:</p>
+<pre><code class="language-no-highlight">Kotlin has Kotlin.length letters in the name</code></pre>
+<p>So, always use curly braces for expressions in string templates to avoid these mistakes. Do not add them if you want to output only a variable value even though it does work.</p>
+<h5 id="idiom">Idiom</h5>
+<p><a class="theory-lookup not-relevant" href="/learn/step/4547" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an idiom refers to a recommended programming practice or convention that has been endorsed by the community. | Idioms are designed to promote concise, clear, and efficient code. For example, string interpolation is an idiom that allows you to insert variable values into a string using the $ symbol followed by the variable name. Another helpful idiom is the use of the [ ] syntax to access elements in a collection, such as a list or map. This syntax is more concise and easier to read than using the get() function.">Idioms</a> are templates for clear and readable code. These patterns clarify the code for other people, so it is a good idea to use them. All idioms are endorsed by the community, so using them will bring you closer to the genuine Kotlin-style code. You can find an exhaustive list of idioms at <a href="https://kotlinlang.org/docs/idioms.html" rel="noopener noreferrer nofollow" target="_blank">Kotlin docs</a>. </p>
+<p>The idiom we'll look at is the <a href="https://kotlinlang.org/docs/idioms.html#string-interpolation" rel="noopener noreferrer nofollow" target="_blank">string interpolation</a>:</p>
+<pre><code class="language-kotlin">val language = "Kotlin"
+println("Have a nice $language!")        // nice code
+println("Have a nice " + language + "!") // bad practice</code></pre>
+<h5 id="conclusion">Conclusion</h5>
+<p>What do you need to remember from this topic? There are two main points:</p>
+<ol><li><p>Use string templates to insert variable values into a string: <code class="language-kotlin">"this string has $value"</code>.</p></li><li><p>If you would like to get an arbitrary expression, use curly braces: <code class="language-kotlin">"The length is ${str.length}"</code>.</p></li></ol>
+</div>

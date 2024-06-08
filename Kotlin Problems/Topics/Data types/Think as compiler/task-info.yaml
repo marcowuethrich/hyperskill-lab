@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: 0 Kotlin
+  - text: error on line 1
+  - text: error on line 3
+  - text: -1 Kotlin
+  - text: undefined Kotlin
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/16075#comment
+status: Solved
+record: -1
+local_check: false

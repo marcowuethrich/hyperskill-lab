@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: "Add four spaces before <b>println(\"Hello, Kotlin!\")</b>"
+  - text: "Add one space after <b>println(\"Hello, Kotlin!\")</b>"
+  - text: Add four spaces before the closing brace
+  - text: Move the opening brace to the end of the previous line
+  - text: Add four spaces before the opening brace
+  - text: "Remove the semicolon after <b>println(\"Hello, Kotlin!\")</b>"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4424#comment
+status: Solved
+record: -1
+local_check: false

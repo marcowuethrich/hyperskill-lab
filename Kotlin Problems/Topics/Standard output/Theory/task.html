@@ -1,0 +1,71 @@
+<div class="step-text">
+<p><strong>Standard output</strong> is the basic operation that displays information on a device. Not every program generates such output. By default, the standard output displays the data on the screen, but it is possible to redirect it to a file.</p>
+<p>On Hyperskill, you will often write programs that send data, for example, strings and numbers, to the standard output.</p>
+<h5 id="printing-text" style="text-align: center;">Printing text</h5>
+<p>Kotlin has two functions that send data to the standard output: <code class="language-kotlin">println</code> and <code class="language-kotlin">print</code>.</p>
+<p>The <code class="language-kotlin">println</code> function (<strong>print line</strong>) displays <strong>a string </strong>followed by <strong>a new line </strong>on the screen. For example, the code snippet below prints four lines:</p>
+<pre><code class="language-kotlin">println("I")
+println("know")
+println("Kotlin")
+println("well.")
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-java">I
+know
+Kotlin
+well.</code></pre>
+<p>As you can see, all strings are printed without double quotes.</p>
+<p>You can also print an empty line:</p>
+<pre><code class="language-kotlin">println("Kotlin is a modern programming language.")
+println() // prints an empty line
+println("It is used all over the world!")</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-java">Kotlin is a modern programming language.
+
+It is used all over the world!</code></pre>
+<p>The <code class="language-kotlin">print</code> function displays <strong>a value </strong>and places the cursor<strong> </strong><strong>after</strong>. Let's look at the example below. This piece of code outputs all strings in a single line:</p>
+<pre><code class="language-kotlin">print("I ")
+print("know ")
+print("Kotlin ")
+print("well.")
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-java">I know Kotlin well.</code></pre>
+<h5 id="printing-numbers-and-characters" style="text-align: center;">Printing numbers and characters</h5>
+<p>With <code class="language-kotlin">println</code> and <code class="language-kotlin">print</code> functions, a program can print not only strings but also <strong>numbers </strong>and <strong>characters</strong>.</p>
+<p>Let's print two secret codes:</p>
+<pre><code class="language-kotlin">print(108)   // prints a number
+print('c')   // prints a character
+print("Q")   // prints a string
+println('3') // prints a character that represents a digit 
+
+print(22)
+print('E')
+print(8)
+println('1')
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-java">108cQ3
+22E81</code></pre>
+<p>Just like with strings, there are no quotes.</p>
+<h5 id="the-operator" style="text-align: center;">The <code class="language-kotlin">$</code> operator</h5>
+<p>In the Kotlin programming language, the <code class="language-kotlin">$</code> operator is often used in <a class="theory-lookup not-relevant" href="/learn/step/4425" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a string template is a powerful tool for formatting strings, allowing for the insertion of variable or expression values directly into a string. | It is a convenient way to create dynamic strings, eliminating the need for manual string concatenation. String templates can be defined using double quotes, and the value of a variable or expression can be inserted using the $ operator. For example, to add a variable value to a string, you can write the dollar sign before a variable name, making the code more readable. Both of the following code snippets print the same message:
+
+```
+println(Hello, $name!) println(Hello,  + name + !) ```
+
+If you do not want to print a string, you can create a variable instead. It is recommended to use string templates to build strings with variable values, instead of string concatenation.">string templates</a> to insert the values of variables or <a class="theory-lookup not-relevant" href="/learn/step/4425" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an expression is a piece of code that evaluates to a value. | It can be a simple literal value, a variable, a function call, or a more complex combination of these elements using operators or other language constructs. Expressions are used to compute and return values from functions, assign values to variables, and perform calculations or operations in conditionals. For example, 2 \* 2 is an expression, and it produces a single value.">expressions</a> directly into a string.</p>
+<p>Examples of use:</p>
+<p>Inserting the value of a variable: </p>
+<pre><code class="language-kotlin">val name = "Alice"
+println("Hello, $name!") // Output: Hello, Alice!
+</code></pre>
+<p>Inserting the value of an expression:</p>
+<pre><code class="language-kotlin">val a = 5
+val b = 10
+println("Sum of $a and $b is ${a + b}") // Output: Sum of 5 and 10 is 15</code></pre>
+<p>Note that when you want to insert a more complex expression or access object properties, you use curly braces <code class="language-kotlin">{}</code> around the expression.</p>
+<p>Thus, the <code class="language-kotlin">$</code> operator in Kotlin allows for the convenient and quick insertion of variable values and expression results directly into string <a class="theory-lookup not-relevant" href="/learn/step/4425" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a literal is a value that is directly represented in the code, such as a number, character, or string. | For example, 3, 'a', and hello are all literals in Kotlin. Integer literals, such as 3, can be represented by the type int (32-bit) or long (64-bit) and can be used in arithmetic operations. Characters, such as 'a', are single-character literals that use less memory than strings. Strings, such as hello, are sequences of characters that can be used for handling text.">literals</a>.</p>
+<h5 id="conclusion" style="text-align: center;">Conclusion</h5>
+<p>In this topic, we have covered two basic functions to redirect information to the standard output: <code class="language-kotlin">println</code> and <code class="language-kotlin">print</code>. <code class="language-kotlin">println</code> prints information followed by a new line, while <code class="language-kotlin">print</code> outputs them one after another. Remember, we can use these functions to output not only strings but also any other characters as well.</p>
+</div>

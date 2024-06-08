@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: isClosingSoon || !isNear
+  - text: isClosingSoon xor isNear
+  - text: '!isClosingSoon || isNear'
+  - text: '!isClosingSoon &amp;&amp; isNear'
+  - text: isClosingSoon &amp;&amp; isNear
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/4523#comment
+status: Solved
+record: -1
+local_check: false

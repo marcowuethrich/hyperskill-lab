@@ -1,0 +1,64 @@
+<div class="step-text">
+<p>Exceptions in Kotlin are events that disrupt the regular flow of a program. When a program encounters an error, like trying to access an index that does not exist in an array, Kotlin uses exceptions to manage these unexpected problems.</p>
+<p>In Kotlin, exceptions are objects that contain information about an error. The standard method for triggering an exception is by using the <code class="language-kotlin">throw</code> keyword, followed by an <a class="theory-lookup not-relevant" href="/learn/step/7243" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an instance refers to an object or an instance of a class that is created during runtime. | It is a subtype of every known type in Kotlin, meaning it can represent a value of any type in terms of type checking. This is particularly useful in situations where a function demands a return type, but it is impossible to return a value, such as when calculating a percentage if the value is zero. In such cases, a function that returns `Instance` can be used. The concept of instance is also related to threading, where only one thread can execute code in a synchronized method of a particular instance. This means that different threads can execute methods of different objects at the same time, a concept that can be summarized as one thread per instance.">instance</a> of the exception.</p>
+<pre><code class="language-kotlin">throw Exception("This is an error message")</code></pre>
+<p>Kotlin has a <code class="language-kotlin">try-catch</code> block to <a class="theory-lookup not-relevant" href="/learn/step/7243" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, handle exception refers to the process of dealing with and responding to exceptions during the execution of a program. | This is done using the `try` and `catch` keywords. The `try` block contains the code that may throw an exception, while the `catch` block contains the action to be taken when an exception occurs. When an exception occurs in the `try` block, the runtime system determines the first suitable `catch` block to handle it, starting from the top. It is best to handle exceptions in a method that has sufficient information to make the correct decision based on the exception.">handle exceptions</a>. The <code class="language-kotlin">try</code> block houses the code that might trigger an exception, while the <code class="language-kotlin">catch</code> block is employed to spot and manage the exception.</p>
+<pre><code class="language-kotlin">try {
+    val result = 10 / 0 // This will cause an ArithmeticException
+} catch (e: ArithmeticException) {
+    println("Caught an arithmetic exception.")
+}</code></pre>
+<p>Kotlin also has a <code class="language-kotlin">finally</code> block that executes the code, irrespective of whether an exception was triggered or not, typically used for cleaning up resources.</p>
+<pre><code class="language-kotlin">try {
+    // risky code that could trigger an exception
+} catch (e: Exception) {
+    // handling the exception
+} finally {
+    // code that will execute no matter what
+}</code></pre>
+<p>The <a class="theory-lookup not-relevant" href="/learn/step/7243" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, exception handling refers to the process of managing and responding to exceptions or errors that occur during the execution of a program. | This is typically done using the `try-catch` statement, where the `try` block contains the code that may throw an exception, and the `catch` block contains the code that handles the exception. It's best practice to specify the type of exception being handled in the `catch` block, such as `IllegalArgumentException` instead of the general `Exception`. If an exception occurs in the `try` block and a suitable handler is found in the `catch` block, the exception is considered handled and the program continues to run normally.">exception handling</a> in Kotlin promotes robust and error-resistant programming by offering a clear layout for error management, allowing developers to anticipate and lessen potential problems within their apps.</p>
+<h5 id="types-of-exceptions-in-kotlin">Types of Exceptions in Kotlin</h5>
+<p>Like many programming languages, Kotlin has a system to manage anomalies that occur during program execution, known as exceptions. These exceptions are divided into three main types: checked exceptions, <a class="theory-lookup not-relevant" href="/learn/step/7243" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, unchecked exceptions are a type of exception that are not checked at compilation time. | They are subclasses of the `java.lang.Exception` class and include examples such as `NullPointerException` or `IllegalArgumentException`. Unchecked exceptions usually result from programming mistakes like logic errors or incorrect use of an API. Unlike checked exceptions, they do not need to be caught or declared in your code, which simplifies the code and makes it cleaner and easier to maintain.">unchecked exceptions</a>, and errors.</p>
+<h5 id="checked-exceptions">Checked Exceptions</h5>
+<p>All exceptions are unchecked in Kotlin because it doesn't have checked exceptions. This decision simplifies the code as it doesn't force you to catch or declare exceptions, leading to cleaner and easier to maintain code.</p>
+<h5 id="unchecked-exceptions">Unchecked Exceptions</h5>
+<p>These exceptions aren't checked at compilation. They usually result from programming mistakes like logic errors or incorrect use of an API. Unchecked exceptions are subclasses of <code class="language-kotlin">RuntimeException</code> and include examples such as <code class="language-kotlin">IndexOutOfBoundsException</code> or <code class="language-kotlin">NullPointerException</code>.</p>
+<pre><code class="language-kotlin">fun accessElement(list: List&lt;String&gt;, index: Int) {
+    try {
+        println(list[index])
+    } catch (e: IndexOutOfBoundsException) {
+        println("Index is out of bounds.")
+    }
+}</code></pre>
+<h5 id="errors">Errors</h5>
+<p>Errors should not be caught or managed by the program. They are subclasses of <code class="language-kotlin">Error</code> and indicate issues originating from the environment where the app is running, like <code class="language-kotlin">OutOfMemoryError</code> or <code class="language-kotlin">StackOverflowError</code>.</p>
+<pre><code class="language-kotlin">fun generateError() {
+    val largeArray = IntArray(Int.MAX_VALUE)
+}</code></pre>
+<h5 id="exception-handling-in-kotlin">Exception Handling in Kotlin</h5>
+<p>Like other programming languages, Kotlin provides a robust system for handling exceptions. Exceptions in Kotlin are events that disrupt the regular flow of a program. Exception handling is critical as it manages runtime errors, ensuring the program can smoothly handle unexpected issues.</p>
+<p>The main constructs for exception handling in Kotlin are <code class="language-kotlin">try</code>, <code class="language-kotlin">catch</code>, and <code class="language-kotlin">finally</code> blocks.</p>
+<ul><li><p><code class="language-kotlin">try</code>: This block encloses the code that might trigger an exception. If an exception occurs within this block, it is thrown, and the control is transferred to the corresponding <code class="language-kotlin">catch</code> block.</p></li><li><p><code class="language-kotlin">catch</code>: This block captures the exceptions thrown from the <code class="language-kotlin">try</code> block. It should follow the <code class="language-kotlin">try</code> block, and you can have multiple <code class="language-kotlin">catch</code> blocks to manage different types of exceptions.</p></li><li><p><code class="language-kotlin">finally</code>: This block is optional and runs after the <code class="language-kotlin">try</code> and <code class="language-kotlin">catch</code> blocks, whether or not an exception has been thrown or caught. It's typically used to clean up resources.</p></li></ul>
+<p>Here's how to use these blocks in Kotlin:</p>
+<pre><code class="language-kotlin">fun divide(a: Int, b: Int): Int {
+    try {
+        return a / b
+    } catch (e: ArithmeticException) {
+        println("Cannot divide by zero!")
+    } finally {
+        println("Operation attempted.")
+    }
+    return 0
+}</code></pre>
+<p>In the above code:</p>
+<ul><li><p>We attempt to perform division inside the <code class="language-kotlin">try</code> block.</p></li><li><p>If division by zero occurs, an <code class="language-kotlin">ArithmeticException</code> is thrown.</p></li><li><p>The <code class="language-kotlin">catch</code> block catches the exception and prints an error message.</p></li><li><p>The <code class="language-kotlin">finally</code> block declares "Operation attempted." whether or not an exception took place.</p></li><li><p>If an exception is caught, the function returns 0 as a default value.</p></li></ul>
+<p>Kotlin also supports <code class="language-kotlin">try</code> as an <a class="theory-lookup not-relevant" href="/learn/step/7243" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an expression is a piece of code that evaluates to a value. | It can be a simple literal value, a variable, a function call, or a more complex combination of these elements using operators or other language constructs. Expressions are used to compute and return values from functions, assign values to variables, and perform calculations or operations in conditionals. For example, 2 \* 2 is an expression, and it produces a single value.">expression</a>, letting you assign the result of a <code class="language-kotlin">try</code> block to a variable:</p>
+<pre><code class="language-kotlin">val result = try {
+    divide(10, 0)
+} catch (e: Exception) {
+    -1
+}</code></pre>
+<p>In this example, if an exception occurs, -1 will be assigned to <code class="language-kotlin">result</code>. Otherwise, it will have the division result.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>In conclusion, Kotlin manages exceptions, which are runtime events that disrupt the regular flow of program execution, by using <code class="language-kotlin">try</code>, <code class="language-kotlin">catch</code>, and <code class="language-kotlin">finally</code> blocks. Kotlin's exception handling, which includes unchecked exceptions by default and no checked exceptions, streamlines <a class="theory-lookup not-relevant" href="/learn/step/7243" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, error handling refers to the process of dealing with and resolving errors or exceptions that occur during the execution of a program. | This includes both compile-time errors, which are caught before the program is run, and run-time errors, which occur while the program is running. Run-time errors can be further divided into logic errors, which result in incorrect output, and unhandled exceptions, such as division by zero or attempting to access a file that does not exist. Kotlin provides several mechanisms for handling errors, including the try-catch statement, which allows you to catch and handle specific exceptions, and the ability to catch multiple exceptions at once.">error handling</a> and leads to clearer, more maintainable code.</p>
+</div>

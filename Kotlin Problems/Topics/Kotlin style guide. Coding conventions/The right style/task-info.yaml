@@ -1,0 +1,20 @@
+type: matching
+captions:
+  - Put the opening curly brace at the end of the line
+  - Put the closing curly brace at the beginning of the next line
+  - Omit semicolon ( ; )
+options:
+  - print("I will finish studying Kotlin in 2023")
+  - "}"
+  - "fun main() {"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23810#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
