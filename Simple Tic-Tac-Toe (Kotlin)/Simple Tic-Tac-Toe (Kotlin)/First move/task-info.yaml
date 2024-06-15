@@ -1,0 +1,15 @@
+type: edu
+custom_name: First move!
+files:
+  - name: src/tictactoe/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/TicTacToeTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/10478#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 13 Jun 2024 10:48:01 UTC"
+record: 4

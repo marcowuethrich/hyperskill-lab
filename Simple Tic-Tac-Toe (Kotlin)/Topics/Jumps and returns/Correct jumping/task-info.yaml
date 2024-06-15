@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: loop@
+  - text: continue
+  - text: replace
+  - text: break
+  - text: return
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20467#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/tictactoe/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/TicTacToeTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/10476#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 09 Jun 2024 09:06:46 UTC"
+record: 2

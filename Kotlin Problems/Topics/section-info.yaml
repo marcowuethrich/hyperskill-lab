@@ -1,0 +1,32 @@
+content:
+  - Introduction to Kotlin
+  - Writing first program
+  - Values and variables
+  - Constants and val variables
+  - Data types
+  - Comments
+  - Kotlin style guide. Coding conventions
+  - Standard output
+  - Invoking functions
+  - Standard input with Java Scanner
+  - String basics
+  - String templates
+  - Boolean type and operations. True and false
+  - Type conversion
+  - Reading data with readln
+  - Integers in action
+  - Comparing numbers. Relational operators
+  - Declaring functions
+  - If expression
+  - Errors in programs
+  - Exception
+  - Hierarchy of exceptions
+  - Taming exceptions
+  - Nullable and non-nullable types
+  - Avoiding NPEs. Null safety
+  - Type system
+  - Loops  repeat statement
+  - While loops
+  - Structural vs referential equality
+  - Work with MutableLists
+  - Functions as objects

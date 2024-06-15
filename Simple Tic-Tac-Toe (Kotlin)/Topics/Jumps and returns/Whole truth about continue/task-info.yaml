@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: It lets us skip the current iteration of the loop using a condition.
+  - text: It cannot be used with break and return expressions in the same loop.
+  - text: The keyword continue only works together with labels.
+  - text: "With a label, it provides a possibility to exit from the inner loop."
+  - text: The keyword continue only works together with the if expression.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6168#comment
+status: Solved
+record: -1
+local_check: false

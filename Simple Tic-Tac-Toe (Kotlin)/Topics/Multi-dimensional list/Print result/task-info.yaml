@@ -1,0 +1,23 @@
+type: matching
+captions:
+  - println(mutList3D.size)
+  - println(mutList3D.first().size)
+  - "println(mutList3D[mutList3D.size - 1].last())"
+  - println(mutList3D.first().last().size)
+options:
+  - "[16, 17, 18]"
+  - 2
+  - 1
+  - 4
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21865#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3

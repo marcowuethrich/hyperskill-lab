@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: They are represented by the <b>Text</b> type.
+  - text: Indexation of elements starts with 1.
+  - text: ' Strings are immutable.'
+  - text: Two strings can be concatenated with the help of the <b>+</b> operator.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/12564#comment
+status: Solved
+record: -1
+local_check: false
