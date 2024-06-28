@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: '%G'
+  - text: '%f'
+  - text: '%F'
+  - text: '%o'
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21439#comment
+status: Solved
+record: -1
+local_check: false

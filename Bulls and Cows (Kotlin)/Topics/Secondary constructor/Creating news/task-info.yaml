@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: val news = News()
+  - text: val news = News("Title")
+  - text: "val news = News(\"Title\", \"Text\")"
+  - text: "val news = News(\"Title\", \"Text\", \"Tag\")"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6241#comment
+status: Solved
+record: -1
+local_check: false

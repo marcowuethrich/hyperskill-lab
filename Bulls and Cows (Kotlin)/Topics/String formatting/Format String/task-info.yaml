@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: This format string is invalid.
+  - text: It can be applied to Short and BigInteger numbers.
+  - text: Negative numbers are represented without the minus sign.
+  - text: It justifies the number to the left.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21444#comment
+status: Solved
+record: -1
+local_check: false

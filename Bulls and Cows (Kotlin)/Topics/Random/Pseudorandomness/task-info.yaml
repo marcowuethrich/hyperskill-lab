@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Sometimes it may generate an object instead of a number
+  - text: Sometimes it doesn't generate anything
+  - text: The numbers are not totally unpredictable
+  - text: It doesn't generate numbers but reads them from the drive instead
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11803#comment
+status: Solved
+record: -1
+local_check: false

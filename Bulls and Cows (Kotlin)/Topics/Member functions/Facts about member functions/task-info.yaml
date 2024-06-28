@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Member functions are the same as methods
+  - text: Member functions have access to the fields of the class
+  - text: The keyword "this" may represent a member function
+  - text: Member functions can implement an uncommon behavior of an object
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20648#comment
+status: Solved
+record: -1
+local_check: false

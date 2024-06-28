@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: from the last function to the first function
+  - text: randomly
+  - text: at the same time
+  - text: from the first function to the last function
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11556#comment
+status: Solved
+record: -1
+local_check: false

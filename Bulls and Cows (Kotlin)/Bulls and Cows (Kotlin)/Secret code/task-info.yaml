@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/bullscows/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/BullsCowsTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30278#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Mon, 17 Jun 2024 19:55:59 UTC"
+record: 3

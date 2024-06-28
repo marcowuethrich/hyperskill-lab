@@ -1,0 +1,20 @@
+type: matching
+captions:
+  - say
+  - self
+  - signature
+options:
+  - String
+  - Person
+  - Unit
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6367#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

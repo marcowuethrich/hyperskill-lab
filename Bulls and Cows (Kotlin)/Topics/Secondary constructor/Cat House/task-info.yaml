@@ -1,0 +1,13 @@
+type: code
+files:
+  - name: src/Main.kt
+    visible: true
+    highlight_level: NONE
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20608#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 28 Jun 2024 07:45:12 UTC"
+record: -1
+submission_language: kotlin

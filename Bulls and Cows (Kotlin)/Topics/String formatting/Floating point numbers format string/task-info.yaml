@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: '"% -(12f"'
+  - text: '"%.4b"'
+  - text: '"%+.5G"'
+  - text: "\"%,e\""
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21442#comment
+status: Solved
+record: -1
+local_check: false

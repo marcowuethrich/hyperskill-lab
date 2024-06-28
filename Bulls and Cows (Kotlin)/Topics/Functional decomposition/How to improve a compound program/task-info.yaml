@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Provide detailed annotation for each line of code
+  - text: Wrap it in one solid function
+  - text: Just write a new one
+  - text: Create a number of separate functions to execute individual tasks
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/12670#comment
+status: Solved
+record: -1
+local_check: false

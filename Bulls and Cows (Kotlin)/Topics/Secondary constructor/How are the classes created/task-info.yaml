@@ -1,0 +1,21 @@
+type: matching
+custom_name: How are the classes created?
+captions:
+  - A
+  - B
+  - C
+options:
+  - Secondary
+  - Primary
+  - Default
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6240#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

@@ -1,0 +1,23 @@
+type: matching
+captions:
+  - '%f'
+  - '%d'
+  - '%B'
+  - '%C'
+options:
+  - Char
+  - Float
+  - Boolean
+  - BigInteger
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21440#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3

@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: A number that a random generator uses to initiate random sequence
+  - text: A number that a random generator is not allowed to return
+  - text: A number that a random generator always returns first
+  - text: A package where Random class is located
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11802#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: NumberFormatException
+  - text: ArithmeticException
+  - text: Exception
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20598#comment
+status: Solved
+record: -1
+custom_name: Now I get it...
+local_check: false
