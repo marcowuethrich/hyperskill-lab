@@ -95,8 +95,3 @@ class Grander(secretCodeLength: Int, possibleSymbols: Int) {
             .let { if (it[0] == '0') it.reversed() else it }
             .take(length)
 }
-
-
-
-
-
