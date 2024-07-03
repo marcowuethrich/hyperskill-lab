@@ -1,0 +1,17 @@
+type: edu
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/EncryptDecryptTest.java
+    visible: false
+    learner_created: false
+  - name: src/road_to_treasure.txt
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/21970#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 03 Jul 2024 19:47:16 UTC"
+record: 5

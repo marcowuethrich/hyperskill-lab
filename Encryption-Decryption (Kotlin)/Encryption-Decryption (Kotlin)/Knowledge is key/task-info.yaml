@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/EncryptDecryptTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21967#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 03 Jul 2024 11:35:18 UTC"
+record: 2
