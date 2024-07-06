@@ -1,0 +1,9 @@
+type: hyperskill
+title: Python Problems
+language: English
+summary: All problems in Python programming language that can't be opened together
+  with currently selected Hyperskill project.
+programming_language: Python
+content:
+  - Topics
+mode: Study

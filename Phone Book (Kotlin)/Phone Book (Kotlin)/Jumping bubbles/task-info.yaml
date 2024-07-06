@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/phonebook/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/PhoneBookTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7749#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 05 Jul 2024 14:26:14 UTC"
+record: 2

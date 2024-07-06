@@ -1,0 +1,17 @@
+type: dataset
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+  - name: data/sample/input.txt
+    visible: true
+    learner_created: false
+  - name: data/dataset/input.txt
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/17034#comment
+status: Solved
+feedback:
+  message: <html>You are right</html>
+  time: "Fri, 05 Jul 2024 12:10:35 UTC"
+record: -1
