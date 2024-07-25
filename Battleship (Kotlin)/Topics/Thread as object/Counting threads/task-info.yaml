@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: exactly one
+  - text: at least one
+  - text: from one to number of processor cores
+  - text: exactly number of processor cores
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15601#comment
+status: Solved
+record: -1
+local_check: false

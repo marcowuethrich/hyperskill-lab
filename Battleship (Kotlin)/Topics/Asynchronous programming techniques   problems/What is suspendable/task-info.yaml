@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: This function may never finish
+  - text: This function can suspend its execution on some blocking operation
+  - text: This function can pause the thread when needed
+  - text: This function can suspend other functions which it calls
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14506#comment
+status: Solved
+record: -1
+custom_name: What is suspendable?
+local_check: false

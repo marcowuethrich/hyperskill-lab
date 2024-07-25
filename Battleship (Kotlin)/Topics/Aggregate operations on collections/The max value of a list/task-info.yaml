@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: maxWithOrNull()
+  - text: maxOfOrNull()
+  - text: maxByOrNull()
+  - text: maxOfWithOrNull()
+  - text: maxOrNull()
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23325#comment
+status: Solved
+record: -1
+local_check: false

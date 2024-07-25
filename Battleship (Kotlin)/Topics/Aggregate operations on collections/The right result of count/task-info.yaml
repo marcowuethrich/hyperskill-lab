@@ -1,0 +1,14 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: michael
+  - text: 3
+  - text: "[michael, caroline, dimitry]"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23327#comment
+status: Solved
+record: -1
+local_check: false

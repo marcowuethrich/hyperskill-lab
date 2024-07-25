@@ -1,0 +1,20 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: It's a class implementing an interface but leaving several functions or properties
+      for further inheritors.
+  - text: "A process when an object uses another object, usually provided as a parameter,\
+    \ for some functionality it lacks itself."
+  - text: Design pattern which allows an object to handle requests by delegating them
+      to another object.
+  - text: "A process of establishing mutual connections between two objects, enabling\
+    \ them to use each other's functions reciprocally."
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21406#comment
+status: Solved
+record: -1
+custom_name: So... what's a delegate?
+local_check: false

@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Constants are already known at compile time
+  - text: Constants are necessary
+  - text: Constants should be named using the camel case
+  - text: They are values that can't be changed
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20473#comment
+status: Solved
+record: -1
+local_check: false

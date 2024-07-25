@@ -1,0 +1,41 @@
+<div class="step-text">
+    <p></p>
+    <p>Imagine we're involved in some kind of game development, and you're working on a fantasy-genre game, which
+        involves defining statistics and actions for different characters, monsters, and NPCs...</p>
+    <p>
+        <picture>
+            <source media="(max-width: 480px)"
+                    srcset="https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/1440x/-/format/webp/ 3x"
+                    type="image/webp"/>
+            <source media="(max-width: 800px)"
+                    srcset="https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/2400x/-/format/webp/ 3x"
+                    type="image/webp"/>
+            <source srcset="https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/-/stretch/off/-/resize/3000x/-/format/webp/ 3x"
+                    type="image/webp"/>
+            <img alt="Choosing interfaces for a given class" height="1080" name="IMG_5485 (2).JPG"
+                 src="https://ucarecdn.com/5ca3b966-11c0-437b-8abf-1a9e715f6e0b/" width="1920"/></picture>
+    </p>
+    <p>The programmers of the team have provided you with a bunch of interfaces, such as <code class="language-kotlin">Melee</code>
+        for the characters who attack with melee weapons, while the team's game designers (not very familiar with the
+        programmers) created classes of in-game entities they would like to add, listing required functions and
+        properties. The thing is, for the whole system to work, interfaces must be connected to game entities:
+        therefore, your task is to check the functionality of the interfaces and add the interfaces to the list of
+        inheritance or implementation of the provided classes. For example, the game designers made an Archer class:</p>
+    <pre><code class="language-kotlin">class Archer: // ?
+{  
+ // Hm this seems to be a part of "Ranged" interface...  
+ override var usesAmmo: Boolean = true  
+ override var ammoAmount: Int = 20  
+ override var hp: Int = 3  
+ override var armorClass: Int = 10  
+  
+ // And that corresponds to "NPC"!  
+ override val xp: Int = 5  
+ override var location: String = "Camp"  
+}</code></pre>
+    <p>Therefore, you'll need to add the following interfaces to the class:</p>
+    <pre><code class="language-kotlin">class Archer: Ranged, NPC {
+ override var usesAmmo: Boolean = true
+...</code></pre>
+    <br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 8 seconds</font><br><br>
+</div>

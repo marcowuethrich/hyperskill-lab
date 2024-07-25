@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Coroutines allow using the imperative style for async operations
+  - text: Coroutines make computations faster than callbacks or threads
+  - text: Coroutines can work even on a single-threaded platform
+  - text: Coroutines consume less memory than threads
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14507#comment
+status: Solved
+record: -1
+local_check: false

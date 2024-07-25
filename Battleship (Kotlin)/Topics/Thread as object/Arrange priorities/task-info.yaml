@@ -1,0 +1,20 @@
+type: sorting
+options:
+  - mix
+  - jix
+  - fix
+  - tix
+  - kix
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21732#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: It's when we use a coroutine
+  - text: It's when we implement additional steps in our function
+  - text: It's when we pass the continuation function to the first function as an argument
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/19676#comment
+status: Solved
+record: -1
+custom_name: What is Reactive extensions?
+local_check: false

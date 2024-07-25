@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: 3
+  - text: 2
+  - text: 4
+  - text: 1
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20221#comment
+status: Solved
+record: -1
+custom_name: Syntax time!
+local_check: false

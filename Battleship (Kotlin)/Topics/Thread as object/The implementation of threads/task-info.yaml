@@ -1,0 +1,14 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: As instances of a special class from an external library
+  - text: As a group of special native functions
+  - text: As instances of the standard class <b>Thread</b> and its subclasses
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15597#comment
+status: Solved
+record: -1
+local_check: false

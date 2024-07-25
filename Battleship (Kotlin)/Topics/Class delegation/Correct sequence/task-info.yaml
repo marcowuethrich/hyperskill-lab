@@ -1,0 +1,16 @@
+type: sorting
+options:
+  - Creating a class that uses delegation
+  - Creating an interface
+  - Creating a delegate class
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/28045#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

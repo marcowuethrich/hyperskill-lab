@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "[03-05-2021-14:33]: 10, 5"
+  - text: "[03-05-2021-14:33]: 10, 10"
+  - text: "[03-05-2021-14:33]: 5, 10"
+  - text: "[03-05-2021-14:33]: 5, 5"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21408#comment
+status: Solved
+record: -1
+local_check: false

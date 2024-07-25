@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: 1
+  - text: 2
+  - text: 3
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20222#comment
+status: Solved
+record: -1
+custom_name: "Interfacing without errors: find what's wrong"
+local_check: false

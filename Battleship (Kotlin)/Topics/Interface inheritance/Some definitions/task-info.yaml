@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Overriding the methods previously declared within the same interface.
+  - text: A mechanism which allows an object or an interface to refer to other objects
+      which provide implementations for their functions.
+  - text: A mechanism which allows to share a set of attributes and methods between
+      several interfaces or classes.
+  - text: A process of deriving an interface from a class.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20219#comment
+status: Solved
+record: -1
+local_check: false

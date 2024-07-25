@@ -1,0 +1,13 @@
+type: code
+custom_name: A different formatter?
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/21413#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sun, 21 Jul 2024 20:04:50 UTC"
+record: -1
+submission_language: kotlin

@@ -1,0 +1,14 @@
+type: code
+custom_name: "Getting rid of copy-pasting: constructing an interface"
+files:
+  - name: src/Main.kt
+    visible: true
+    highlight_level: NONE
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/18228#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sun, 21 Jul 2024 18:00:46 UTC"
+record: -1
+submission_language: kotlin

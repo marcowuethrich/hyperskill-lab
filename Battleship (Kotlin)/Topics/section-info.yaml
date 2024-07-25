@@ -1,0 +1,12 @@
+content:
+  - Aggregate operations on collections
+  - "Scope functions  let, run, and with"
+  - Introduction to Interfaces
+  - Interface inheritance
+  - Delegate
+  - Class delegation
+  - Object expressions
+  - Object declarations
+  - Thread as object
+  - Thread synchronization
+  - Asynchronous programming techniques   problems

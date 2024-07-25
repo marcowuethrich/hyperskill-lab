@@ -1,0 +1,13 @@
+type: code
+custom_name: The secret is inside the spell?
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23330#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 12 Jul 2024 20:39:49 UTC"
+record: -1
+submission_language: kotlin

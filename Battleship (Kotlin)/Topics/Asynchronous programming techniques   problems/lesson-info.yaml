@@ -1,0 +1,11 @@
+custom_name: Asynchronous programming techniques & problems
+content:
+  - Theory
+  - Long operations
+  - What is callback
+  - What is suspendable
+  - Coroutines advantages
+  - Coroutines keyword
+  - Allowed actions in coroutines
+  - Fix the coroutine call
+  - What is Reactive extensions

@@ -1,0 +1,15 @@
+type: edu
+files:
+  - name: src/battleship/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30259#comment
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Thu, 25 Jul 2024 16:07:25 UTC"
+record: -1
