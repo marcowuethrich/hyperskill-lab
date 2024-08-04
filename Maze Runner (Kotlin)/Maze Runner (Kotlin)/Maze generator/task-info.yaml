@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/mazerunner/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/MazeRunnerTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/24319#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 03 Aug 2024 11:20:34 UTC"
+record: 2

@@ -1,72 +1,31 @@
 <div class="step-text">
-    <h5 id="introduction">Introduction</h5>
-    <p>We have already figured out what <a class="theory-lookup not-relevant" href="/learn/step/22875"
-                                           rel="noopener noreferrer nofollow" target="_blank"
-                                           title="In Kotlin, scope functions are a group of non-extension functions (let, run, with, also, and apply) that return lambda calculation and are used for grouping function calls. | They help you work with the safety call operator or introduce an expression as a variable in a local scope. Specifically, scope functions like let and run return the result of a lambda and are not extension functions, meaning the context object is passed as an argument and is available inside the lambda as a receiver.">scope
-        functions</a> are and how <code class="language-kotlin">apply</code> and <code
-            class="language-kotlin">also</code> work. In this topic, we will consider three other functions: <code
-            class="language-kotlin">with</code>, <code class="language-kotlin">let</code>, and <code
-            class="language-kotlin">run</code>. They return the result of the last expression and make code more
-        readable and concise.</p>
-    <h5 id="with">with</h5>
-    <p>Let's start from <code class="language-kotlin">with</code> — it's the simplest function among the three. Here are
-        the main characteristics of the <code class="language-kotlin">with</code> function:</p>
-    <ul>
-        <li><p><a class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow"
-                  target="_blank"
-                  title="In Kotlin, a context object is an object that provides contextual information or services to a function or a lambda expression. | It is similar to the with function, but it is recommended to use it when working with the entire object and not caring about its parameter or method. It allows you to invoke functions and access properties of the object in a more concise and readable way. The context object is available inside the function or lambda expression and it returns the result of the lambda expression. It is useful in two major cases: initializing a new object and passing the result of a lambda to it, and using a function without an extension.">Context
-            object</a> is available as <code class="language-kotlin">this</code>.</p></li>
-        <li><p>It returns the result of a lambda.</p></li>
-        <li><p>It isn't an <a class="theory-lookup not-relevant" href="/learn/step/22875"
-                              rel="noopener noreferrer nofollow" target="_blank"
-                              title="In Kotlin, an extension function is a function that can be called on an existing class as if it were a member of that class, but is actually defined outside of the class. | It allows developers to add new functionality to existing classes without modifying the original class code. Extension functions take the receiver object (the class they are extending) as the first argument, which is implicitly passed. They can take arguments and return values like regular functions. If a class has both a member function and an extension function with the same name and signature, the member function will take precedence.">extension
-            function</a>.</p></li>
-    </ul>
-    <p>What do we mean when we say that <code class="language-kotlin">with</code> isn't an extension function? It means
-        that the context object is passed as an argument — it is enclosed in parentheses. However, inside the lambda our
-        object is available as a receiver (<code class="language-kotlin">this</code>).</p>
-    <p><code class="language-kotlin">with</code> is used in two cases: </p>
-    <p>First, when we want to do something with the context object and don't want to receive a result. Remember — <code
-            class="language-kotlin">with</code> returns the result of a lambda, but according to Kotlin code
-        conventions, we use this scope function when we don't need a certain result. Truly, "What Happens in <code
-                class="language-kotlin">with</code>, stays in <code class="language-kotlin">with</code>".</p>
-    <pre><code class="language-kotlin">val musicians = mutableListOf("Thom York", "Jonny Greenwood", "Colin Greenwood")
+<h5 id="introduction">Introduction</h5>
+<p>We have already figured out what <a class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, scope functions are a group of non-extension functions (let, run, with, also, and apply) that return lambda calculation and are used for grouping function calls. | They help you work with the safety call operator or introduce an expression as a variable in a local scope. Specifically, scope functions like let and run return the result of a lambda and are not extension functions, meaning the context object is passed as an argument and is available inside the lambda as a receiver.">scope functions</a> are and how <code class="language-kotlin">apply</code> and <code class="language-kotlin">also</code> work. In this topic, we will consider three other functions: <code class="language-kotlin">with</code>, <code class="language-kotlin">let</code>, and <code class="language-kotlin">run</code>. They return the result of the last expression and make code more readable and concise.</p>
+<h5 id="with">with</h5>
+<p>Let's start from <code class="language-kotlin">with</code> — it's the simplest function among the three. Here are the main characteristics of the <code class="language-kotlin">with</code> function:</p>
+<ul><li><p><a class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a context object is an object that provides contextual information or services to a function or a lambda expression. | It is similar to the with function, but it is recommended to use it when working with the entire object and not caring about its parameter or method. It allows you to invoke functions and access properties of the object in a more concise and readable way. The context object is available inside the function or lambda expression and it returns the result of the lambda expression. It is useful in two major cases: initializing a new object and passing the result of a lambda to it, and using a function without an extension.">Context object</a> is available as <code class="language-kotlin">this</code>.</p></li><li><p>It returns the result of a lambda.</p></li><li><p>It isn't an <a class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an extension function is a function that can be called on an existing class as if it were a member of that class, but is actually defined outside of the class. | It allows developers to add new functionality to existing classes without modifying the original class code. Extension functions take the receiver object (the class they are extending) as the first argument, which is implicitly passed. They can take arguments and return values like regular functions. If a class has both a member function and an extension function with the same name and signature, the member function will take precedence.">extension function</a>.</p></li></ul>
+<p>What do we mean when we say that <code class="language-kotlin">with</code> isn't an extension function? It means that the context object is passed as an argument — it is enclosed in parentheses. However, inside the lambda our object is available as a receiver (<code class="language-kotlin">this</code>).</p>
+<p><code class="language-kotlin">with</code> is used in two cases: </p>
+<p>First, when we want to do something with the context object and don't want to receive a result. Remember — <code class="language-kotlin">with</code> returns the result of a lambda, but according to Kotlin code conventions, we use this scope function when we don't need a certain result. Truly, "What Happens in <code class="language-kotlin">with</code>, stays in <code class="language-kotlin">with</code>".</p>
+<pre><code class="language-kotlin">val musicians = mutableListOf("Thom York", "Jonny Greenwood", "Colin Greenwood")
 with(musicians) {
     println("'with' is called with the argument $this")
     println("List contains $size elements")
 } // We print the needed data and don't try to get a certain result</code></pre>
-    <p>Besides, we use <code class="language-kotlin">with</code> when we want to make an accessory object whose
-        parameters or functions may be used to calculate the result. It is important — this new object is used as an
-        accessory one (we will work with the real object in <code class="language-kotlin">run</code>).</p>
-    <pre><code class="language-kotlin">val musicians = mutableListOf("Thom York", "Jonny Greenwood", "Colin Greenwood")
+<p>Besides, we use <code class="language-kotlin">with</code> when we want to make an accessory object whose parameters or functions may be used to calculate the result. It is important — this new object is used as an accessory one (we will work with the real object in <code class="language-kotlin">run</code>).</p>
+<pre><code class="language-kotlin">val musicians = mutableListOf("Thom York", "Jonny Greenwood", "Colin Greenwood")
 val firstAndLast = with(musicians) {
     "First list element - ${first()}," +
     " last list element - ${last()}"
 }
 println(firstAndLast) // We create a new variable firstAndLast and pass the result of calculations inside the function body to it. After that we print this variable.</code></pre>
-    <p>When we use <code class="language-kotlin">with</code>, it sounds like: "Ok, let's do some work with a certain
-        object". Note that <code class="language-kotlin">with</code> is written to the left of the object itself — it is
-        the only scope function with such syntax.</p>
-    <h5 id="let">let</h5>
-    <p>Here are the main features of the <code class="language-kotlin">let</code> function:</p>
-    <ul>
-        <li><p>Context object is available as <code class="language-kotlin">it</code>.</p></li>
-        <li><p>It returns the result of a lambda.</p></li>
-    </ul>
-    <p><code class="language-kotlin">let</code> is used in two general cases:</p>
-    <p>First, when we want to do something with the safety call operator <code class="language-kotlin">?</code> and
-        non-null objects — yes, <code class="language-kotlin">let</code> allows us to do that. Let's see: in the code
-        below, we try to perform some operations with a nullable string (<code class="language-kotlin">String?</code>).
-        If we use the standard method, the compiler throws an error. To avoid that, we can check if <code
-                class="language-kotlin">str</code> is null or non-null when <code class="language-kotlin">let</code> is
-        called. And do remember that <code class="language-kotlin">let</code> returns the result of a lambda, which is
-        <code class="language-kotlin">it.length</code> in our case — the last <a class="theory-lookup not-relevant"
-                                                                                 href="/learn/step/22875"
-                                                                                 rel="noopener noreferrer nofollow"
-                                                                                 target="_blank"
-                                                                                 title="In Kotlin, a lambda expression is a function without a name, allowing you to use and pass around code as data. | They are often more readable than function references and force developers to break down a program into smaller functions with clear responsibilities. For instance, you can call a function directly or by passing its value using a function reference. Lambda expressions have a reasonable type, just like top-level functions. If a lambda expression has no arguments, you don't need to include the arrow symbol. You might wonder how to use a function without a known name.">lambda
-            expression</a> (the last line in the lambda's body).</p>
-    <pre><code class="language-kotlin">val str: String? = "Jonny Greenwood"
+<p>When we use <code class="language-kotlin">with</code>, it sounds like: "Ok, let's do some work with a certain object". Note that <code class="language-kotlin">with</code> is written to the left of the object itself — it is the only scope function with such syntax.</p>
+<h5 id="let">let</h5>
+<p>Here are the main features of the <code class="language-kotlin">let</code> function:</p>
+<ul><li><p>Context object is available as <code class="language-kotlin">it</code>.</p></li><li><p>It returns the result of a lambda.</p></li></ul>
+<p><code class="language-kotlin">let</code> is used in two general cases:</p>
+<p>First, when we want to do something with the safety call operator <code class="language-kotlin">?</code> and non-null objects — yes, <code class="language-kotlin">let</code> allows us to do that. Let's see: in the code below, we try to perform some operations with a nullable string (<code class="language-kotlin">String?</code>). If we use the standard method, the compiler throws an error. To avoid that, we can check if <code class="language-kotlin">str</code> is null or non-null when <code class="language-kotlin">let</code> is called. And do remember that <code class="language-kotlin">let</code> returns the result of a lambda, which is <code class="language-kotlin">it.length</code> in our case — the last <a class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a lambda expression is a function without a name, allowing you to use and pass around code as data. | They are often more readable than function references and force developers to break down a program into smaller functions with clear responsibilities. For instance, you can call a function directly or by passing its value using a function reference. Lambda expressions have a reasonable type, just like top-level functions. If a lambda expression has no arguments, you don't need to include the arrow symbol. You might wonder how to use a function without a known name.">lambda expression</a> (the last line in the lambda's body).</p>
+<pre><code class="language-kotlin">val str: String? = "Jonny Greenwood"  
 //processNonNullString(str)       // compilation error: str can be null
 
 val length = str?.let {
@@ -74,42 +33,21 @@ val length = str?.let {
     processNonNullString(it)      // OK: 'it' is not null inside '?.let { }'
     it.length
 }</code></pre>
-    <p>Second, we use <code class="language-kotlin">let</code> when we want to enter <a
-            class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow"
-            target="_blank"
-            title="In Kotlin, a local variable is a named value that is declared within a block of code and is only accessible within that block. | It differs from a top-level variable, which is accessible from anywhere in the program. Local variables can be either mutable or read-only, depending on whether they are declared with the `var` or `val` keyword, respectively. Local variables are useful for storing temporary values or for encapsulating the scope of a variable to improve code readability and reduce the likelihood of errors. It is a good practice to use local variables instead of top-level ones whenever possible.">local
-        variables</a> with a limited scope. In such a case, <code class="language-kotlin">let</code> allows us to
-        improve code readability. Let's see the code below: we don't need to change the first element of <code
-                class="language-kotlin">musicians</code>, but we can work with it as if with a limited scope element
-        with the full name <code class="language-kotlin">firstItem</code> (in most cases, we use <code
-                class="language-kotlin">it</code> or <code class="language-kotlin">this</code>).</p>
-    <pre><code class="language-kotlin">val musicians = listOf("Thom York", "Jonny Greenwood", "Colin Greenwood")
+<p>Second, we use <code class="language-kotlin">let</code> when we want to enter <a class="theory-lookup not-relevant" href="/learn/step/22875" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a local variable is a named value that is declared within a block of code and is only accessible within that block. | It differs from a top-level variable, which is accessible from anywhere in the program. Local variables can be either mutable or read-only, depending on whether they are declared with the `var` or `val` keyword, respectively. Local variables are useful for storing temporary values or for encapsulating the scope of a variable to improve code readability and reduce the likelihood of errors. It is a good practice to use local variables instead of top-level ones whenever possible.">local variables</a> with a limited scope. In such a case, <code class="language-kotlin">let</code> allows us to improve code readability. Let's see the code below: we don't need to change the first element of <code class="language-kotlin">musicians</code>, but we can work with it as if with a limited scope element with the full name <code class="language-kotlin">firstItem</code> (in most cases, we use <code class="language-kotlin">it</code> or <code class="language-kotlin">this</code>).</p>
+<pre><code class="language-kotlin">val musicians = listOf("Thom York", "Jonny Greenwood", "Colin Greenwood")
 val modifiedFirstItem = musicians.first().let { firstItem -&gt;
     println("The first item of the list is '$firstItem'")
     if (firstItem.length &gt;= 5) firstItem else "!" + firstItem + "!"
 }.uppercase()
 println("First item after modifications: '$modifiedFirstItem'")</code></pre>
-    <p>You can say: "Hey, I can do that by using <code class="language-kotlin">with</code>". And technically, yes, you
-        can. But wait till we figure out how <code class="language-kotlin">run</code> works.</p>
-    <h5 id="run">run</h5>
-    <p>Now, look at the characteristics of the <code class="language-kotlin">run</code> function:</p>
-    <ul>
-        <li><p>Context object is available as <code class="language-kotlin">this</code>.</p></li>
-        <li><p>It returns the result of a lambda.</p></li>
-    </ul>
-    <p><code class="language-kotlin">run</code> is like <code class="language-kotlin">with</code>, but it is an
-        extension function. Thus, <code class="language-kotlin">run</code> does the same thing as <code
-                class="language-kotlin">with</code> but is invoked like <code class="language-kotlin">let</code>.</p>
-    <p>When can we use <code class="language-kotlin">run</code>? Mostly in two cases:</p>
-    <p>First, when we want to initialize a new object and pass the result of a lambda to it. It is important — our new
-        object is independent and valuable, unlike in the case of the <code class="language-kotlin">with</code>
-        function. For instance, in the code below, we create a new object <code class="language-kotlin">result</code>,
-        pass a new value to the <code class="language-kotlin">service</code> element <code
-                class="language-kotlin">port</code>, and pass to <code class="language-kotlin">result</code> the result
-        of the <code class="language-kotlin">query()</code> function with the <code class="language-kotlin">prepareRequest()</code>
-        function concatenated with a string as a parameter. Note! The value of <code class="language-kotlin">service.port</code>
-        is changed.</p>
-    <pre><code class="language-kotlin">class MultiportService(var url: String, var port: Int) {
+<p>You can say: "Hey, I can do that by using <code class="language-kotlin">with</code>". And technically, yes, you can. But wait till we figure out how <code class="language-kotlin">run</code> works.</p>
+<h5 id="run">run</h5>
+<p>Now, look at the characteristics of the <code class="language-kotlin">run</code> function:</p>
+<ul><li><p>Context object is available as <code class="language-kotlin">this</code>.</p></li><li><p>It returns the result of a lambda.</p></li></ul>
+<p><code class="language-kotlin">run</code> is like <code class="language-kotlin">with</code>, but it is an extension function. Thus, <code class="language-kotlin">run</code> does the same thing as <code class="language-kotlin">with</code> but is invoked like <code class="language-kotlin">let</code>.</p>
+<p>When can we use <code class="language-kotlin">run</code>? Mostly in two cases:</p>
+<p>First, when we want to initialize a new object and pass the result of a lambda to it. It is important — our new object is independent and valuable, unlike in the case of the <code class="language-kotlin">with</code> function. For instance, in the code below, we create a new object <code class="language-kotlin">result</code>, pass a new value to the <code class="language-kotlin">service</code> element <code class="language-kotlin">port</code>, and pass to <code class="language-kotlin">result</code> the result of the <code class="language-kotlin">query()</code> function with the <code class="language-kotlin">prepareRequest()</code> function concatenated with a string as a parameter. Note! The value of <code class="language-kotlin">service.port</code> is changed.</p>
+<pre><code class="language-kotlin">class MultiportService(var url: String, var port: Int) {
     fun prepareRequest(): String = "Default request"
     fun query(request: String): String = "Result for query '$request'"
 }
@@ -122,10 +60,8 @@ fun main() {
         query(prepareRequest() + " to port $port")
     }
 }</code></pre>
-    <p>Second, when we want to use a function without an extension and execute a block of several operators. In that
-        case, we don't use a context object and just organize some piece of code related to the variable <code
-                class="language-kotlin">hexNumberRegex</code>.</p>
-    <pre><code class="language-kotlin">fun main() {
+<p>Second, when we want to use a function without an extension and execute a block of several operators. In that case, we don't use a context object and just organize some piece of code related to the variable <code class="language-kotlin">hexNumberRegex</code>.</p>
+<pre><code class="language-kotlin">fun main() {
     val hexNumberRegex = run {
         val digits = "0-9"
         val hexDigits = "A-Fa-f"
@@ -138,21 +74,11 @@ fun main() {
         println(match.value)
     }
 }</code></pre>
-    <p></p>
-    <div class="alert alert-warning"><p>We've been twice surprised that these functions can be used interchangeably.
-        Yes, they really are, and we'll unravel this confusion in the following topic. But right now, you can look at
-        the official <a href="https://kotlinlang.org/docs/scope-functions.html#distinctions"
-                        rel="noopener noreferrer nofollow" target="_blank">documentation</a>.</p></div>
-    <p></p>
-    <h5 id="conclusion">Conclusion</h5>
-    <p>So, we've figured out how to work with three scope functions, which return lambda calculations.</p>
-    <ul>
-        <li><p><code class="language-kotlin">with</code> is a non-extension function and is used for grouping function
-            calls.</p></li>
-        <li><p><code class="language-kotlin">let</code> usually helps us to work with the safety call operator <code
-                class="language-kotlin">?</code> or introduce an expression as a variable in a local scope.</p></li>
-        <li><p><code class="language-kotlin">run</code> is used when we want to configure our object or configure it and
-            return a certain result.</p></li>
-    </ul>
-    <p>Now, time for some practice.</p>
+<p></p>
+<div class="alert alert-warning"><p>We've been twice surprised that these functions can be used interchangeably. Yes, they really are, and we'll unravel this confusion in the following topic. But right now, you can look at the official <a href="https://kotlinlang.org/docs/scope-functions.html#distinctions" rel="noopener noreferrer nofollow" target="_blank">documentation</a>.</p></div>
+<p></p>
+<h5 id="conclusion">Conclusion</h5>
+<p>So, we've figured out how to work with three scope functions, which return lambda calculations.</p>
+<ul><li><p><code class="language-kotlin">with</code> is a non-extension function and is used for grouping function calls.</p></li><li><p><code class="language-kotlin">let</code> usually helps us to work with the safety call operator <code class="language-kotlin">?</code> or introduce an expression as a variable in a local scope.</p></li><li><p><code class="language-kotlin">run</code> is used when we want to configure our object or configure it and return a certain result.</p></li></ul>
+<p>Now, time for some practice.</p>
 </div>

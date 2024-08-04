@@ -1,0 +1,17 @@
+type: edu
+files:
+  - name: src/mazerunner/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/MazeRunnerTest.java
+    visible: false
+    learner_created: false
+  - name: test_maze.txt
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/24320#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 04 Aug 2024 11:09:16 UTC"
+record: 3
