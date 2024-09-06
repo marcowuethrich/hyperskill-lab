@@ -35,8 +35,8 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven { url 'https://packages.jetbrains.team/maven/p/academy/hyperskill-hspc' }
-        maven { url 'https://jitpack.io' }
+        maven { url "https://packages.jetbrains.team/maven/p/academy/hyperskill-hspc" }
+        maven { url "https://jitpack.io" }
     }
 
     dependencies {
@@ -69,7 +69,7 @@ project(':util') {
     }
 }
 
-configure(subprojects.findAll {it.name != 'util'}) {
+configure(subprojects.findAll { it.name != 'util' }) {
     dependencies {
         testImplementation project(':util').sourceSets.main.output
         testImplementation project(':util').sourceSets.test.output

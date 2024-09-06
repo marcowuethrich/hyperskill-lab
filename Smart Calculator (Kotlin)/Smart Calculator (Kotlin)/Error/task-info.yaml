@@ -1,0 +1,15 @@
+type: edu
+custom_name: Error!
+files:
+  - name: src/calculator/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/Test.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/88/stages/490/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 06 Sep 2024 12:10:09 UTC"
+record: 5
