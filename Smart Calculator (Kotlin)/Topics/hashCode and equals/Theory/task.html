@@ -1,0 +1,186 @@
+<div class="step-text">
+    <p>In previous topics, we have learned how to work with objects, their properties and member functions.</p>
+    <p>One of the most frequent problems is check two objects for equality. For this task, we can use two fundamental
+        methods: <code class="language-kotlin">hashCode()</code> and <code class="language-kotlin">equals()</code>.</p>
+    <h5 id="the-hashcode-method">The hashCode() method</h5>
+    <p>What is a hash code? A hash function is a special function that can be used to map data of any size to fixed-size
+        values. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes.
+        You heard about them in the context of algorithms or hash functions, such as md5 or sha. For example, if we use
+        a hash generator for the following message: "Hi, this is a hash!", we will get:</p>
+    <ul>
+        <li><p>MD5 Hash: d6daac6fa4bfe4d4f123341b5263e139</p></li>
+        <li><p>SHA1 Hash: 94db811c3956339f89224d4157be0026db52f091</p></li>
+    </ul>
+    <p>One of the fundamental properties of hash functions is that they always return the same value for the same
+        content or input information, that is, if we pass them the same content value, they will always return the same
+        hash code.</p>
+    <p>This property can be used to check if two objects are equal based on their content and their hash. If the content
+        of two objects, that is, their state, is the same, their hash code must be the same.</p>
+    <p>In Kotlin, hashCode is a 32-bit identifier that is stored in the hash table for an instance of the class. Every
+        class must provide a <code class="language-kotlin">hashCode()</code> method that allows to retrieve the hash
+        code assigned, by default, by the <code class="language-kotlin">Any</code> class. All classes inherit from the
+        <code class="language-kotlin">Any</code> class for hashing, although it is common to override that to obtain a
+        hash function that more specifically handles the contained data.</p>
+    <p>To obtain the hash code for the state of an object, we can make use of the <code class="language-kotlin">hashCode()</code>
+        functions for the types or simple classes Kotlin has already pre-calculated: Int, Long, String, etc.</p>
+    <pre><code class="language-kotlin">fun main() {
+    val intValue = 32
+    val intValue2 = 64
+    val intValue3 = 32
+
+    println(intValue.hashCode()) // 32
+    println(intValue2.hashCode()) // 64
+    println(intValue3.hashCode()) // 32
+
+    println(intValue.hashCode() == intValue2.hashCode()) // false
+    println(intValue.hashCode() == intValue3.hashCode()) // true
+
+    val stringValue = "Hello"
+    val stringValue2 = "Hello"
+    val stringValue3 = "Hello World"
+
+    println(stringValue.hashCode()) // 69609650
+    println(stringValue2.hashCode()) // 69609650
+    println(stringValue3.hashCode()) // -862545276
+
+    println(stringValue.hashCode() == stringValue2.hashCode()) // true
+    println(stringValue.hashCode() == stringValue3.hashCode()) // false
+}</code></pre>
+    <p>To get the hash code for the state of our class, we must override the default <code class="language-kotlin">hashCode()</code>
+        (inherited from <code class="language-kotlin">Any</code>) according to the properties of our class. This way, we
+        can get the proper <code class="language-kotlin">hashCode()</code> method to represent the state of our object.
+    </p>
+    <pre><code class="language-kotlin">class Person(val name: String, val age: Int) {
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + age.hashCode()
+        return result
+    }
+}
+
+fun main() {
+    val person1 = Person("John", 32)
+    val person2 = Person("John", 32)
+    val person3 = Person("John", 64)
+
+    println(person1.hashCode()) // 71750741
+    println(person2.hashCode()) // 71750741
+    println(person3.hashCode()) // 71750773
+
+    println(person1.hashCode() == person2.hashCode()) // true
+    println(person1.hashCode() == person3.hashCode()) // false
+}</code></pre>
+    <h5 id="the-equals-method">The equals method</h5>
+    <p>What is the <code class="language-kotlin">equals</code> method? This special method<strong> </strong>compares two
+        objects and returns true if they are <strong>equal</strong>. This method exists by default for all objects and
+        is defined in <code class="language-kotlin">Any</code>, so we must override it to adapt it to the nature and
+        definition of our classes. </p>
+    <p>To build the <code class="language-kotlin">equals</code> method, we can make use of the <code
+            class="language-kotlin">equals</code> method that already exists implemented in the basic Kotlin types or
+        classes: Int, Long, String, etc.</p>
+    <p>To use the <code class="language-kotlin">equals()</code> method, we can either call it or use the <code
+            class="language-kotlin">==</code> operator.</p>
+    <pre><code class="language-kotlin">fun main() {
+    val intValue = 32
+    val intValue2 = 64
+    val intValue3 = 32
+
+    println(intValue.equals(intValue2)) // false
+    println(intValue.equals(intValue3)) // true
+    println(intValue == intValue2) // false
+    println(intValue == intValue3) // true
+
+    val stringValue = "Hello"
+    val stringValue2 = "Hello"
+    val stringValue3 = "Hello World"
+
+    println(stringValue.equals(stringValue2)) // true
+    println(stringValue.equals(stringValue3)) // false
+    println(stringValue == stringValue2) // true
+    println(stringValue == stringValue3) // false
+}</code></pre>
+    <p>To perform the right operation of <code class="language-kotlin">equals</code> for the state of our class, we must
+        override the default <code class="language-kotlin">equals()</code> (inherited from <code
+                class="language-kotlin">Any</code>) according to the properties of our class. This way, we can get the
+        proper <code class="language-kotlin">equals</code><strong> </strong>method to represent the state of our object.
+    </p>
+    <pre><code class="language-kotlin">class Person(val name: String, val age: Int) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Person) return false
+
+        if (name != other.name) return false
+        return age == other.age
+    }
+}
+
+fun main() {
+    println(person1.equals(person2)) // true
+    println(person1.equals(person3)) // false
+    println(person1 == person2) // true
+    println(person1 == person3) // false
+}</code></pre>
+    <h5 id="equals-and-hashcode-relationship">equals and hashCode relationship</h5>
+    <p>The <code class="language-kotlin">equals()</code> and <code class="language-kotlin">hashCode()</code> methods are
+        closely related, and we must take this into account when defining them.</p>
+    <p>Normally, the <code class="language-kotlin">hashCode()</code> method is overridden so that it behaves in the way
+        <code class="language-kotlin">equals()</code> does: that is, if two objects are equal, they must have the same
+        hash value. So, if two objects are equal, <code class="language-kotlin">hashCode()</code> produces the same
+        integer result. Hence, <code class="language-kotlin">equals()</code> returns true if <code
+                class="language-kotlin">hashCode()</code> is equal, else it returns false. This is very important, as
+        <code class="language-kotlin">equals()</code> and <code class="language-kotlin">hashCode()</code> must be
+        consistent and based on the same object properties to be calculated.</p>
+    <pre><code class="language-kotlin">class Person(val name: String, val age: Int) {
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + age.hashCode()
+        return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Person) return false
+
+        if (name != other.name) return false
+        return age == other.age
+    }
+}
+
+fun main() {
+    println(person1.hashCode() == person2.hashCode()) // true
+    println(person1.hashCode() == person3.hashCode()) // false
+    println(person1 == person2) // true
+    println(person1 == person3) // false
+}</code></pre>
+    <h5 id="equals-and-hashcode-in-data-classes">equals and hashCode in data classes</h5>
+    <p>When we are working with <a class="theory-lookup not-relevant" href="/learn/step/27975"
+                                   rel="noopener noreferrer nofollow" target="_blank"
+                                   title="In Kotlin, a data class is a special type of class that automatically provides implementations of several common methods, such as `equals()`, `hashCode()`, and `toString()`, based on the properties of the class. | This is done using the `data` keyword before the class definition. This simplifies the code required for standard operations and allows for easier comparison of objects based on their properties. Additionally, data classes automatically provide a `copy()` function, which creates a shallow copy of the object, and `componentN()` functions, which can be used for destructuring declarations.">data
+        classes</a>, the <code class="language-kotlin">equals()</code> and <code
+            class="language-kotlin">hashCode()</code> methods are implemented and defined automatically based on the
+        state of the properties that define our data class in the constructor. In the event that we are not interested
+        in the auto-generated behavior, we can define it by overriding these methods as we have seen in the previous
+        sections.</p>
+    <pre><code class="language-kotlin">data class PersonData(val name: String, val age: Int)
+
+fun main() {
+    val personData1 = PersonData("John", 32)
+    val personData2 = PersonData("John", 32)
+    val personData3 = PersonData("John", 64)
+
+    println(personData1.hashCode()) // 71750741
+    println(personData2.hashCode()) // 71750741
+    println(personData3.hashCode()) // 71750773
+
+    println(personData1.hashCode() == personData2.hashCode()) // true
+    println(personData1.hashCode() == personData3.hashCode()) // false
+
+    println(personData1 == personData2) // true
+    println(personData1 == personData3) // false
+}</code></pre>
+    <h5 id="conclusion">Conclusion</h5>
+    <p><code class="language-kotlin">hashCode</code> and <code class="language-kotlin">equals</code> are two powerful
+        methods that can help us compare the state of our objects. But you must not forget that they must be consistent
+        with each other: if two objects are equal, their hash codes should be the same.</p>
+    <p>Now is the time to do some tasks to check what you have learned. Are you ready?</p>
+</div>

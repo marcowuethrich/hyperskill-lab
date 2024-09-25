@@ -1,0 +1,183 @@
+<div class="step-text">
+    <p></p>
+    <p>As we have seen in previous topics, <strong>functions</strong> in Kotlin are <a
+            class="theory-lookup not-relevant" href="/learn/step/20947" rel="noopener noreferrer nofollow"
+            target="_blank"
+            title="In Kotlin, a first-class citizen refers to a language construct that is treated as a full-fledged value with equal status. | This includes variables, functions, and objects. They can be passed as arguments to functions, returned as values from functions, assigned to variables, and stored in data structures like arrays and maps. This treatment allows for greater flexibility and expressiveness in the language, making it easier to write concise and expressive code. For example, functions in Kotlin are first-class citizens, meaning they can be assigned to variables, passed as arguments to other functions, and returned as values from functions.">first-class
+        citizens</a>: we can have functions that return functions, or even take a function as a parameter. As you
+        remember, in Kotlin you can use <strong>lambdas </strong>(function <a class="theory-lookup not-relevant"
+                                                                              href="/learn/step/20947"
+                                                                              rel="noopener noreferrer nofollow"
+                                                                              target="_blank"
+                                                                              title="In Kotlin, a literal is a value that is directly represented in the code, such as a number, character, or string. | For example, 3, 'a', and hello are all literals in Kotlin. Integer literals, such as 3, can be represented by the type int (32-bit) or long (64-bit) and can be used in arithmetic operations. Characters, such as 'a', are single-character literals that use less memory than strings. Strings, such as hello, are sequences of characters that can be used for handling text.">literals</a>,
+        or functions that are not declared but passed immediately as expressions). Thanks to lambdas, we can code the
+        behavior of a function on the fly and use it as a function parameter. We can also store the behavior of a
+        function as a variable. Besides, Kotlin introduces <strong><a class="theory-lookup not-relevant"
+                                                                      href="/learn/step/20947"
+                                                                      rel="noopener noreferrer nofollow" target="_blank"
+                                                                      title="In Kotlin, an extension function is a function that can be called on an existing class as if it were a member of that class, but is actually defined outside of the class. | It allows developers to add new functionality to existing classes without modifying the original class code. Extension functions take the receiver object (the class they are extending) as the first argument, which is implicitly passed. They can take arguments and return values like regular functions. If a class has both a member function and an extension function with the same name and signature, the member function will take precedence.">extension
+            functions</a></strong>, which offer a way of extending existing classes with new functionality without using
+        class inheritance.</p>
+    <p>In this topic, you will learn how to combine these two concepts: we'll talk about "extension lambdas",
+        technically called "<strong>lambdas with receivers</strong>",<strong> </strong>and learn to use them in our
+        code.</p>
+    <h5 id="receiver">Receiver</h5>
+    <p>First of all, what is a <strong>receiver</strong>? In Kotlin, every piece of code must have an associated type
+        (or multiple types) that receives it.</p>
+    <p>In the context of extension functions, the receiver is an object instance that extends its functionality by the
+        function. Receivers can be omitted to give you direct access to the receiver’s members. The following code shows
+        an extension function that checks if an integer is even. It shows how we can access the integer itself, which is
+        the receiver (<code class="language-kotlin">this</code>) we operate with:</p>
+    <pre><code class="language-kotlin">fun Int.isEven() = this % 2 == 0
+
+fun main() {
+    println("Is 2 even?: ${2.isEven()}") // true
+    println("Is 3 even?: ${3.isEven()}") // false
+}</code></pre>
+    <p>A <strong>lambda with a receiver</strong> is a way to define behavior similar to an extension function, and it
+        uses <a class="theory-lookup not-relevant" href="/learn/step/20947" rel="noopener noreferrer nofollow"
+                target="_blank"
+                title="In Kotlin, a lambda expression is a function without a name, allowing you to use and pass around code as data. | They are often more readable than function references and force developers to break down a program into smaller functions with clear responsibilities. For instance, you can call a function directly or by passing its value using a function reference. Lambda expressions have a reasonable type, just like top-level functions. If a lambda expression has no arguments, you don't need to include the arrow symbol. You might wonder how to use a function without a known name.">lambda
+            expressions</a> to operate with some object. To convert a lambda into a lambda with a receiver, you can give
+        one of the parameters of the lambda the special status of a receiver, which allows you to refer to its members
+        directly without any qualifier.</p>
+    <h5 id="working-with-lambdas-with-receivers">Working with lambdas with receivers</h5>
+    <p>With lambdas with receivers, you indicate how methods are resolved in the lambda body. The receiver is an
+        extension function type. It enables the access to the visible methods and properties of the receiver of the
+        lambda in its body without any additional qualifier.</p>
+    <p> We can explore this concept by implementing a <code class="language-kotlin">sum</code> function with integer
+        type.</p>
+    <pre><code class="language-kotlin">val sum: (Int, Int) -&gt; Int = { a, b -&gt; a + b }
+fun main() {
+    println(sum(1, 2)) // 3
+}</code></pre>
+    <p> We can use a lambda with a receiver to rewrite our code.</p>
+    <pre><code class="language-kotlin">val sum: Int.(Int) -&gt; Int = { a -&gt; this + a }
+
+fun main() {
+    println(sum(1, 2)) // 3
+    println(1.sum(2)) // 3
+}</code></pre>
+    <p>Function types can optionally have an additional <a class="theory-lookup not-relevant" href="/learn/step/20947"
+                                                           rel="noopener noreferrer nofollow" target="_blank"
+                                                           title="In Kotlin, a receiver type is a special parameter of a lambda function that gives it the ability to access the members (properties and methods) of the corresponding receiver object directly, without any qualifier. | It is specified before the dot in the notation, for example, `Integer. () -&gt; Unit` represents a function type that can be called on an integer receiver object. A lambda with a receiver is similar to an extension function, and it allows you to define behavior for a specific object or class.">receiver
+        type</a>, which is specified before the dot in the notation: <code class="language-kotlin">A.(B) -&gt; C { body
+        }</code> represents functions that can be called on a <a class="theory-lookup not-relevant"
+                                                                 href="/learn/step/20947"
+                                                                 rel="noopener noreferrer nofollow" target="_blank"
+                                                                 title="In Kotlin, a receiver object is an object instance that extends its functionality by the function. | It can be implicit or explicit, and it's the object on which the extension function is invoked. When using a lambda with a receiver, you can give one of the parameters of the lambda a special status of a receiver, which allows you to refer to its members directly without any qualifier. This way, you can indicate how methods are resolved in the lambda body and enable access to the visible methods and properties of the receiver of the lambda in its body without any additional qualifier.">receiver
+        object</a> A with a parameter B, return a value C, and perform any action in the body.</p>
+    <p>Inside the <strong>body</strong> of the function literal, you can access the members of the receiver object using
+        the expression <code class="language-kotlin">this</code>.</p>
+    <p>We must highlight the <strong>context of the receiver</strong>. Normal <a class="theory-lookup not-relevant"
+                                                                                 href="/learn/step/20947"
+                                                                                 rel="noopener noreferrer nofollow"
+                                                                                 target="_blank"
+                                                                                 title="In Kotlin, a lambda function is also known as a lambda expression. | It is a function that can be created at runtime, which is useful when calling functions from the Kotlin standard library for data processing. Lambda functions help reduce code length and make it more concise. They allow you to use code and data as a function's argument. A lambda expression can be used directly or passed as an argument using a function reference. Lambda functions are first-class citizens in the Kotlin language, just like top-level functions. They can be declared with or without arguments, and if there are no arguments, the arrow symbol is not required.">lambda
+        functions</a> (first case) in Kotlin are as follows: a set of explicit arguments and the body of the lambda
+        separated by an arrow: <code class="language-kotlin">(A,B) -&gt; C</code>, in this case: <code
+                class="language-kotlin">(Int, Int) -&gt; Int</code>.</p>
+    <p>To transform it into a<strong> </strong>lambda with a receiver, we move the <a class="theory-lookup not-relevant"
+                                                                                      href="/learn/step/20947"
+                                                                                      rel="noopener noreferrer nofollow"
+                                                                                      target="_blank"
+                                                                                      title="In Kotlin, a type parameter is a named type that is used in a class, interface, or function declaration to make it work with different data types. | Type parameters are often used in generic programming, which allows for versatility and reusability of code. They are typically named using a single letter, such as T, E, K, or V, to distinguish them from regular class names. When creating an instance of a generic class, you need to provide a concrete type as a type argument, which can be inferred by the compiler if it's a standard type. Once the type argument is specified, you can invoke methods of the class using the provided type. If the class has multiple type parameters, you should specify them in order. Type parameters can be used as ordinary types inside the class body, such as a type for a field, constructor argument type, instance method argument, or return type.">type
+        parameter</a> outside of the parentheses. It's similar both to a lambda and to an extension function, so you can
+        combine these concepts. You can use an extension function due to the context of the receiver. We can use <code
+                class="language-kotlin">this</code>, so we can perform <code class="language-kotlin">sum</code> over its
+        value adding the parameter. Thus, it can be defined as <code class="language-kotlin">A.(B) -&gt; C</code>, in
+        this case: <code class="language-kotlin">Int.(Int)-&gt;Int</code>, where A is the receiver and we can use <code
+                class="language-kotlin">this</code> to operate with it, see <code
+                class="language-kotlin">sum(1,2)</code>. Also, we can use a lambda with a receiver similar to an
+        extension function, thanks to the implicit <code class="language-kotlin">this</code>, see <code
+                class="language-kotlin">1.sum(2)</code>.</p>
+    <p>Let’s try to generalize this example code to a code block that allows us to perform a series of operations with
+        integers using a lambda with a receiver. We use the receiver as an extension and expect that the function with
+        an integer will work with it in the block of the function and we will obtain an integer.</p>
+    <pre><code class="language-kotlin">// Extension function for Int, which applies function f to the current Int
+fun Int.opp(f: Int.() -&gt; Int): Int = f()
+
+fun main() {
+    // Use the opp function to multiply the number 10 by 2
+    var res = 10.opp { this.times(2) }
+    println(res) // 20
+
+    // Another way to use the opp function to add 10 to the number 10
+    // We can omit "this" as the context explicitly refers to the current Int
+    res = 10.opp { plus(10) }
+    println(res) // 20
+
+    // Yet another way to multiply the number 10 by 2 using the opp function
+    res = 10.opp { this * 2 }
+    println(res) // 20
+}</code></pre>
+    <p>As shown above, we just call the <code class="language-kotlin">f()</code> function, which is equal to <code
+            class="language-kotlin">this.f()</code>. Again, each unqualified function call uses an instance of Integer
+        as a <a class="theory-lookup not-relevant" href="/learn/step/20947" rel="noopener noreferrer nofollow"
+                target="_blank"
+                title="In Kotlin, a function call is the action of invoking a function using its name followed by parentheses. | Functions are subprograms that perform a specific action, such as printing data or calculating a square root. When a function takes one or more arguments, they should be passed in the parentheses. For example, if a function takes a single-string argument, you can invoke it like this: `functionName(string)`. Some functions not only take arguments but also produce a result, which can be assigned to a variable.">function
+            call</a> receiver.</p>
+    <h5 id="usage-of-lambdas-with-receivers">Usage of lambdas with receivers</h5>
+    <p>Lambda expressions can be used as function literals with a receiver when the receiver type can be inferred from
+        the context. One of the most important examples of their usage is <strong><a class="theory-lookup not-relevant"
+                                                                                     href="/learn/step/20947"
+                                                                                     rel="noopener noreferrer nofollow"
+                                                                                     target="_blank"
+                                                                                     title="In Kotlin, a type-safe builder is a feature that combines the builder design pattern and Domain Specific Language (DSL) to create APIs with a fluent and readable syntax. | Type-safe builders are defined through extension functions in a class or companion object, which extend a base type and allow for building and configuring objects safely at compile time. The Kotlin compiler can verify the correctness of the values and properties used in the building block, preventing common errors and providing a safer and more error-prone development experience. Type-safe builders are useful in enforcing scoping rules and providing better clarity about the intended usage of the DSL.">type-safe
+            builders</a></strong> or<strong> DSLs</strong>. Domain-specific languages (DSLs) allow us to easily encode
+        complex structures using declarative syntax. The following code shows how to use type-safe builders with the
+        <code class="language-kotlin">StringBuilder</code><strong> </strong>class, which can be applied to efficiently
+        perform multiple string manipulation operations. For example, using the <code
+                class="language-kotlin">append</code> method, we can append a specified character sequence; in the end,
+        after all manipulations, we return the final string.</p>
+    <pre><code class="language-kotlin">// Safe Builder String with Lambda with receiver
+fun myString(init: StringBuilder.() -&gt; Unit): String {
+    return StringBuilder().apply(init).toString()
+}
+
+fun main() {
+    val str = myString {
+        append("Hello, ".uppercase())
+        append("World!")
+    }
+    println(str) // HELLO, World!
+}</code></pre>
+    <p>Finally, the standard library and third-party libraries extensively use lambdas with receivers to improve
+        developer experience. This is the basis of performing DSL operations. An example can be seen in the <code
+                class="language-kotlin">apply()</code><strong> <a class="theory-lookup not-relevant"
+                                                                  href="/learn/step/20947"
+                                                                  rel="noopener noreferrer nofollow" target="_blank"
+                                                                  title="In Kotlin, scope functions are a group of non-extension functions (let, run, with, also, and apply) that return lambda calculation and are used for grouping function calls. | They help you work with the safety call operator or introduce an expression as a variable in a local scope. Specifically, scope functions like let and run return the result of a lambda and are not extension functions, meaning the context object is passed as an argument and is available inside the lambda as a receiver.">scope
+            function</a></strong>.</p>
+    <pre><code class="language-kotlin">fun MutableMap&lt;String, Any&gt;.apply(block: MutableMap&lt;String, Any&gt;.() -&gt; Unit): MutableMap&lt;String, Any&gt; {
+    block()
+    return this
+}
+
+fun main() {
+    val student: MutableMap&lt;String, Any&gt; = mutableMapOf(
+        "name" to "John",
+        "age" to 20
+    )
+
+    student.apply {
+        this["name"] = (this["name"] as String).uppercase()
+        this["age"] = (this["age"] as Int) + 1
+    }
+
+    println(student) // {name=JOHN, age=21}
+}</code></pre>
+    <p>Basically, all <code class="language-kotlin">apply</code> functions invoke the argument of an extension function
+        type on the provided receiver and return the receiver itself.</p>
+    <h5 id="conclusion">Conclusion</h5>
+    <p>In this topic, we saw how we can take advantage of lambdas with receivers to make better and more readable
+        program constructs. </p>
+    <p>Lambdas with receivers are great tools for generalizing a code block, which allows us to perform a series of
+        operations or build DSLs. The benefit of using lambdas with receivers is the ability to reuse code and create
+        abstractions or define extensions on primitive types, which lets you create a readable <a
+                class="theory-lookup not-relevant" href="/learn/step/20947" rel="noopener noreferrer nofollow"
+                target="_blank"
+                title="In Kotlin, a syntax refers to the set of rules and conventions that dictate how a program should be written in the language. | It includes the structure of statements, expressions, and keywords, as well as the use of indentation, whitespace, and comments. An expression, for example, is a type of syntax that evaluates to a single value, such as a literal value, variable, function call, or a combination of these elements using operators. Understanding the syntax of Kotlin is essential for writing clear, maintainable, and error-free code.">syntax</a>
+        for various kinds of literals, such as dates, or make builders for your objects.</p>
+    <p>Ready for some questions and tasks? Let's go!</p>
+</div>

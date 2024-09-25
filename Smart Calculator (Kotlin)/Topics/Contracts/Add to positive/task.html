@@ -1,0 +1,26 @@
+<div class="step-text">
+    <p></p>
+    <p>We have a function <code class="language-kotlin">printIncrement</code> that prints the incrementation of an <code
+            class="language-kotlin">Int</code> if it is positive:</p>
+    <pre><code class="language-kotlin">fun printIncrement(value: Int?) {
+    val x: Int? = value
+    if (x.isPositive()) {
+        println(x + 1)
+    } else {
+        println("Can't increment a negative value")
+    }
+}</code></pre>
+    <p>Complete the provided function <code class="language-kotlin">isPositive</code> to make it verify if an <code
+            class="language-kotlin">Int</code> is positive and not null. Also, it must contain a contract that implies
+        that when the function returns <code class="language-kotlin">true</code>, the receiver is not null.</p><br><b>Sample
+    Input:</b><br>
+    <pre><code class="language-no-highlight">-4</code></pre>
+    <br><b>Sample Output:</b><br>
+    <pre><code class="language-no-highlight">Can&#39;t increment a negative value</code></pre>
+    <br><br><b>Sample Input:</b><br>
+    <pre><code class="language-no-highlight">9</code></pre>
+    <br><b>Sample Output:</b><br>
+    <pre><code class="language-no-highlight">10</code></pre>
+    <br><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 8
+    seconds</font><br><br>
+</div>

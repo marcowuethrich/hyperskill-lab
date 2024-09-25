@@ -1,0 +1,18 @@
+content:
+  - Lazy initialization
+  - Companion object
+  - Function references
+  - Lambda with receiver
+  - Type-safe builders
+  - Contracts
+  - Overriding constructors
+  - Visibility modifiers for members
+  - Argument naming in overridden functions
+  - hashCode and equals
+  - Sealed class and interface
+  - Null and collections
+  - Grouping collections
+  - Advanced lambda expressions
+  - Monitor and Thread synchronization
+  - Coroutine builders  overview
+  - Channels

@@ -1,0 +1,505 @@
+<div class="step-text">
+    <p></p>
+    <p>In previous topics, we have seen the power of working with functions in Kotlin. We have learned how important it
+        is to use <a class="theory-lookup not-relevant" href="/learn/step/29647" rel="noopener noreferrer nofollow"
+                     target="_blank"
+                     title="In Kotlin, an extension function is a function that can be called on an existing class as if it were a member of that class, but is actually defined outside of the class. | It allows developers to add new functionality to existing classes without modifying the original class code. Extension functions take the receiver object (the class they are extending) as the first argument, which is implicitly passed. They can take arguments and return values like regular functions. If a class has both a member function and an extension function with the same name and signature, the member function will take precedence.">extension
+            functions</a> and lambdas with receivers.</p>
+    <p>In this topic, we will focus on how to use those with the <a class="theory-lookup not-relevant"
+                                                                    href="/learn/step/29647"
+                                                                    rel="noopener noreferrer nofollow" target="_blank"
+                                                                    title="In Kotlin, the builder pattern is a creational design pattern that allows for the construction of complex objects in a step-by-step manner, separating the construction logic from the representation. | This results in more readable and maintainable code. Traditionally, the builder pattern is implemented using a class to represent the object being built and a separate builder class that provides methods to set the properties of the object being built. However, in Kotlin, you can implement this pattern using the language's functional advantages such as DSL (Domain Specific Language) and extension functions. By combining these two concepts, type-safe builders in Kotlin enable the creation of APIs with a fluent and readable syntax, where code blocks can be structured similarly to a hierarchical structure or a markup language. Type-safe builders in Kotlin are defined through extension functions in a class or companion object, which extend a base type and allow for building and configuring objects safely at compile-time.">builder
+        pattern</a> to implement DSL (domain-specific language) and make a <a class="theory-lookup not-relevant"
+                                                                              href="/learn/step/29647"
+                                                                              rel="noopener noreferrer nofollow"
+                                                                              target="_blank"
+                                                                              title="In Kotlin, a type-safe builder is a feature that combines the builder design pattern and Domain Specific Language (DSL) to create APIs with a fluent and readable syntax. | Type-safe builders are defined through extension functions in a class or companion object, which extend a base type and allow for building and configuring objects safely at compile time. The Kotlin compiler can verify the correctness of the values and properties used in the building block, preventing common errors and providing a safer and more error-prone development experience. Type-safe builders are useful in enforcing scoping rules and providing better clarity about the intended usage of the DSL.">type-safe
+        builder</a> for our code.</p>
+    <h5 id="builders-in-kotlin">Builders in Kotlin</h5>
+    <p>The <strong>builder pattern</strong> is a creational design pattern that allows making complex objects step by
+        step. It provides a way to construct objects by separating the construction logic from the representation, which
+        results in more readable and maintainable code.</p>
+    <p>The traditional builder pattern is commonly implemented using a combination of a class representing the object to
+        be built and a separate builder class. The builder class provides methods to set the properties of the object
+        being built, allowing for a fluent and customizable construction process. The builder pattern helps improve the
+        readability and flexibility of object construction by providing a clear and customizable way to construct
+        complex objects, avoiding the need for <a class="theory-lookup not-relevant" href="/learn/step/29647"
+                                                  rel="noopener noreferrer nofollow" target="_blank"
+                                                  title="In Kotlin, multiple constructors refer to the ability of a class to have more than one constructor, each with its own logic for initializing the class properties. | This is useful when you need to create several different instances of a class with varying initial values. Custom constructors, declared within the class body and having their own parameter list, allow you to create multiple constructors for the same class. For example, a derived class may implement multiple constructors to initialize the base class in different ways.">multiple
+            constructors</a> or large parameter lists.</p>
+    <pre><code class="language-kotlin">class Person private constructor(
+    val firstName: String,
+    val lastName: String,
+    val age: Int,
+    val address: String
+) {
+    class Builder {
+        private var firstName: String = ""
+        private var lastName: String = ""
+        private var age: Int = 0
+        private var address: String = ""
+
+        fun setFirstName(firstName: String): Builder {
+            this.firstName = firstName
+            return this
+        }
+
+        fun setLastName(lastName: String): Builder {
+            this.lastName = lastName
+            return this
+        }
+
+        fun setAge(age: Int): Builder {
+            this.age = age
+            return this
+        }
+
+        fun setAddress(address: String): Builder {
+            this.address = address
+            return this
+        }
+
+        fun build(): Person {
+            return Person(firstName, lastName, age, address)
+        }
+    }
+}
+
+fun main() {
+   val person = Person.Builder()
+    .setFirstName("John")
+    .setLastName("Doe")
+    .setAge(30)
+    .setAddress("123 Main St")
+    .build()
+}
+</code></pre>
+    <p>However, you can implement this pattern using Kotlin's functional advantages: extension functions and lambdas
+        with receivers or function literals with receivers. Let's see an example:</p>
+    <pre><code class="language-kotlin">data class Person(
+    val firstName: String,
+    val lastName: String,
+    val age: Int,
+    val address: String
+)
+
+data class PersonBuilder(
+    val firstName: String = "",
+    val lastName: String = "",
+    val age: Int = 0,
+    val address: String = ""
+)
+
+fun personBuilder(init: PersonBuilder.() -&gt; Unit): Person {
+    val builder = PersonBuilder()
+    builder.init()
+    return Person(builder.firstName, builder.lastName, builder.age, builder.address)
+}
+
+fun main() {
+    val person = personBuilder {
+        firstName = "John"
+        lastName = "Doe"
+        age = 30
+        address = "123 Main St"
+    }
+}</code></pre>
+    <p>In this approach, the <code class="language-kotlin">Person</code> class remains the same, but the <code
+            class="language-kotlin">PersonBuilder</code> class is defined as a data class that represents the builder's
+        state. The <code class="language-kotlin">personBuilder</code> function is defined as a <a
+                class="theory-lookup not-relevant" href="/learn/step/29647" rel="noopener noreferrer nofollow"
+                target="_blank"
+                title="In Kotlin, a higher-order function is a function that can take one or more functions as parameters or return a function as its result. | This feature allows for more modular, reusable, and maintainable code, as it promotes functional programming patterns and prevents issues with shared state in concurrent environments. Higher-order functions can be used to simplify complex situations and enhance code organization through functional decomposition. They are an essential part of Kotlin's support for functional programming, along with other features like lambda expressions, anonymous functions, and monads.">higher-order
+            function</a> that takes a lambda with a receiver (<code class="language-kotlin">init: PersonBuilder.() -&gt;
+            Unit</code>) to configure the builder. The lambda with a receiver (<code class="language-kotlin">init</code>)
+        allows you to directly set the properties of the <code class="language-kotlin">PersonBuilder</code> object using
+        named parameters. After configuring the builder, calling the <code class="language-kotlin">personBuilder</code>
+        function creates and returns the corresponding <code class="language-kotlin">Person</code> object. This <a
+                class="theory-lookup not-relevant" href="/learn/step/29647" rel="noopener noreferrer nofollow"
+                target="_blank"
+                title="In Kotlin, functional programming is a style of programming that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. | It emphasizes immutability, pure functions, and higher-order functions. The Kotlin standard library provides many functions for collections, such as `filter`, `map`, and `reduce`, which are commonly used in functional programming. These functions allow you to process and transform data in a declarative way, without changing the original data.">functional
+            programming</a> approach provides a concise and <strong>declarative </strong>way to build objects using a
+        builder pattern, leveraging the power of lambdas with receivers and immutable data classes.</p>
+    <p>Here is another example, which shows how to build a String based on the above pattern.</p>
+    <pre><code class="language-kotlin">fun buildString(action: (StringBuilder).() -&gt; Unit): String {
+    val stringBuilder = StringBuilder()
+    action(stringBuilder)
+    return stringBuilder.toString()
+}
+
+fun main() {
+    println(buildString {
+        append("I Love ")
+        append("learning Kotlin")
+        append(" with Hyperskill")
+    }) // I Love learnig Kotlin with Hyperskill
+}
+</code></pre>
+    <h5 id="dsl">DSL</h5>
+    <p>According to Martin Fowler, a Domain-Specific Language (DSL) is a specialized programming language designed to
+        tackle specific types of problems, as opposed to general-purpose languages. In Kotlin, with its powerful
+        features, you can create internal DSLs to address complex hierarchical problems using extension functions,
+        lambdas, lambdas with receivers, and <a class="theory-lookup not-relevant" href="/learn/step/29647"
+                                                rel="noopener noreferrer nofollow" target="_blank"
+                                                title="In Kotlin, operator overloading is a feature that allows defining custom behavior for existing operators when applied to objects of user-defined types. | This enables more readable and maintainable code by making it possible to perform common operations, such as arithmetic, comparisons, or indexed access, using familiar syntax. To use operator overloading, you need to implement specific functions in your class or type, such as unary operations, binary operations, indexed access operator, augmented assignment, equality and inequality operators, comparison operators, unary prefix operators, increment and decrement, arithmetic operators, in operator, and invoke operator. These functions are not operators themselves, and their execution order in an expression is from left to right, with some exceptions determined by associativity.">operator
+            overloading</a>. These language constructs allow you to define a DSL that closely resembles the problem
+        domain and provides a natural and intuitive syntax for working with complex hierarchical structures. You can
+        create internal DSLs that offer a more focused and expressive way of solving specific problems within a
+        particular domain, resulting in code that is easier to read, write, and maintain.</p>
+    <p>Examples of using DSL in Kotlin include generating markup with Kotlin code, such as <a
+            href="https://github.com/Kotlin/kotlinx.html" rel="noopener noreferrer nofollow" target="_blank">HTML</a> or
+        XML, or configuring routes for a web server in <a href="https://ktor.io/docs/routing.html"
+                                                          rel="noopener noreferrer nofollow" target="_blank">Ktor</a>.
+    </p>
+    <h5 id="type-safe-builders">Type-safe builders</h5>
+    <p>Type-safe builders in Kotlin are based on two main concepts: DSLs and the builder design pattern. By combining
+        these two concepts, type-safe builders in Kotlin enable us to create APIs with a fluent and readable syntax,
+        where code blocks can be structured similarly to a hierarchical structure or a markup language. Type-safe
+        builders in Kotlin are defined through extension functions in a class or <a class="theory-lookup not-relevant"
+                                                                                    href="/learn/step/29647"
+                                                                                    rel="noopener noreferrer nofollow"
+                                                                                    target="_blank"
+                                                                                    title="In Kotlin, a companion object is a special object that is associated with a class and contains class-wide properties and methods. | It is similar to static members in other programming languages. The companion object is shared among all instances of a class and can be accessed without creating an instance of the class. There can only be one companion object per class, and it cannot be created inside another singleton or a companion object. This is because it violates the global access principle.">companion
+            object</a>. These functions extend a <a class="theory-lookup not-relevant" href="/learn/step/29647"
+                                                    rel="noopener noreferrer nofollow" target="_blank"
+                                                    title="In Kotlin, a base type, also known as a basic type, is a fundamental building block for data manipulation within the language. | They can be separated into several groups according to their meaning, and the types from the same group operate similarly but have different sizes and thus represent different ranges of value. Kotlin provides several types for integer and fractional numbers. For example, integer numbers (e.g. 0, 1, 2, ...) are represented by the following four types: Int, Long, Short, and Byte (from the largest to the smallest). These types have different sizes and may represent different ranges of value.">base
+            type</a> and allow for building and configuring objects safely at compile time. By using type-safe builders,
+        the Kotlin compiler can verify the correctness of the values and properties used in the building block,
+        preventing common errors and providing a safer and less error-prone development experience.</p>
+    <p>As an example, we will code a tree of String values to organize nodes in a hierarchical structure. The first
+        example is without DSL: the <code class="language-kotlin">TreeNodeBuilder</code> class is responsible for
+        building the tree structure. It has a <code class="language-kotlin">root</code> property, an empty <code
+                class="language-kotlin">TreeNode</code>, and methods like <code class="language-kotlin">value</code> and
+        <code class="language-kotlin">child</code>. The <code class="language-kotlin">value</code> method creates a new
+        <code class="language-kotlin">TreeNode</code> with the specified value and adds it as a child to the root node.
+        The <code class="language-kotlin">child</code> method creates a new <code class="language-kotlin">TreeNodeBuilder</code>,
+        adds its built child to the root node, and returns the child builder for further configuration. The <code
+                class="language-kotlin">build</code> method in the <code class="language-kotlin">TreeNodeBuilder</code>
+        class returns the root node of the built tree. The <code class="language-kotlin">buildTree</code> function is a
+        <a class="theory-lookup not-relevant" href="/learn/step/29647" rel="noopener noreferrer nofollow"
+           target="_blank"
+           title="In Kotlin, a top-level function is a function that is defined at the top level of a file, outside of any class or object. | These functions are global and can be called from anywhere in the file where they are defined. They are similar to static methods in other programming languages. Top-level functions can take parameters and can return values, just like regular functions. They are useful for defining utility functions that can be reused throughout an application.">top-level
+            function</a> that creates a new <code class="language-kotlin">TreeNodeBuilder</code> and returns it.</p>
+    <pre><code class="language-kotlin">data class TreeNode(val value: String) {
+    val children = mutableListOf&lt;TreeNode&gt;()
+
+    fun addChild(child: TreeNode) {
+        children.add(child)
+    }
+
+    fun parent(): TreeNodeBuilder {
+        return TreeNodeBuilder(root)
+    }
+}
+
+class TreeNodeBuilder(private val root: TreeNode? = null) {
+    private val currentNode: TreeNode
+
+    init {
+        currentNode = if (root != null) {
+            root
+        } else {
+            TreeNode("")
+        }
+    }
+
+    fun value(value: String): TreeNodeBuilder {
+        val node = TreeNode(value)
+        currentNode.addChild(node)
+        return this
+    }
+
+    fun child(): TreeNodeBuilder {
+        val childBuilder = TreeNodeBuilder(currentNode)
+        currentNode.addChild(childBuilder.build())
+        return childBuilder
+    }
+
+    fun parent(): TreeNodeBuilder {
+        if (root != null) {
+            return TreeNodeBuilder(root)
+        } else {
+            throw IllegalStateException("Cannot go back to parent node. Already at the root.")
+        }
+    }
+
+    fun build(): TreeNode {
+        return currentNode
+    }
+}
+
+fun buildTree(): TreeNodeBuilder {
+    return TreeNodeBuilder()
+}
+
+fun main() {
+    val tree = buildTree()
+        .value("Root")
+        .child()
+            .value("Child 1")
+            .child()
+                .value("Grandchild 1.1")
+            .parent()
+            .child()
+                .value("Grandchild 1.2")
+            .parent()
+        .parent()
+        .child()
+            .value("Child 2")
+            .child()
+                .value("Grandchild 2.1")
+            .parent()
+        .build()
+
+    printTree(tree)
+}
+
+fun printTree(node: TreeNode, level: Int = 0) {
+    val indentation = "  ".repeat(level)
+    println("$indentation${node.value}")
+    for (child in node.children) {
+        printTree(child, level + 1)
+    }
+}</code></pre>
+    <p>When you run the main function, it will print the tree structure: each level of the tree is indented by two
+        spaces and the strings representing the nodes are displayed. This gives you a visual representation of the
+        hierarchical structure of the tree of strings.</p>
+    <pre><code class="language-kotlin">Root
+  Child 1
+    Grandchild 1.1
+    Grandchild 1.2
+  Child 2
+    Grandchild 2.1
+</code></pre>
+    <p>Now, we will transform this code to a type-safe builder to use it as a DSL. In this example, the type-safe
+        builder <code class="language-kotlin">TreeNodeBuilder </code>provides methods such as <code
+                class="language-kotlin">value</code> and <code class="language-kotlin">child</code>, which can be
+        chained together to build the tree structure. This allows the tree to be built in a declarative and readable
+        way. In the end, you will get a tree object that represents the data structure of the tree. As an example, we
+        code a tree structure and the items in a hierarchical structure. The <code
+                class="language-kotlin">buildTree</code> function outside the <code
+                class="language-kotlin">TreeNode</code> class is used to initiate the building process by taking a
+        lambda with a receiver (<code class="language-kotlin">TreeNodeBuilder.() -&gt; Unit</code>). Inside the <code
+                class="language-kotlin">TreeNodeBuilder</code> class, the functions <code
+                class="language-kotlin">value</code> and <code class="language-kotlin">child</code> are defined to
+        configure and build the tree structure. The <code class="language-kotlin">value</code> function in the <code
+                class="language-kotlin">TreeNodeBuilder</code> class is used to set the value of the current node. It
+        creates a new <code class="language-kotlin">TreeNode</code> with the specified value and adds it as a child to
+        the root node. The <code class="language-kotlin">child</code> function in the <code class="language-kotlin">TreeNodeBuilder</code>
+        class is used to add a child node to the current node. It takes a lambda with a receiver (<code
+                class="language-kotlin">TreeNodeBuilder.() -&gt; Unit</code>) that defines the configuration of the
+        child node. Inside the lambda, a new <code class="language-kotlin">TreeNodeBuilder</code> is created, and the
+        lambda block is executed within the scope of the child builder. The resulting child node is then added to the
+        current node's list of children.</p>
+    <pre><code class="language-kotlin">data class TreeNode(val value: String) {
+    val children = mutableListOf&lt;TreeNode&gt;()
+
+    fun addChild(child: TreeNode) {
+        children.add(child)
+    }
+}
+
+class TreeNodeBuilder {
+    private val root = TreeNode("")
+    private var currentNode = root
+
+    fun value(value: String) {
+        currentNode = TreeNode(value)
+        root.addChild(currentNode)
+    }
+
+    fun child(block: TreeNodeBuilder.() -&gt; Unit) {
+        val childBuilder = TreeNodeBuilder()
+        childBuilder.block()
+        currentNode.addChild(childBuilder.build())
+    }
+
+    fun build(): TreeNode {
+        return root
+    }
+}
+
+fun buildTree(block: TreeNodeBuilder.() -&gt; Unit): TreeNode {
+    val builder = TreeNodeBuilder()
+    builder.block()
+    return builder.build()
+}
+
+fun main() {
+    val tree = buildTree {
+        value("Root")
+        child {
+            value("Child 1")
+            child {
+                value("Grandchild 1.1")
+            }
+            child {
+                value("Grandchild 1.2")
+            }
+        }
+        child {
+            value("Child 2")
+            child {
+                value("Grandchild 2.1")
+            }
+        }
+    }
+
+    printTree(tree)
+}
+
+fun printTree(node: TreeNode, level: Int = 0) {
+    val indentation = "  ".repeat(level)
+    println("$indentation${node.value}")
+    for (child in node.children) {
+        printTree(child, level + 1)
+    }
+}</code></pre>
+    <p> That gives you visually the same representation of the hierarchical structure of the tree of strings as in the
+        previous example.</p>
+    <pre><code class="language-kotlin">Root
+  Child 1
+    Grandchild 1.1
+    Grandchild 1.2
+  Child 2
+    Grandchild 2.1
+</code></pre>
+    <h5 id="using-builders-with-builder-type-inference">Using Builders with Builder Type Inference</h5>
+    <p>In Kotlin, starting from version 1.7.0, it's possible to use builders with builder type inference, which is
+        particularly useful when working with <a class="theory-lookup not-relevant" href="/learn/step/29647"
+                                                 rel="noopener noreferrer nofollow" target="_blank"
+                                                 title="In Kotlin, a generic builder is a type-safe builder implemented using the builder pattern, which allows for creating complex objects step by step in a more readable and maintainable way. | It provides a way to construct objects by separating the construction logic from the representation. Generic builders in Kotlin can be enhanced by using features such as extension functions, lambda with receivers, and DSL (Domain Specific Language) to create versatile and reusable code structures.">generic
+            builders</a>. This feature enables the compiler to infer the type arguments of a builder call based on the
+        type information about other calls within its lambda argument.</p>
+    <p><strong>Usage Example</strong></p>
+    <p>Consider the use of <code class="language-kotlin">buildMap()</code>:</p>
+    <pre><code class="language-kotlin">fun addEntryToMap(baseMap: Map&lt;String, Number&gt;, additionalEntry: Pair&lt;String, Int&gt;?) {
+    val myMap = buildMap {
+        putAll(baseMap)
+        additionalEntry?.let { put(it.first, it.second) }
+    }
+}
+</code></pre>
+    <p>Here, the compiler automatically infers the type arguments of the <code class="language-kotlin">buildMap()</code>
+        call as <code class="language-kotlin">String</code> and <code class="language-kotlin">Number</code>, based on
+        the information about the <code class="language-kotlin">putAll()</code> and <code
+                class="language-kotlin">put()</code> calls.</p>
+    <p><strong>Writing Your Own Builders with Type Inference</strong></p>
+    <p>To enable <a class="theory-lookup not-relevant" href="/learn/step/29647" rel="noopener noreferrer nofollow"
+                    target="_blank"
+                    title="In Kotlin, type inference is the process where the compiler automatically deduces the data type of a variable, expression, or function parameter, without requiring explicit type declaration. | This feature is particularly useful in lambda expressions, where the parameter type is inferred from the interface, making the code easier to read. Kotlin's type inference works seamlessly with Java's functional interface, allowing for smooth interoperability between the two. Type inference helps to reduce redundancy in the code and makes it more concise, as the programmer does not have to explicitly specify the type of the variable every time.">type
+        inference</a> in your builders:</p>
+    <ol>
+        <li>Ensure your builder's declaration includes a lambda parameter with a receiver.</li>
+        <li>The receiver type should use the type of arguments that are to be inferred. For example: <code
+                class="language-kotlin">fun &lt;V&gt; buildList(builder: MutableList&lt;V&gt;.() -&gt; Unit) { ...
+            }</code></li>
+        <li>The receiver type should provide public members or extensions that include the corresponding type arguments
+            in their signatures.
+        </li>
+    </ol>
+    <p><strong>Supported Features</strong></p>
+    <ol>
+        <li>Inferring several types of arguments.</li>
+        <li>Inferring type arguments of multiple builder lambdas within one call.</li>
+        <li>Inferring type arguments whose type parameters are the lambda's parameter or return types.</li>
+    </ol>
+    <p><strong>How Builder Type Inference Works</strong></p>
+    <p>Builder type inference operates in terms of "postponed type variables", which appear inside the builder lambda
+        during the builder inference analysis. The compiler uses them to collect information about the type argument. At
+        the end of the builder type inference analysis, all collected type information is considered and attempted to be
+        merged into the resulting type.</p>
+    <h5 id="scope-control-dslmarker">Scope control: @DslMarker</h5>
+    <p>In Kotlin, the <code class="language-kotlin">@DslMarker</code> annotation is used to define a DSL marker
+        interface or annotation. It allows you to specify a marker that indicates the scope of the DSL and helps enforce
+        scoping rules within the DSL. When creating a DSL, it is often desirable to restrict the availability of certain
+        functions or builders within specific scopes. The <code class="language-kotlin">@DslMarker</code> annotation
+        enables you to define a marker interface or annotation that acts as a signal to the compiler and other
+        developers that certain functions or builders are intended to be used only within a specific DSL scope.</p>
+    <p>Let's apply this annotation to our tree structure definition:</p>
+    <pre><code class="language-kotlin">@DslMarker
+annotation class TreeNodeDslMarker
+
+@TreeNodeDslMarker
+data class TreeNode(val value: String) {
+    val children = mutableListOf&lt;TreeNode&gt;()
+
+    fun addChild(child: TreeNode) {
+        children.add(child)
+    }
+}
+
+class TreeNodeBuilder {
+    private val root = TreeNode("")
+    private var currentNode = root
+
+    fun value(value: String) {
+        currentNode = TreeNode(value)
+        root.addChild(currentNode)
+    }
+
+    fun child(block: TreeNodeBuilder.() -&gt; Unit) {
+        val childBuilder = TreeNodeBuilder()
+        childBuilder.block()
+        currentNode.addChild(childBuilder.build())
+    }
+
+    fun build(): TreeNode {
+        return root
+    }
+}
+
+fun buildTree(block: TreeNodeBuilder.() -&gt; Unit): TreeNode {
+    val builder = TreeNodeBuilder()
+    builder.block()
+    return builder.build()
+}
+
+fun main() {
+    val tree = buildTree {
+        value("Root")
+        child {
+            value("Child 1")
+            child {
+                value("Grandchild 1.1")
+            }
+            child {
+                value("Grandchild 1.2")
+            }
+        }
+        child {
+            value("Child 2")
+            child {
+                value("Grandchild 2.1")
+            }
+        }
+    }
+
+    printTree(tree)
+}
+
+fun printTree(node: TreeNode, level: Int = 0) {
+    val indentation = "  ".repeat(level)
+    println("$indentation${node.value}")
+    for (child in node.children) {
+        printTree(child, level + 1)
+    }
+}
+</code></pre>
+    <p>The <code class="language-kotlin">@DslMarker</code> annotation is applied to the <code class="language-kotlin">TreeNode</code>
+        class, marking it as part of the DSL. The <code class="language-kotlin">@TreeNodeDslMarker</code> annotation
+        serves as a marker for the DSL, indicating that the <code class="language-kotlin">TreeNode</code> class is
+        specifically designed for use within the DSL. By applying the <code class="language-kotlin">@DslMarker</code>
+        annotation, you can clearly indicate that the <code class="language-kotlin">TreeNode</code> class is intended to
+        be used within the DSL scope and prevent its accidental usage outside of the DSL context. This serves as a way
+        to control the visibility and scoping of the DSL functions and builders. <code class="language-kotlin">@DslMarker</code>
+        is optional, and its usage depends on your specific requirements for scoping and DSL design, but it can be
+        useful in enforcing scoping rules and providing better clarity about the intended usage of the DSL.</p>
+    <h5 id="conclusion">Conclusion</h5>
+    <p>In this topic, we have learned how to use type-safe builders to make our DSL for building complex hierarchical <a
+            class="theory-lookup not-relevant" href="/learn/step/29647" rel="noopener noreferrer nofollow"
+            target="_blank"
+            title="In Kotlin, a data structure is a way to organize and store data that can be accessed and manipulated in a structured manner. | It can be as simple as a variable that holds a value or as complex as a hierarchy of objects, similar to directories in a file system. In the context of Kotlin, data structures can include basic data types like integers, floating-point numbers, and booleans, as well as more complex objects like strings and collections. These data structures have a defined internal organization and can be accessed and manipulated using properties and methods.">data
+        structures</a> in a semi-declarative way. You can try implementing that in your further projects.</p>
+    <p>Now is the time to do some tasks to check what you have learned. Are you ready?</p>
+</div>

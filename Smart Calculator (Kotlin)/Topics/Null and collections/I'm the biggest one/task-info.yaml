@@ -1,0 +1,13 @@
+type: code
+custom_name: I'm the biggest one!
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23981#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 20 Sep 2024 20:44:57 UTC"
+record: -1
+submission_language: kotlin

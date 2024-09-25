@@ -1,0 +1,107 @@
+<div class="step-text">
+    <p>The Kotlin language does not allow overriding constructors directly. However, using inheritance and polymorphism,
+        we can extend superclass constructors in subclasses. In this topic, we'll discuss how to do that.</p>
+    <h5 id="introduction-to-kotlin-constructors">Introduction to Kotlin constructors</h5>
+    <p>A <strong>constructor</strong> is a special method that is called when creating an <a
+            class="theory-lookup not-relevant" href="/learn/step/30966" rel="noopener noreferrer nofollow"
+            target="_blank"
+            title="In Kotlin, an instance refers to an object or an instance of a class that is created during runtime. | It is a subtype of every known type in Kotlin, meaning it can represent a value of any type in terms of type checking. This is particularly useful in situations where a function demands a return type, but it is impossible to return a value, such as when calculating a percentage if the value is zero. In such cases, a function that returns `Instance` can be used. The concept of instance is also related to threading, where only one thread can execute code in a synchronized method of a particular instance. This means that different threads can execute methods of different objects at the same time, a concept that can be summarized as one thread per instance.">instance</a>
+        of a class. It is used to initialize the properties of the class.</p>
+    <p>In Kotlin, there are two types of constructors:</p>
+    <ul>
+        <li><strong>Primary constructor</strong>: it is declared in the class header and may contain parameters
+            initializing the class properties.
+        </li>
+        <li><strong>Secondary constructor</strong>: it is declared inside the class body and can have various
+            parameters.
+        </li>
+    </ul>
+    <pre><code class="language-kotlin">class Person(val name: String) {  // Primary constructor
+
+    constructor(name: String, age: Int) : this(name) {  // Secondary constructor
+        // Initialization code
+    }
+}</code></pre>
+    <h5 id="basic-principles-of-overriding">Basic principles of overriding</h5>
+    <p>In the context of object-oriented programming (OOP), <strong>overriding</strong> is a mechanism that allows a
+        subclass to provide its implementation of a method already defined in its superclass.</p>
+    <p>Unfortunately, in Kotlin (like in most other programming languages), constructors cannot be directly
+        overridden.</p>
+    <pre><code class="language-kotlin">open class Person(val name: String)
+
+class Employee(name: String, val id: Int) : Person(name)  // In this case, we use the superclass 
+                                                          // constructor but do not override it.
+</code></pre>
+    <h5 id="overriding-constructors-in-kotlin">Overriding constructors in Kotlin</h5>
+    <p>As mentioned before, constructors cannot be overridden in Kotlin. However, you can define constructors in
+        subclasses that use or "extend" constructors of the superclass.</p>
+    <p>When declaring a subclass, we can use the keywords <code class="language-kotlin">open</code>, <code
+            class="language-kotlin">final</code>, and <code class="language-kotlin">override</code> to control
+        inheritance and polymorphism.</p>
+    <ul>
+        <li><code class="language-kotlin">open</code>: it allows subclasses to inherit or override functions and
+            properties.
+        </li>
+        <li><code class="language-kotlin">final</code>: it prevents subclasses from overriding functions or properties.
+        </li>
+        <li><code class="language-kotlin">override</code>: it is used by the subclass to override functions or
+            properties of the superclass.
+        </li>
+    </ul>
+    <pre><code class="language-kotlin">open class Person(open val name: String)
+
+class Employee(override val name: String, val id: Int) : Person(name)  // We override the property name.
+</code></pre>
+    <p>There are some common mistakes and problems that can arise when working with constructors in the context of
+        inheritance and polymorphism. One of the most common mistakes is not calling the superclass constructor in the
+        subclass:</p>
+    <pre><code class="language-kotlin">open class Person(val name: String)
+
+class Employee(val id: Int) : Person // Error: superclass constructor call is required
+</code></pre>
+    <h5 id="constructor-overriding-in-practice">Constructor overriding in practice</h5>
+    <p>Even though constructors cannot be directly overridden in Kotlin, you can still use the constructors of the
+        superclass when defining subclasses, which is an important element of inheritance in OOP.</p>
+    <pre><code class="language-kotlin">open class Person(val name: String) {
+    fun talk() {
+        println("$name is talking")
+    }
+}
+
+class Employee(name: String, val id: Int) : Person(name) {
+    fun work() {
+        println("$name is working with id $id")
+    }
+}
+
+fun main() {
+    val person = Person("John")
+    person.talk()  // Outputs: John is talking
+
+    val employee = Employee("Jane", 123)
+    employee.talk()  // Outputs: Jane is talking
+    employee.work()  // Outputs: Jane is working with id 123
+}
+
+</code></pre>
+    <p>In the above example, the <code class="language-kotlin">Employee</code> class extends the <code
+            class="language-kotlin">Person</code> class, using its constructor to set the <code class="language-kotlin">name</code>
+        property. This is an example of inheritance, where the subclass (<code class="language-kotlin">Employee</code>)
+        uses the constructor of the superclass (<code class="language-kotlin">Person</code>). The <code
+                class="language-kotlin">Employee</code> class also adds a new property, <code
+                class="language-kotlin">id</code>.</p>
+    <p>In the <code class="language-kotlin">main</code> function, we create instances of both <code
+            class="language-kotlin">Person</code> and <code class="language-kotlin">Employee</code>. The <code
+            class="language-kotlin">talk</code> method is called on both instances. Even though the <code
+            class="language-kotlin">talk</code> method is defined in the <code class="language-kotlin">Person</code>
+        class, it can be used by instances of the <code class="language-kotlin">Employee</code> class due to
+        inheritance. The <code class="language-kotlin">work</code> method, which is unique to the <code
+                class="language-kotlin">Employee</code> class, can only be called on instances of <code
+                class="language-kotlin">Employee</code>.</p>
+    <h5 id="conclusion">Conclusion</h5>
+    <p>The key concepts for understanding how to work with constructors in Kotlin are inheritance and polymorphism.
+        Unfortunately, it's not possible to directly override a constructor, however, you can extend superclass
+        constructors when creating subclasses, which plays an important role in object-oriented programming. Please note
+        that in the context of Kotlin and many other languages, when we talk about "overriding constructors", we usually
+        mean using or "extending" superclass constructors when creating subclasses, not their direct overriding.</p>
+</div>

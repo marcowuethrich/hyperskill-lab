@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: <code>@OptIn(ContractsExperimental::class)</code>
+  - text: <code>@OptIn(ExperimentalContracts::class)</code>
+  - text: <code>@OptIn(Contracts::class)</code>
+  - text: <code>@OptIn(Experimental::class)</code>
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/33979#comment
+status: Solved
+record: -1
+local_check: false

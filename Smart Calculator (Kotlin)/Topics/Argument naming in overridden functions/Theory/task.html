@@ -1,0 +1,168 @@
+<div class="step-text">
+    <p>In this topic, we will consider the issue of <a class="theory-lookup" href="/learn/step/4640"
+                                                       rel="noopener noreferrer nofollow" target="_blank"
+                                                       title="In Kotlin, named arguments are a way to pass arguments to functions by specifying the name of the parameter rather than its position. | This can improve code readability and allow for reordering of arguments, especially when some parameters have default values. Named arguments can be used in function calls, including overridden functions, by specifying the name of the argument before its value. This can be useful when redefining functions in derived classes, as it allows for the preservation of argument names. However, it is important to use named arguments wisely to avoid unnecessary complexity and maintain code clarity.">naming
+        arguments</a> in <a class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow"
+                            target="_blank"
+                            title="In Kotlin, overriding property refers to the ability to modify the behavior of an already defined property in a base class within a derived class. | This allows for the creation of a new layer of data within the object and control over how this data is accessed and manipulated. The keyword override is used to override both properties and methods in a subclass. It's important to note that properties and methods operate differently in Kotlin, as methods perform certain operations, while properties represent data.">overridden</a>
+        functions. This subject is important for those who want to write pure and understandable code, which is one of
+        the main goals of the Kotlin language.</p>
+    <h5 id="basics-of-function-overrides">Basics of function overrides</h5>
+    <p>In Kotlin, as in most <a class="theory-lookup not-relevant" href="/learn/step/0"
+                                rel="noopener noreferrer nofollow" target="_blank"
+                                title="In Kotlin, an object is an instance of a class that stores data and defines its behavior. | It is a complex structure that has a state, which is the data stored in the object, and a behavior, which is defined by the functions associated with the object. The state of an object can be accessed through properties, which are accessed by putting a dot and the property name after the object. Objects are stored in memory, and variables and values simply point to these objects.">object</a>-oriented
+        programming languages, classes can be inherited from each other. When inherited, classes can <a
+                class="theory-lookup" href="/learn/step/7884" rel="noopener noreferrer nofollow" target="_blank"
+                title="In Kotlin, overriding a property is the ability to modify the behavior of an already defined property in a base class from a derived class. | This feature allows for the extension of properties, similar to how methods are inherited and extended in object-oriented programming. Properties in Kotlin take the place of fields seen in other languages, such as Java, and provide a way to encapsulate data within an object and control how that data is accessed and manipulated. Overriding a property enables changing the behavior or value of a property in a derived class, providing an additional layer of flexibility.">override</a>
+        the functions of the parent class to modify or <a class="theory-lookup" href="/learn/step/7770"
+                                                          rel="noopener noreferrer nofollow" target="_blank"
+                                                          title="In Kotlin, extend is a keyword used to create a subclass or a derived class that inherits properties and methods from a superclass or a base class. | It allows for code reuse and facilitates the implementation of inheritance hierarchy. When a class is extended, the subclass can inherit all the members (properties and methods) of the superclass, and it can also add new members or override existing ones. This way, the subclass can build upon the functionality of the superclass and provide additional features.">extend</a>
+        their <a class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow"
+                 target="_blank"
+                 title="In Kotlin, a behavior refers to a specific action or set of actions that an object or class can perform. | It is often implemented through member functions, which are functions declared within a class and can access the class's fields. These member functions can take arguments and return values of any type. In the context of data structures, behavior can refer to the way data is organized and accessed within a collection. For example, a queue follows the FIFO (first-in-first-out) principle, where data is added to the end and removed from the beginning. On the other hand, a stack follows the LIFO (last-in-first-out) principle, where the last element added is the first to be removed. When creating classes to represent real-world objects, behaviors can be defined as methods that the objects can perform. For instance, when simulating a zoo, different animal species can have their own behaviors, such as eating, sleeping, making sounds, and moving around.">behavior</a>.
+        To do that, Kotlin uses the <code class="language-kotlin">override</code> <a class="theory-lookup not-relevant"
+                                                                                     href="/learn/step/0"
+                                                                                     rel="noopener noreferrer nofollow"
+                                                                                     target="_blank"
+                                                                                     title="In Kotlin, a keyword is a word that has a special meaning in the language and cannot be changed by the programmer. | It is used to define the structure and behavior of the code. Examples of keywords in Kotlin include `fun` (used to define a function), `var` (used to define a variable), and `if` (used to define a conditional statement). Keywords are reserved words in Kotlin and cannot be used as identifiers.">keyword</a>.
+        Let's take a simple example:</p>
+    <pre><code class="language-kotlin">open class Animal {
+    open fun makeSound() {
+        println("The animal makes a sound")
+    }
+}
+
+class Dog : Animal() {
+    override fun makeSound() {
+        println("The dog barks")
+    }
+}
+</code></pre>
+    <p>Here, the <code class="language-kotlin">Animal</code> base class has an open <code class="language-kotlin">makeSound()</code>
+        function. The <code class="language-kotlin">Dog</code> class inherits from the <code class="language-kotlin">Animal</code>
+        class and overrides the <code class="language-kotlin">makeSound()</code> function.</p>
+    <h5 id="overriding-properties">Overriding properties</h5>
+    <p>The primary mechanism works for properties as it does for methods. When redeclaring properties from a <a
+            class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow" target="_blank"
+            title="In Kotlin, a superclass is a class that serves as a blueprint for other classes, also known as subclasses. | It defines common behavior for a group of related classes. Superclasses can have abstract methods, which are methods without a body that must be implemented by the subclasses. Superclasses can also be abstract classes themselves and serve as a base class for other abstract classes. When a subclass inherits from a superclass, it can override the superclass's properties and functions, providing more specialized behavior.">superclass</a>
+        in a derived class, they must be preceded by the <code class="language-kotlin">override</code> keyword and
+        possess a compatible type. A declared property can be overridden either by a property featuring an initializer
+        or one with a <code class="language-kotlin">get</code> method. Overriding a <code
+                class="language-kotlin">val</code> property with a <code class="language-kotlin">var</code> property is
+        allowed, but the opposite is not permitted. This is due to the fact that a <code
+                class="language-kotlin">val</code> property inherently includes a <code
+                class="language-kotlin">get</code> <a class="theory-lookup not-relevant" href="/learn/step/0"
+                                                      rel="noopener noreferrer nofollow" target="_blank"
+                                                      title="In Kotlin, a method is a function that performs a certain operation, as opposed to a property which represents data. | Methods often contain logic, while properties contain state or data. In the context of object-oriented programming, methods define the actions that an object can perform. For instance, in a class definition, you can include methods that specify the behaviors associated with that class. These methods can then be called on instances of the class to execute the specified logic.">method</a>,
+        and when overridden as a <code class="language-kotlin">var</code>, a <code class="language-kotlin">set</code>
+        method is also declared in the derived class:</p>
+    <pre><code class="language-kotlin">open class Shape {
+    open val vertexCount: Int = 0
+}
+
+class Triangle : Shape() {
+    override val vertexCount = 3
+}</code></pre>
+    <p>Another example:</p>
+    <pre><code class="language-kotlin">interface Shape {
+    val vertexCount: Int
+}
+
+
+class Polygon : Shape {
+    override var vertexCount: Int = 0  // Can be set to any number later
+}</code></pre>
+    <h5 id="argument-names-in-overridden-functions">Argument names in overridden functions</h5>
+    <p>Functions can often have several arguments, and to improve the <a class="theory-lookup not-relevant"
+                                                                         href="/learn/step/0"
+                                                                         rel="noopener noreferrer nofollow"
+                                                                         target="_blank"
+                                                                         title="In Kotlin, readability refers to the clarity and ease of understanding the code. | It involves organizing the code in a way that makes it easy to read and follow, such as declaring constants in the object to which they relate, rather than all at the top of the file. This is important because programmers often spend more time reading code than writing it, and clear, concise code can improve productivity and reduce errors. Code style conventions can help maintain readability by providing recommendations for formatting and organizing code. These conventions are not strict rules, but following them can make code more steady and consistent.">readability</a>
+        of code in Kotlin, you can use named arguments when calling a <a class="theory-lookup not-relevant"
+                                                                         href="/learn/step/0"
+                                                                         rel="noopener noreferrer nofollow"
+                                                                         target="_blank"
+                                                                         title="In Kotlin, a function is a sequence of instructions that performs a specific action, such as printing data to standard output or calculating a square root. | It is a named block of code that can be invoked from a program using its name followed by parentheses. If a function takes one or more arguments (input data), they should be passed in the parentheses. Functions can return a result that can be assigned to a variable. Some functions, like regular math functions, take arguments and produce a result.">function</a>.
+        However, you need to be careful when naming arguments in overridden functions to avoid confusion and errors. It
+        is important to keep argument names from the parent class to ensure compatibility with function calls that use
+        named arguments.</p>
+    <p>Suppose we have the following basic class:</p>
+    <pre><code class="language-kotlin">open class Shape {
+    open fun draw(color: String, strokeWidth: Int) {
+        println("Drawing a shape with the color $color and stroke width $strokeWidth")
+    }
+}
+</code></pre>
+    <p>If we want to redefine the <code class="language-kotlin">draw()</code> function in a derived class, we must store
+        the argument names:</p>
+    <pre><code class="language-kotlin">class Circle : Shape() {
+    override fun draw(color: String, strokeWidth: Int) {
+        println("Drawing a circle with the color $color and stroke width $strokeWidth")
+    }
+}
+</code></pre>
+    <p>Now, if we call the <code class="language-kotlin">draw()</code> function using named arguments, the code will
+        work correctly:</p>
+    <pre><code class="language-kotlin">fun main() {
+    val shape: Shape = Circle()
+    shape.draw(color = "red", strokeWidth = 3)
+</code></pre>
+    <p>Let's now look at a more complex example with named arguments in overridden functions.</p>
+    <pre><code class="language-kotlin">open class Vehicle {
+    open fun move(speed: Int, direction: String) {
+        println("The vehicle is moving at $speed km/h $direction")
+    }
+}
+
+class Car : Vehicle() {
+    override fun move(speed: Int, direction: String) {
+        println("The car is moving at $speed km/h $direction")
+    }
+}
+
+class Bicycle : Vehicle() {
+    override fun move(speed: Int, direction: String) {
+        println("The bicycle is moving at $speed km/h $direction")
+    }
+}
+</code></pre>
+    <p>In the above example, we have a base class <code class="language-kotlin">Vehicle</code> and two class
+        derivatives: <code class="language-kotlin">Car</code> and <code class="language-kotlin">Bicycle</code>. All
+        classes have a <code class="language-kotlin">move()</code> function, which takes two arguments: <code
+                class="language-kotlin">speed</code> and <code class="language-kotlin">direction</code>. In the derived
+        classes, the <code class="language-kotlin">move()</code> function is overridden while preserving the argument
+        names. This allows us to use named arguments without problems:</p>
+    <pre><code class="language-kotlin">fun main() {
+    val vehicle1: Vehicle = Car()
+    val vehicle2: Vehicle = Bicycle()
+
+    vehicle1.move(speed = 60, direction = "north")
+    vehicle2.move(speed = 15, direction = "south")
+}
+</code></pre>
+    <p>The output will be:</p>
+    <pre><code class="language-no-highlight">The car is moving at 60 km/h north
+The bicycle is moving at 15 km/h south
+</code></pre>
+    <h5 id="argument-naming-guidelines">Argument naming guidelines</h5>
+    <ul>
+        <li>Always save argument names when overriding functions. This ensures compatibility with function calls that
+            use named arguments.
+        </li>
+        <li>Use meaningful argument names that reflect their purpose. This makes it easier to read and understand the
+            code.
+        </li>
+        <li>Use named arguments when calling functions with a large number of arguments or with arguments whose values
+            are difficult to understand from the context. This will make the code more readable and understandable.
+        </li>
+    </ul>
+    <h5 id="conclusion">Conclusion</h5>
+    <p>In this topic, we've looked at the importance of keeping argument names when redefining functions in Kotlin. This
+        ensures compatibility with function calls that use named arguments and makes code more readable and
+        understandable. When using named arguments, it is important to follow the naming guidelines and try to select
+        meaningful names that do not trigger the assignment of arguments. We've also touched on the issue of <a
+                class="theory-lookup" href="/learn/step/30920" rel="noopener noreferrer nofollow" target="_blank"
+                title="In Kotlin, property overriding is the ability to modify the behavior of an already defined property in a base class within a derived class. | This feature allows you to extend properties, similar to how methods are inherited and extended in object-oriented programming. Properties in Kotlin replace the traditional fields seen in other languages, like Java, and offer a way to encapsulate data within objects and control their access and manipulation. Property overriding enables you to change the behavior or value of a property in a derived class, providing an additional layer of flexibility. For example, you can override a property in a class to assign a specific value. The 'override' keyword is used to override both properties and methods in a subclass. It's important to note that properties and methods operate differently in Kotlin. A method is a function that performs a certain operation, whereas a property represents data.">property
+            overriding</a>, as well as the possibility of changing the <code class="language-kotlin">val</code> property
+        to <code class="language-kotlin">var</code> in overridden properties.</p>
+</div>

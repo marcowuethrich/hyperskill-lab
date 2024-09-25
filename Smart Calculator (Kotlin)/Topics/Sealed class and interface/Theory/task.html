@@ -1,0 +1,159 @@
+<div class="step-text">
+    <p>Do you remember <a class="theory-lookup" href="/learn/step/6245" rel="noopener noreferrer nofollow"
+                          target="_blank"
+                          title="In Kotlin, enums are a container for a collection of constants. | They are a convenient way to store a fixed set of values, such as the days of the week or the suits in a deck of cards. Enums in Kotlin come with embedded properties and methods that allow you to access the name and order of the constants. You can retrieve all instances of an enum or just one of them. Additionally, you can extend your enum with custom behavior. Enums are a useful tool for improving code organization and readability. For example, you might create an enum for the colors of the rainbow, or for the status of an order.">enums</a>,
+        containers for a collection of <a class="theory-lookup" href="/learn/step/10698"
+                                          rel="noopener noreferrer nofollow" target="_blank"
+                                          title="In Kotlin, a constant is a type of property that is declared with the `val` keyword and cannot be modified once assigned. | Constant values are known at compile time and must be initialized with a value of a basic type. They should be named using screaming\_snake\_case. Constant variables can be accessed multiple times during program execution, but their value remains unchanged. Additionally, Kotlin provides the `const` keyword for declaring compile-time constant values, which can be used for top-level constants. Using constants is a good practice that can help avoid errors and make the code more readable.">constants</a>?
+        Today we will talk about another kind of container – the one for fixed <a class="theory-lookup not-relevant"
+                                                                                  href="/learn/step/0"
+                                                                                  rel="noopener noreferrer nofollow"
+                                                                                  target="_blank"
+                                                                                  title="In Kotlin, a subclass is a class that is derived from an existing class, also known as the superclass or base class. | It inherits the properties and methods of the superclass and can provide its own implementations for those methods or add new ones. Subclasses can be used to create a hierarchy of classes, where each level adds more specialized behavior. An abstract class can serve as a base class for other classes, including other abstract classes. It can have both abstract and non-abstract members, and an abstract member is declared using the `abstract` keyword and does not have an implementation in its class. In the provided context, the `Animal` class is an abstract class that defines common behavior for all animals, such as eating and sleeping. It has abstract methods for making sound and moving, which are implemented by its subclasses. The `Mammal` class is a subclass of `Animal` that adds mammal-specific behavior, and the `Cat` class is a subclass of `Mammal` that defines specific behavior for cats.">subclasses</a>:
+        a <a class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow" target="_blank"
+             title="In Kotlin, a sealed class is a restricted class that can have a fixed set of direct subclasses, which must be defined within the same file as the sealed class. | This is similar to an enum, but with more flexibility as sealed classes can have multiple instances and inherit from classes or interfaces. The subclasses of a sealed class are known at compile time, and no other subclasses can be added outside of the module or package where the sealed class is defined.">sealed
+            class</a> or sealed interface. Let's get started.</p>
+    <h5 id="basic-syntax">Basic syntax</h5>
+    <p>To declare a sealed class or interface, we just need to put the <code class="language-kotlin">sealed</code> <a
+            class="theory-lookup" href="/learn/step/31660" rel="noopener noreferrer nofollow" target="_blank"
+            title="In Kotlin, a modifier is a keyword used to define the accessibility and mutability of variables or members of a class. | For instance, the `var` keyword is a modifier that indicates a variable can be changed, while `val` indicates a variable is immutable. Additionally, modifiers such as `private` and `public` determine the scope of variable or class visibility. For example, a property declared with the `private` modifier can only be accessed within the same file or class, while a `public` modifier allows it to be accessed from anywhere in the program where the object is available.">modifier</a>
+        in front of the class or interface:</p>
+    <pre><code class="language-kotlin">sealed class CustomError
+sealed interface CustomErrors</code></pre>
+    <p>As sealed classes and sealed <a class="theory-lookup not-relevant" href="/learn/step/0"
+                                       rel="noopener noreferrer nofollow" target="_blank"
+                                       title="In Kotlin, an interface is a blueprint of a class that defines a set of methods and properties that a class must implement. | It represents a contract for the implementing class, specifying the functionality that the class must provide. Interfaces provide a way to generalize and keep the code clean by stating the expected functionality upfront. They are an essential part of object-oriented programming, representing the concepts of abstraction and encapsulation. Interfaces are useful when you want to define a class's behavior without providing an implementation immediately.">interfaces</a>
+        are similar (the only difference is that between a class and an interface), we will continue with sealed class
+        examples only.</p>
+    <p>A sealed class is <a class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow"
+                            target="_blank"
+                            title="In Kotlin, an abstract class is a blueprint for creating other classes. | It cannot be instantiated directly and serves as a base class for other classes. Abstract classes can have constructor functions to initialize their properties and can contain both abstract and non-abstract members (properties and methods). Abstract members are declared without an implementation and must be overridden by any class that extends the abstract class. Non-abstract members, on the other hand, can provide a common implementation that can be inherited by subclasses. If a class extends an abstract class, it must provide an implementation for all the abstract members declared in the abstract class.">abstract</a>,
+        so it can't be instantiated. The following code will give an error:</p>
+    <pre><code class="language-kotlin">fun main() {
+    // Sealed types cannot be instantiated
+    val customError = CustomError()
+}
+</code></pre>
+    <p>However, of course, you can <a class="theory-lookup" href="/learn/step/7770" rel="noopener noreferrer nofollow"
+                                      target="_blank"
+                                      title="In Kotlin, extend is a keyword used to create a subclass or a derived class that inherits properties and methods from a superclass or a base class. | It allows for code reuse and facilitates the implementation of inheritance hierarchy. When a class is extended, the subclass can inherit all the members (properties and methods) of the superclass, and it can also add new members or override existing ones. This way, the subclass can build upon the functionality of the superclass and provide additional features.">extend</a>
+        it.</p>
+    <p>Like with normal classes, you can declare constructors, but constructors in a sealed class must be private or <a
+            class="theory-lookup" href="/learn/step/31660" rel="noopener noreferrer nofollow" target="_blank"
+            title="In Kotlin, the `protected` keyword is used to make a member of a class available only within the class itself and its subclasses. | This means that the member cannot be accessed from outside the class hierarchy. It provides a way to protect the member from tampering and ensures that the member can only be modified within the class or its subclasses. However, it also means that the member cannot be accessed from outside the class hierarchy, including any attempts to output its value. The `protected` modifier is similar to `private`, but with the added ability to be seen in subclasses. When a member is declared with the `protected` modifier, any subclass of the declaring class can see and access the member. This is in contrast to `private`, which makes the member completely inaccessible from outside the class. Using access modifiers like `protected` is a valuable tool in safeguarding communication and preserving the authenticity, integrity, and confidentiality of data.">protected</a>:
+    </p>
+    <pre><code class="language-kotlin">sealed class CustomError {
+    
+    constructor(type: String) {} // protected (default) 
+    private constructor(type: String, code: Int) {} // private
+    public constructor() {} //  Public gives error
+}</code></pre>
+    <p>You can also use a <a class="theory-lookup" href="/learn/step/10740" rel="noopener noreferrer nofollow"
+                             target="_blank"
+                             title="In Kotlin, a primary constructor is a special type of constructor that is declared as part of the class header, after the class name. | It can have parameters that are used to initialize class properties directly or within an initializer block. The primary constructor cannot contain any code, but initialization code can be placed in initializer blocks. If a class requires more complex initialization that cannot be covered by the primary constructor, secondary constructors can be used. These secondary constructors must delegate to the primary constructor either directly or indirectly through another secondary constructor.">primary
+        constructor</a>, exactly like in any normal class: </p>
+    <pre><code class="language-kotlin">//primary constructor
+sealed class CustomError(type: String) </code></pre>
+    <h5 id="sealed-class-vs-enum">Sealed class vs enum </h5>
+    <p>One of the best ways to understand sealed classes is to compare them with enums. Basically, a sealed class is
+        like an enum but with more flexibility. What does this mean? Consider the example below:</p>
+    <pre><code class="language-kotlin">enum class Staff(numberOfLessons: Int)  {
+    TEACHER(2), MANAGER("Manager is managing")
+}
+</code></pre>
+    <p>That is not possible with an enum but can be done with a sealed class:</p>
+    <pre><code class="language-kotlin">sealed class Staff {
+    class Teacher(val numberOfLessons: Int) : Staff()
+    class Manager(val Responsibility: String) : Staff()
+    object Worker : Staff()
+}</code></pre>
+    <p>Enum constants have only one single type, while sealed classes offer multiple instances with greater flexibility.
+        We can conclude that an enum is used to represent a fixed set of values, while a sealed class is a class used to
+        represent a fixed set of subclasses of the <a class="theory-lookup not-relevant" href="/learn/step/0"
+                                                      rel="noopener noreferrer nofollow" target="_blank"
+                                                      title="In Kotlin, a type is a classification of data that determines the values a variable can hold and the operations that can be performed on it. | It can be a primitive type, such as Int or Boolean, or a user-defined type, such as a class or interface. Type parameters, represented by angle brackets (&lt; &gt;), allow for the creation of classes with flexible types, making it possible to define several parameters of arbitrary types. Additionally, types can be used as the data type for a variable, constructor argument type, instance method argument, and return type.">type</a>
+        of the given class.</p>
+    <p>An enum can't inherit from classes of interfaces, while a sealed class can. Consider the example below:</p>
+    <pre><code class="language-kotlin">open class Person {
+    fun whoAmI(name: String): String {
+        return "I am $name"
+    }
+}
+
+
+sealed class Staff : Person() {
+    class Teacher(val numberOfLessons: Int) : Staff()
+    class Manager(val Responsibility: String) : Staff()
+    object Worker : Staff()
+}
+
+fun main() {
+    val worker = Staff.Worker
+    println(worker.whoAmI("Worker"))
+}</code></pre>
+    <p>We declared a simple class <code class="language-kotlin">Person</code>, which has a <a
+            class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow" target="_blank"
+            title="In Kotlin, a method is a function that performs a certain operation, as opposed to a property which represents data. | Methods often contain logic, while properties contain state or data. In the context of object-oriented programming, methods define the actions that an object can perform. For instance, in a class definition, you can include methods that specify the behaviors associated with that class. These methods can then be called on instances of the class to execute the specified logic.">method</a>,
+        and then a sealed class <code class="language-kotlin">Staff</code> to extend it, which gives us the power of <a
+                class="theory-lookup" href="/learn/step/7770" rel="noopener noreferrer nofollow" target="_blank"
+                title="In Kotlin, inheritance is a mechanism that allows a class to inherit the properties and methods of another class, called the base or parent class. | This concept helps reduce boilerplate code by enabling the creation of extensions of a class or class model, which can be implemented later. Inheritance is used when the new class being created has something in common with an existing class. In Kotlin, a class can inherit from only one base class but can implement several interfaces. When a class inherits from a base class with constructor parameters, the derived class should take care of them. If the base class does not have any constructor parameters, the derived class can simply inherit from it by using empty parentheses. Inheritance ensures that both the base and derived classes are correctly initialized, and the derived class can take advantage of the base class's multiple constructors to create its own constructor scheme.">inheritance</a>
+        we've already talked about. In the <code class="language-kotlin">main</code> method, we used the method of <code
+                class="language-kotlin">Person</code> from <code class="language-kotlin">worker</code>. And that's it.
+    </p>
+    <p>On the other hand, if we tried to do that with an enum, it would throw an error. The code below won't work:</p>
+    <pre><code class="language-kotlin">enum class Staff : Person() {
+    //...//
+}</code></pre>
+    <h5 id="sealed-classes-and-the-when-expression">Sealed classes and the when expression</h5>
+    <p>Sealed classes are often used with the <code class="language-kotlin">when</code> expression, as each class is
+        considered as a case. Let's take an example:</p>
+    <pre><code class="language-kotlin">sealed class Staff {
+    class Teacher(val numberOfLessons: Int) : Staff()
+    class Manager(val Responsibility: String) : Staff()
+    object Worker : Staff()
+}
+
+fun listTheTasks(staff: Staff) = when (staff) {
+    is Staff.Teacher -&gt; println("The teacher has ${staff.numberOfLessons} lessons today")
+    is Staff.Manager -&gt; println("The manager is doing ${staff.Responsibility} today")
+    Staff.Worker -&gt; println("Worker is fixing the projector for profs in CS, all respect to him.")
+}</code></pre>
+    <p>We declared a sealed class <code class="language-kotlin">Staff</code> with two classes and one object. An object
+        is better in the case of no state. Then we created a function <code class="language-kotlin">listTheTasks</code>.
+        Notice that <code class="language-kotlin">is</code> is required in the case of classes and not in the case of an
+        <a class="theory-lookup not-relevant" href="/learn/step/0" rel="noopener noreferrer nofollow" target="_blank"
+           title="In Kotlin, an object is an instance of a class that stores data and defines its behavior. | It is a complex structure that has a state, which is the data stored in the object, and a behavior, which is defined by the functions associated with the object. The state of an object can be accessed through properties, which are accessed by putting a dot and the property name after the object. Objects are stored in memory, and variables and values simply point to these objects.">object</a>.
+        There's no <code class="language-kotlin">else</code>, as we've handled all the cases.</p>
+    <p>Let's run the function:</p>
+    <pre><code class="language-kotlin">fun main() {
+    val teacher = Staff.Teacher(3)
+    val worker = Staff.Worker
+    listTheTasks(teacher)
+    listTheTasks(worker)
+
+}
+
+// output:
+// The teacher has 3 lessons today
+// Worker is fixing the projector for profs in CS, all respect to him.</code></pre>
+    <h5 id="location-of-direct-subclasses">Location of direct subclasses</h5>
+    <p>Now, a final important note to keep in mind. Direct subclasses of sealed classes and interfaces must be declared
+        in the same package. On the other hand, this does not apply to indirect subclasses. You may ask what direct and
+        indirect subclasses are. Let's clarify it with a simple example below: </p>
+    <pre><code class="language-kotlin">open class B : A() // class B is direct subclass of class A
+open class C : B() // class C is indirect subclass of class A and direct subclass of class B</code></pre>
+    <p>It's direct if there's no class between the parent and the child.</p>
+    <p>Quoting the official <a href="https://kotlinlang.org/docs/sealed-classes.html" rel="noopener noreferrer nofollow"
+                               target="_blank">documentation</a>, "All direct subclasses of a sealed class are known at
+        compile time. No other subclasses may appear outside a module/ package within which the sealed class is
+        defined."</p>
+    <h5 id="conclusion">Conclusion </h5>
+    <p>In this topic, we've learned that a sealed class, as the name "sealed" implies, restricts class hierarchies,
+        which is useful when we want to represent a fixed set of subclasses. </p>
+    <p>We've also found out that a sealed class is like an enum but with more flexibility. Also, we've seen how to use
+        it with the <code class="language-kotlin">when</code> <a class="theory-lookup not-relevant" href="/learn/step/0"
+                                                                 rel="noopener noreferrer nofollow" target="_blank"
+                                                                 title="In Kotlin, an expression is a piece of code that evaluates to a value. | It can be a simple literal value, a variable, a function call, or a more complex combination of these elements using operators or other language constructs. Expressions are used to compute and return values from functions, assign values to variables, and perform calculations or operations in conditionals. For example, 2 \* 2 is an expression, and it produces a single value.">expression</a>,
+        and finally, we've discussed the restriction of class hierarchies in sealed classes. Now, let's get some
+        practice.</p>
+</div>

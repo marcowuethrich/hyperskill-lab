@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Building all scope functions
+  - text: You can create type-safe builders or DSLs
+  - text: Using "it" and "this" interchangeably
+  - text: You can access the members of that receiver object using the expression "this"
+  - text: It enables the access to visible methods and properties of a receiver without
+      any qualifier
+  - text: Accessing private methods of a receiver object
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20957#comment
+status: Solved
+record: -1
+local_check: false

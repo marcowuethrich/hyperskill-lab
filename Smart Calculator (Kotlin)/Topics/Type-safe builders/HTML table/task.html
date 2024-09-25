@@ -1,0 +1,87 @@
+<div class="step-text">
+    <p></p>
+    <p>We want to create a type-safe builder to make an HTML table. The HTML Table has a list of rows. Here is the
+        initial code:</p>
+    <pre><code class="language-kotlin">class TableBuilder {
+    private val rows = mutableListOf&lt;TableRowBuilder&gt;()
+
+    fun row(block: TableRowBuilder.() -&gt; Unit) {
+        val rowBuilder = TableRowBuilder()
+        rowBuilder.block()
+        rows.add(rowBuilder)
+    }
+
+    fun build(): String {
+        val tableContent = buildString {
+            append("&lt;table&gt;")
+            for (row in rows) {
+                // Write your code here
+            }
+            append("&lt;/table&gt;")
+        }
+        return tableContent
+    }
+}
+
+class TableRowBuilder {
+    private val cells = mutableListOf&lt;String&gt;()
+
+    fun cell(value: String) {
+        cells.add(value)
+    }
+
+    fun build(): String {
+        val rowContent = buildString {
+            append("&lt;tr&gt;")
+            for (cell in cells) {
+                // Write your code here
+            }
+            append("&lt;/tr&gt;")
+        }
+        return rowContent
+    }
+}
+
+fun table(block: TableBuilder.() -&gt; Unit): String {
+    // Write your code here
+}</code></pre>
+    <p>Please complete the code to obtain the following result:</p>
+    <pre><code class="language-kotlin">fun main() {
+    val htmlTable = table {
+        row {
+            cell("Name")
+            cell("Age")
+        }
+        row {
+            cell("John Doe")
+            cell("25")
+        }
+        row {
+            cell("Jane Smith")
+            cell("30")
+        }
+    }
+
+    println(htmlTable)
+}</code></pre>
+    <pre><code class="language-html">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Name&lt;/td&gt;
+    &lt;td&gt;Age&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;John Doe&lt;/td&gt;
+    &lt;td&gt;25&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Jane Smith&lt;/td&gt;
+    &lt;td&gt;30&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+    <br><b>Sample Input:</b><br>
+    <pre><code class="language-no-highlight">Name Age John 25 Jane 30<br></code></pre>
+    <br><b>Sample Output:</b><br>
+    <pre><code class="language-no-highlight">&lt;table&gt;&lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Age&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;John&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Jane&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br></code></pre>
+    <br><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 8
+    seconds</font><br><br>
+</div>

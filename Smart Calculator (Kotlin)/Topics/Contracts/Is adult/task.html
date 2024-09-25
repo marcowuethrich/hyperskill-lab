@@ -1,0 +1,34 @@
+<div class="step-text">
+    <p></p>
+    <p>We have a function <code class="language-kotlin">isAdult</code> that is trying to check if a person is an adult:
+    </p>
+    <pre><code class="language-kotlin">fun isAdult(value: Any?): Boolean {
+    return if (value.isPerson()) {
+        value.age &gt;= 18
+    } else {
+        false
+    }
+}
+
+fun Any?.isPerson(): Boolean {
+    return this is Person
+}
+
+class Person(val name: String, val age: Int)</code></pre>
+    <p>However, it won't compile because the compiler doesn't know that the <code
+            class="language-kotlin">isPerson</code> function guarantees that <code class="language-kotlin">value</code>
+        is a <code class="language-kotlin">Person</code> when it returns <code class="language-kotlin">true</code>.</p>
+    <p>Your task is to add a contract to the <code class="language-kotlin">isPerson</code> function that tells the
+        compiler that <code class="language-kotlin">value</code> can be smartcast to <code class="language-kotlin">Person</code>
+        when <code class="language-kotlin">isPerson</code> returns <code class="language-kotlin">true</code>.</p><br><b>Sample
+    Input:</b><br>
+    <pre><code class="language-no-highlight">Imane<br>40</code></pre>
+    <br><b>Sample Output:</b><br>
+    <pre><code class="language-no-highlight">Imane is an adult.</code></pre>
+    <br><br><b>Sample Input:</b><br>
+    <pre><code class="language-no-highlight">Siraj<br>10</code></pre>
+    <br><b>Sample Output:</b><br>
+    <pre><code class="language-no-highlight">Siraj is not an adult.</code></pre>
+    <br><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 8
+    seconds</font><br><br>
+</div>

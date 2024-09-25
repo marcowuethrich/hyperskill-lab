@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: "Put lines 1-2 in a synchronized block, the monitor being an additional field:\
+    \ <b>private val lock = Object()</b>"
+  - text: "Put line 2 in a synchronized block, the monitor being the class (<b>this</b>)"
+  - text: Declare the method with the <b>@Synchronized</b> annotation
+  - text: "Nothing needs to be done, everything works correctly"
+  - text: Declare the class with the <b>synchronized</b> keyword
+  - text: "Put lines 1-2 in a synchronized block, the monitor being the class (<b>this</b>)"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/17909#comment
+status: Solved
+record: -1
+local_check: false

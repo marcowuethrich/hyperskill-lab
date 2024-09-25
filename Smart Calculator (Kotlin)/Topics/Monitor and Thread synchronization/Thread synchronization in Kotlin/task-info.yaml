@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Two threads cannot simultaneously enter into two synchronized blocks having
+      the same monitor
+  - text: Methods marked with the @Synchronized annotation are synchronized on an instance
+      of the class
+  - text: Fields can be declared as synchronized
+  - text: Classes can be declared as synchronized
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/17904#comment
+status: Solved
+record: -1
+local_check: false

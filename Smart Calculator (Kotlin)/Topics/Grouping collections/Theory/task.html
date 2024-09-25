@@ -1,0 +1,116 @@
+<div class="step-text">
+    <p>Previously, we have learned how to work with collections – to filter, order, or perform aggregate operations.</p>
+    <p>In this topic, we will learn how to <a class="theory-lookup not-relevant" href="/learn/step/23346"
+                                              rel="noopener noreferrer nofollow" target="_blank"
+                                              title="In Kotlin, a grouping collection is a data structure that allows you to group collection elements based on shared characteristics. | It is an extension function that takes a lambda function and returns a map, where the keys represent the groups, and the values contain all the corresponding elements of the original collection identified by that key. Grouping collections are useful when you want to present information in a way that is most appropriate for your task.">group
+        collection</a> elements to present information in the way most appropriate to our task.</p>
+    <h5 id="grouping">Grouping</h5>
+    <p>In Kotlin, we have extension functions for grouping collection elements, and one of them is <code
+            class="language-kotlin">groupBy()</code>. It takes a <a class="theory-lookup not-relevant"
+                                                                    href="/learn/step/23346"
+                                                                    rel="noopener noreferrer nofollow" target="_blank"
+                                                                    title="In Kotlin, a lambda function is also known as a lambda expression. | It is a function that can be created at runtime, which is useful when calling functions from the Kotlin standard library for data processing. Lambda functions help reduce code length and make it more concise. They allow you to use code and data as a function's argument. A lambda expression can be used directly or passed as an argument using a function reference. Lambda functions are first-class citizens in the Kotlin language, just like top-level functions. They can be declared with or without arguments, and if there are no arguments, the arrow symbol is not required.">lambda
+        function</a> and returns a <strong>Map</strong> grouped by <strong>keys</strong>, with the
+        <strong>value</strong> field containing all the corresponding elements of the collection. We will group when we
+        use an index key and for each value of this key, we will have all the elements of the original collection
+        identified by it. </p>
+    <pre><code class="language-kotlin">fun main() {
+    val names = listOf("John", "Jane", "Mary", "Peter", "John", "Jane", "Mary", "Peter")
+    
+    // Grouping by the first letter of the name
+    val groupedNames = names.groupBy { it.first() }
+    println(groupedNames) // {J=[John, Jane, John, Jane], M=[Mary, Mary], P=[Peter, Peter]}
+}</code></pre>
+    <p>In the above example, we can group them by the first letter: you can see the returned map, where the key is the
+        first letter of each name and the value is the list of names with the first letter matching the key. For
+        example, in the returned map, the J key has the value [John, Jane, John, Jane].</p>
+    <p>You can use <code class="language-kotlin">groupBy()</code> with a second lambda argument as a transformation
+        function. The result is a map where the keys produced by the <strong>keySelector</strong> function are mapped
+        with values, and each value is the result of applying the transformation function
+        <strong>valueTransform</strong> to each element of the grouping. For example, we can group a list of names and
+        transform the elements associated with uppercase.</p>
+    <pre><code class="language-kotlin">fun main() {
+    val names = listOf("John", "Jane", "Mary", "Peter", "John", "Jane", "Mary", "Peter")
+   
+    // Grouping by the length of the name and values transformed to uppercase
+    val groupedNames2 = names.groupBy(keySelector = { it.length },
+        valueTransform = { it.uppercase() })
+    println(groupedNames2) // {4=[JOHN, JANE, MARY, JOHN, JANE, MARY], 5=[PETER, PETER]}
+}</code></pre>
+    <h5 id="grouping-and-additional-operations">Grouping and additional operations</h5>
+    <p>Sometimes when we work with collections, we want to apply an operation to all groups at the same time. We can
+        perform this task using <code class="language-kotlin">groupingBy()</code>. It returns a
+        <strong>grouping</strong> <strong>instance</strong>, which allows you to apply operations to all groups in a
+        lazy way: that is, the groups are built before the operation execution. We can use this method with grouping:
+    </p>
+    <ul>
+        <li><p><code class="language-kotlin">eachCount()</code> counts the elements in each group. Return a Map
+            associating the key of each group with the count of elements in the group.</p></li>
+        <li><p><code class="language-kotlin">fold()</code>accumulates value starting with initial value and applying
+            operation from left to right to current accumulator value and each element. Returns the specified initial
+            value if the array is empty. Optionally we can use a key as the first parameter, if not used it can be left
+            as "_" due to destructuring. With the key we can group elements from the Grouping source by key and apply
+            the operation to the elements of each group sequentially, passing the previously accumulated value and the
+            current element as arguments, and store the results in a new map. An initial value of accumulator is
+            provided by initialValueSelector function.</p></li>
+        <li><p><code class="language-kotlin">reduce()</code> accumulates value starting with the first element and
+            applying operation from left to right to current accumulator value and each element. Throws an exception if
+            this array is empty. If the array can be empty in an expected way, please use <code class="language-kotlin">reduceOrNull</code>
+            instead. It returns null when its receiver is empty. Optionally we can use a key as the first parameter, if
+            not used it can be left as "_" due to destructuring. With the key we can group elements from the Grouping
+            source by key and apply the reducing operation to the elements of each group sequentially starting from the
+            second element of the group, passing the previously accumulated value and the current element as arguments,
+            and store the results in a new map. An initial value of accumulator is the first element of the group.</p>
+        </li>
+    </ul>
+    <pre><code class="language-kotlin">fun main() {
+    val names = listOf("John", "Jane", "Mary", "Peter", "John", "Jane", "Mary", "Peter")
+
+    // Grouping by the first letter and eachCount
+    val groupedNames3 = names.groupingBy { it.first() }.eachCount()
+    println(groupedNames3) // {J=4, M=2, P=2}
+
+    // Grouping by the first letter and folding (accumulates) the length of the names
+    val groupedNames4 = names.groupingBy { it.first() }
+        .fold(0) { acc, name -&gt; acc + name.length }
+    println(groupedNames4) // {J=16, M=8, P=10}
+
+    // Grouping by length and reducing to the longest name
+    // we use "_" because the first parameter is the key, but we don't use it
+    val groupedNames5 = names.groupingBy { it.length }
+        .reduce { _, acc, name -&gt; if (name.length &gt; acc.length) name else acc }
+    println(groupedNames5) // {4=John, 5=Peter}
+
+}</code></pre>
+    <h5 id="aggregate">Aggregate</h5>
+    <p>With the <code class="language-kotlin">aggregate()</code> function, we apply an operation to all the elements in
+        each group and return the result. It is a generic way to perform all the grouping operations if the <code
+                class="language-kotlin">fold</code> and <code class="language-kotlin">reduce</code> methods are not
+        enough. We can group elements from the Grouping source by key and apply the operation to the elements of each
+        group sequentially, passing the previously accumulated value and the current element as arguments, and store the
+        results in a new map.</p>
+    <pre><code class="language-kotlin">fun main() {
+    val names = listOf("John", "Jane", "Mary", "Peter", "John", "Jane", "Mary", "Peter")
+
+    // Grouping and using aggregate to get the size of the group
+    // we don't use the key, so we use "_"
+    val groupedNames6 = names.groupingBy { it.first() }
+        .aggregate { _, accumulator: Int?, _, first -&gt;
+            if (first) 1 else accumulator!! + 1
+        }
+    println(groupedNames6) // {J=4, M=2, P=2}
+
+    // Grouping and using aggregate, returning even or odd size according to the size of the group
+    val groupedNames7 = names.groupingBy { it.first() }
+        .aggregate { _, accumulator: Boolean?, element, first -&gt;
+            if (first) element.length % 2 == 0 else accumulator!! &amp;&amp; element.length % 2 == 0
+        }
+    println(groupedNames7) // {J=true, M=true, P=false}
+
+}</code></pre>
+    <h5 id="conclusion">Conclusion</h5>
+    <p>In this topic, we have discussed different techniques for grouping the elements in a collection using <code
+            class="language-kotlin">groupBy</code> and <code class="language-kotlin">groupingBy</code> functions, which
+        is an essential skill when working with collection data.</p>
+    <p>It is time to solve some tasks to check what you have learned. Are you ready?</p>
+</div>

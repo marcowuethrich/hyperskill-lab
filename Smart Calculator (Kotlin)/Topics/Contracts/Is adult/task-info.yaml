@@ -1,0 +1,18 @@
+type: code
+custom_name: Is adult?
+files:
+  - name: src/Main.kt
+    visible: true
+    highlight_level: NONE
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/33984#comment
+status: Solved
+feedback:
+  message: |-
+    <html>[+] Test #1. OK
+    [+] Test #2. OK
+
+    2 of 2 test(s) passed.</html>
+  time: "Fri, 20 Sep 2024 12:51:47 UTC"
+record: -1
+submission_language: kotlin

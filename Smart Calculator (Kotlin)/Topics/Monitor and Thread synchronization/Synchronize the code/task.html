@@ -1,0 +1,20 @@
+<div class="step-text">
+    <p></p>
+    <p>Here's a class named<strong> </strong><code class="language-kotlin">SimpleClass</code><strong>.</strong> It has
+        two fields of different types and a method to initialize these fields.</p>
+    <pre><code class="language-kotlin">class SimpleClass {
+
+    var strField: String = ""
+    var numField: Int = 0
+
+    fun initFields(str: String, number: Int) {
+        strField = str    // 1
+        numField = number // 2
+    }
+}
+</code></pre>
+    <p>Multiple threads are trying to invoke the <code class="language-kotlin">initFields</code> method of the class.
+        You need to synchronize this code so that a thread would not be able to set new values until another thread has
+        set both of them (in a way an atomic operation does).</p>
+    <p>How can one do it? Select all correct cases.</p>
+</div>

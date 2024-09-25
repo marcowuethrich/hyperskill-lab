@@ -1,0 +1,241 @@
+<div class="step-text">
+    <p>Sometimes, when writing code, everything may seem correct, but the compiler still gives a warning. For example,
+        it may not be able to determine (with all its mighty power of analysis) that a variable cannot be <code
+                class="language-kotlin">null</code> and suggests using the <code class="language-kotlin">?</code>
+        operator. Should you listen and obey even if you know the compiler is wrong? Or is there a way to get the
+        compiler on the same page as you, so everyone is satisfied in the end?</p>
+    <p>In this topic, we will discuss how to communicate with the compiler using a feature called
+        <strong>contracts</strong>, which was introduced in Kotlin $1.3$. Let's discover what kind of spells we can cast
+        on the compiler.</p>
+    <h5 id="understanding-contracts">Understanding contracts</h5>
+    <p>Contracts are agreements between different parts of the code that allow a function to explicitly describe its
+        behavior in a way that is understood by the compiler. This information can help the compiler make smart
+        decisions, such as when to <strong>allow smartcasts</strong> or <strong>determine variable
+            initialization</strong>. The compiler does extensive static analysis to provide warnings and reduce
+        boilerplate, and contracts take this a step further.</p>
+    <p>Consider the following example:</p>
+    <pre><code class="language-kotlin">fun foo(s: String?) {
+    if (s != null) s.length // Compiler automatically casts 's' to 'String'
+}</code></pre>
+    <p>Here, the compiler smartcasts <code class="language-kotlin">s</code> to a <code
+            class="language-kotlin">String</code> inside the <code class="language-kotlin">if</code> statement. However,
+        if we extract the null check into a separate function, the compiler loses this context:</p>
+    <pre><code class="language-kotlin">fun String?.isNotNull(): Boolean = this != null
+
+fun foo(s: String?) {
+    if (s.isNotNull()) s.length // No smartcast :(
+}</code></pre>
+    <p>This is where contracts come into play. By adding a contract to our <code
+            class="language-kotlin">isNotNull</code> function, we can inform the compiler that when <code
+            class="language-kotlin">isNotNull</code> returns true, the receiver of the function (like <code
+            class="language-kotlin">s</code>) is not null:</p>
+    <pre><code class="language-kotlin">import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
+
+@OptIn(ExperimentalContracts::class)
+fun String?.isNotNull(): Boolean {
+    contract {
+        returns(true) implies (this@isNotNull != null)
+    }
+    return this != null
+}
+
+fun foo(s: String?) {
+    if (s.isNotNull()) s.length // Smartcast :)
+}
+</code></pre>
+    <p>In this example, <code class="language-kotlin">this@isNotNull</code> represents the receiver (which has to be of
+        type <code class="language-kotlin">String</code>) of the <code class="language-kotlin">isNotNull</code>
+        extension function.</p>
+    <p>Now, the compiler will know from the contract that <code class="language-kotlin">s</code> is definitely not a
+        <code class="language-kotlin">String?</code> type (based on our word), so it will smartcast it to a <code
+                class="language-kotlin">String</code> inside the <code class="language-kotlin">if</code> statement, even
+        though the null check is inside a separate function.</p>
+    <p>The <code class="language-kotlin">@OptIn(ExperimentalContracts::class)</code> annotation is used to indicate that
+        the <code class="language-kotlin">contracts</code> feature is still experimental. Although the syntax of
+        contracts is not yet stable, the binary implementation is stable and is already being utilized by Kotlin's <code
+                class="language-kotlin">stdlib</code> (standard library). We will see more about this later.</p>
+    <h5 id="syntax-of-contracts">Syntax of contracts</h5>
+    <p>The standard format for a contract is as follows:</p>
+    <pre><code class="language-kotlin">function {
+    contract {
+        Effect
+    }
+}</code></pre>
+    <p>This can be interpreted as "calling the function results in the specified Effect".</p>
+    <p>The <code class="language-kotlin">contract</code> function provides a Domain-Specific Language (DSL) scope. This
+        means that within the <code class="language-kotlin">contract</code> block, you can use a specific set of
+        functions and syntax to define the behavior of the contract. The DSL scope provided by the <code
+                class="language-kotlin">contract</code> function allows you to write contracts in a more concise and
+        readable way, using a syntax that is specifically designed for this purpose.</p>
+    <p>For example, within the <code class="language-kotlin">contract</code> block, you can use functions such as <code
+            class="language-kotlin">returns</code>, <code class="language-kotlin">callsInPlace</code>, and <code
+            class="language-kotlin">implies</code> to specify the behavior of the contract. These functions are part of
+        the DSL scope provided by the <code class="language-kotlin">contract</code> function and are not available
+        outside of the <code class="language-kotlin">contract</code> block.</p>
+    <p>As of now, there are two main types of contracts: <code class="language-kotlin">returns</code>–<code
+            class="language-kotlin">implies</code> and <code class="language-kotlin">callsInPlace</code>. The former one
+        is used in cases like Improving the compiler's <strong>smartcasts</strong> analysis by declaring the relation
+        between a function's call outcome and the passed arguments' values, while the latter one is used in cases like
+        Improving the compiler's <strong>variable initialization</strong> analysis in the presence of high-order
+        functions. Let's explore each one of them in more detail.</p>
+    <h5 id="returnsimplies-contract">"returns"–"implies" contract</h5>
+    <p>The <code class="language-kotlin">returns</code>–<code class="language-kotlin">implies</code> contract is used to
+        specify that a function will return a certain type by implying a <strong>condition</strong>. This allows the
+        compiler to assume that after the function is called, the <code class="language-kotlin">implies</code> part of
+        the contract will be satisfied, which is, in fact, a boolean expression.</p>
+    <p></p>
+    <div class="alert alert-primary">Currently, the <code class="language-kotlin">returns</code>–<code
+            class="language-kotlin">implies</code> contracts only permit the use of the values <code
+            class="language-kotlin">true</code>, <code class="language-kotlin">false</code>, or <code
+            class="language-kotlin">null</code> on the right-hand side of the <code
+            class="language-kotlin">implies</code> function.
+    </div>
+    <p>Let's consider the following example. First, we need to import the necessary packages to work with contracts:</p>
+    <pre><code class="language-kotlin">import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract</code></pre>
+    <p> After that, we declare the <code class="language-kotlin">Animal</code> abstract class, which is implemented by
+        two concrete classes <code class="language-kotlin">Cat</code> and <code class="language-kotlin">Dog</code>:</p>
+    <pre><code class="language-kotlin">abstract class Animal {
+    abstract fun doAnimalStuff()
+}
+
+class Cat : Animal() {
+    override fun doAnimalStuff() { /* ... */
+    }
+
+    fun makeSound() {
+        println("Meow!")
+    }
+}
+
+class Dog : Animal() {
+    override fun doAnimalStuff() { /* ... */
+    }
+}</code></pre>
+    <p>Now, let's create an extension function to use the above-mentioned first type of contracts:</p>
+    <pre><code class="language-kotlin">@OptIn(ExperimentalContracts::class)
+fun Animal.isCat(): Boolean {
+    contract {
+        returns(true) implies (this@isCat is Cat)
+    }
+    return this is Cat
+}</code></pre>
+    <p>Here, the contract tells the compiler that if <code class="language-kotlin">isCat</code> returns <code
+            class="language-kotlin">true</code>, then <code class="language-kotlin">this</code> is an instance of <code
+            class="language-kotlin">Cat</code>. As a result, the compiler can smartcast an instance of <code
+            class="language-kotlin">Animal</code> to <code class="language-kotlin">Cat</code>:</p>
+    <pre><code class="language-kotlin">fun main() {
+    val animalList = listOf(Cat(), Dog())
+
+    for (animal in animalList) {
+        if (animal.isCat()) {
+            animal.makeSound() // Compiler smartcasts animal to Cat
+        }
+    }
+}</code></pre>
+    <p>Here we created a list of <code class="language-kotlin">Animal</code> objects and iterated through it. If an
+        object is a <code class="language-kotlin">Cat</code>, the compiler smartcasts it to a <code
+                class="language-kotlin">Cat</code> object and calls the <code class="language-kotlin">makeSound</code>
+        function.</p>
+    <h5 id="callsinplace-contract">"callsInPlace" contract</h5>
+    <p>The <code class="language-kotlin">callsInPlace</code> contract is used to specify that a function parameter
+        lambda is invoked in place. There are four possible invocation kinds: <code
+                class="language-kotlin">AT_MOST_ONCE</code>, <code class="language-kotlin">AT_LEAST_ONCE</code>, <code
+                class="language-kotlin">EXACTLY_ONCE</code>, and <code class="language-kotlin">UNKNOWN</code>. These
+        options allow different behaviors, and their promises are as follows:</p>
+    <ul>
+        <li><code class="language-kotlin">AT_MOST_ONCE</code>: the lambda is invoked zero or one time.</li>
+        <li><code class="language-kotlin">AT_LEAST_ONCE</code>: the lambda is invoked at least one time.</li>
+        <li><code class="language-kotlin">EXACTLY_ONCE</code>: the lambda is invoked exactly one time.</li>
+        <li><code class="language-kotlin">UNKNOWN</code>: the number of invocations is unknown.</li>
+    </ul>
+    <p>The <code class="language-kotlin">callsInPlace</code> contract is especially useful when you know that the lambda
+        will assign a value to a variable but the compiler does not. By using the contract, you can tell the compiler
+        that the lambda will assign a value to the variable, and the compiler will allow the code to be compiled.</p>
+    <pre><code class="language-kotlin">import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
+
+@OptIn(ExperimentalContracts::class)
+fun myRun(block: () -&gt; Unit) {
+      contract {
+            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+          }
+      return block()
+}
+
+fun main() {
+    val x: Int
+    myRun {
+        x = 10 // The compiler is satisfied :)
+    }
+    println(x) // 10
+}</code></pre>
+    <p>In this example, we defined a function <code class="language-kotlin">myRun</code> that takes a lambda function
+        <code class="language-kotlin">block</code> as a parameter and executes it. The <code class="language-kotlin">callsInPlace</code>
+        contract is used to specify that the lambda function <code class="language-kotlin">block</code> is invoked
+        exactly once, in place, within the <code class="language-kotlin">myRun</code> function. This means that the
+        lambda is executed at the location where it is passed as an argument to <code
+                class="language-kotlin">myRun</code>, rather than being deferred or executed at a later time.</p>
+    <p>In the <code class="language-kotlin">main</code> function, a variable <code class="language-kotlin">x</code> of
+        type <code class="language-kotlin">Int</code> is declared as immutable (<code class="language-kotlin">val</code>)
+        but not initialized. The <code class="language-kotlin">myRun</code> function is then called with a lambda that
+        assigns a value to <code class="language-kotlin">x</code>. Due to the contract specified within the <code
+                class="language-kotlin">myRun</code> function, the compiler is aware that the lambda is executed exactly
+        once and therefore does not produce an error for possible reassignment to an immutable (<code
+                class="language-kotlin">val</code>) variable.</p>
+    <h5 id="contracts-in-standard-library">Contracts in standard library</h5>
+    <p>Contracts are widely used in the standard library. Here are some examples:</p>
+    <ul>
+        <li><code class="language-kotlin">isNullOrEmpty</code> extension function:</li>
+    </ul>
+    <pre><code class="language-kotlin">public inline fun CharSequence?.isNullOrEmpty(): Boolean {
+    contract {
+        returns(false) implies (this@isNullOrEmpty != null)
+    }
+
+    return this == null || this.length == 0
+}</code></pre>
+    <ul>
+        <li><code class="language-kotlin">run</code> and other scoped functions:</li>
+    </ul>
+    <pre><code class="language-kotlin">public inline fun &lt;R&gt; run(block: () -&gt; R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return block()
+}</code></pre>
+    <ul>
+        <li><code class="language-kotlin">require</code> and <code class="language-kotlin">check</code> functions:</li>
+    </ul>
+    <pre><code class="language-kotlin">public inline fun require(value: Boolean): Unit {
+    contract {
+        returns() implies value
+    }
+    require(value) { "Failed requirement." }
+}</code></pre>
+    <h5 id="limitations-and-future-of-contracts">Limitations and future of contracts</h5>
+    <p>While contracts are a promising feature, they currently have a few limitations:</p>
+    <ul>
+        <li>They can only be applied to top-level functions with a body.</li>
+        <li>The contract call must be the first statement in the function body.</li>
+        <li>The compiler trusts contracts unconditionally, so it is up to the programmer to ensure that the contracts
+            they write are correct and sound.
+        </li>
+    </ul>
+    <p>It is important to note that the syntax for contracts is currently unstable and may change in the future.
+        However, the binary representation of contracts is stable and already part of <code class="language-kotlin">stdlib</code>.
+        This means that binary artifacts with contracts, such as <code class="language-kotlin">stdlib</code>, will not
+        change without a graceful migration cycle and will have all the usual compatibility guarantees.</p>
+    <h5 id="conclusion">Conclusion</h5>
+    <p>Contracts in Kotlin serve as a great tool to enhance the compiler's understanding of a function's behavior. They
+        allow for explicit declaration of function behavior, enabling the compiler to make intelligent decisions such as
+        smartcasting and variable initialization. The two main types of contracts, <code
+                class="language-kotlin">returns</code>–<code class="language-kotlin">implies</code> and <code
+                class="language-kotlin">callsInPlace</code>, offer different ways to specify function behavior and are
+        widely used in Kotlin's standard library. Despite being an experimental feature with a few limitations,
+        contracts have a stable binary implementation and hold a great potential for future development. As developers,
+        it's crucial to understand and correctly use contracts to optimize code readability and efficiency. Let's have
+        some practice now.</p>
+</div>

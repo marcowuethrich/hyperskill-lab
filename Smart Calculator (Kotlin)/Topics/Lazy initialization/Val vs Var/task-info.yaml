@@ -1,0 +1,20 @@
+type: matching
+captions:
+  - var
+  - val
+  - ""
+options:
+  - lateinit
+  - lateinit()
+  - lazy()
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/19670#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

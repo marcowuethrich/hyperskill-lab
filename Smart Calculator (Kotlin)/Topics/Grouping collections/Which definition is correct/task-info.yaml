@@ -1,0 +1,21 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: "Each key is the index to group by, the value field\_has the first element\
+    \ of the collection that corresponds to that grouping."
+  - text: "Returns a Map where the keys produced by the keySelector function are mapped\
+    \ with values and each value\_is the result of applying the transformation function,\
+    \ valueTransform, to each element of the group."
+  - text: Returns a Map grouped by the key; the value field has all the corresponding
+      elements of the collection.
+  - text: "Each key is the value to group by, the value field\_has the number of the\
+    \ elements of the collection that correspond to that grouping."
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23350#comment
+status: Solved
+record: -1
+custom_name: Which definition is correct?
+local_check: false

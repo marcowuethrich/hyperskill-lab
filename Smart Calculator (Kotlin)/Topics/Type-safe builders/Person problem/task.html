@@ -1,0 +1,29 @@
+<div class="step-text">
+    <p></p>
+    <p>We have the following code:</p>
+    <pre><code class="language-kotlin">data class Person(val name: String, val age: Int)
+
+class PersonBuilder {
+    var name: String = ""
+    var age: Int = 0
+
+    fun name(value: String) {
+        name = value
+    }
+
+    fun age(value: Int) {
+        age = value
+    }
+
+    fun build(): Person {
+        return Person(name, age)
+    }
+}</code></pre>
+    <p>Please code <code class="language-kotlin">buildPerson</code> as a type-safe builder. It takes a lambda with a
+        receiver (<code class="language-kotlin">PersonBuilder.() -&gt; Unit</code>).</p><br><b>Sample Input:</b><br>
+    <pre><code class="language-no-highlight">John 30<br></code></pre>
+    <br><b>Sample Output:</b><br>
+    <pre><code class="language-no-highlight">Person(name=John, age=30)<br></code></pre>
+    <br><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 8
+    seconds</font><br><br>
+</div>

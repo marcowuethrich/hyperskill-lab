@@ -1,0 +1,21 @@
+type: matching
+captions:
+  - LazyThreadSafetyMode.NONE
+  - LazyThreadSafetyMode.SYNCHRONIZED
+  - LazyThreadSafetyMode.PUBLICATION
+options:
+  - we cannot guarantee what value the variable will have
+  - the value returned first will be used
+  - "value will be calculated only in one thread, the other threads will get the same\
+  \ value"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14664#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
