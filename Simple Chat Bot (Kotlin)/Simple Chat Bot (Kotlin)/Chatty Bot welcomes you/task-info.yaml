@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/bot/SimpleBot.kt
+    visible: true
+    learner_created: false
+  - name: test/ChattyBotTest.java
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/126/stages/668/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 26 Sep 2024 18:35:54 UTC"
+record: 1

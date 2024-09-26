@@ -8,4 +8,6 @@ summary: "<p>Here, at the beginning of your programmer’s path, creating a simp
   \ more at <a href=\"https://hyperskill.org/projects/126?utm_source=ide&utm_medium=ide&utm_campaign=ide&utm_content=project-card\"\
   >https://hyperskill.org/projects/126</a>"
 programming_language: Kotlin
+content:
+  - Simple Chat Bot (Kotlin)
 mode: Study
