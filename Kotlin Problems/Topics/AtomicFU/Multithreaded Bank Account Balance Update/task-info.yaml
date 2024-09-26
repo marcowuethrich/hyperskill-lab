@@ -1,0 +1,14 @@
+type: code
+files:
+  - name: src/Main.kt
+    visible: true
+    highlight_level: NONE
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/38456#comment
+status: Failed
+feedback:
+  message: |
+    Failed. Wrong answer
+  time: "Thu, 26 Sep 2024 11:42:18 UTC"
+record: -1
+submission_language: kotlin

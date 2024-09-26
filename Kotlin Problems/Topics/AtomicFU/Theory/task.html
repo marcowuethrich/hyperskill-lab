@@ -1,0 +1,127 @@
+<div class="step-text">
+<h5 id="introduction-to-atomicfu">Introduction to AtomicFU</h5>
+<p>AtomicFU is shorthand for Atomic Functional Updates. This is a library designed to handle atomic operations in Kotlin. Being part of the Kotlin ecosystem, it offers developers a way to build lock-free and thread-safe elements without resorting to <code class="language-kotlin">synchronized</code> blocks or Java's <code class="language-kotlin">Atomic</code> classes.</p>
+<p>AtomicFU's role is to provide a more intuitive Kotlin way to handle atomic operations. It takes advantage of <a class="theory-lookup not-relevant" href="/learn/step/38447" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an inline function is a function that gets expanded in-line at the call site, rather than being called as a separate function. | This means that the code of the inline function gets copied and pasted at the place where the function is called, which can result in more efficient code. Inline functions are useful for optimizing performance-critical code, and are often used with higher-order functions and lambdas in Kotlin. However, it's important to note that overusing inline functions can lead to larger code size, so they should be used judiciously.">inline functions</a> and other characteristics unique to Kotlin to reduce runtime overhead and enhance performance. This is particularly handy for high-speed concurrent algorithms where it's essential to manage state without locking.</p>
+<p>Here's a basic example of how you can use AtomicFU to create an atomic integer:</p>
+<pre><code class="language-kotlin">import kotlinx.atomicfu.atomic
+
+val counter = atomic(0)
+
+fun increment() {
+    counter.incrementAndGet()
+}</code></pre>
+<p>In this piece of code, <code class="language-kotlin">atomic(0)</code> generates an atomic integer, starting from 0. The <code class="language-kotlin">increment()</code> function safely steps up the counter, ensuring thread safety.</p>
+<p>AtomicFU offers various kinds of atomic variables, such as <code class="language-kotlin">AtomicInt</code>, <code class="language-kotlin">AtomicLong</code>, <code class="language-kotlin">AtomicRef</code>, and others, each with methods for performing operations securely in a multi-threaded environment. It also supports complex update operations using the <code class="language-kotlin">update</code> and <code class="language-kotlin">getAndUpdate</code> functions. This can be quite useful when building concurrent data structures or algorithms.</p>
+<p>In general, AtomicFU has carved out a significant place in the Kotlin ecosystem. It enables developers to write efficient, concurrent code without having to rely on wordier and more error-prone Java-based atomic constructs.</p>
+<pre><code class="language-kotlin">val complexState = atomic(MyState())
+
+complexState.update { currentState -&gt;
+    currentState.copy(updatedField = newValue)
+}</code></pre>
+<p>In this example, <code class="language-kotlin">atomic</code> is employed to create a thread-safe reference to a changeable state. This state can be atomically updated with a new value.</p>
+<h5 id="understanding-atomic-variables-with-atomicfu">Understanding Atomic Variables with AtomicFU</h5>
+<p>AtomicFU provides a set of atomic variables essential for thread-safe operations in concurrent programming. These atomic variables are as follows:</p>
+<ul><li><p><strong>Atomic Integers (</strong><code class="language-kotlin">atomicInt</code>): Used for atomic operations on <code class="language-kotlin">Int</code> values.</p></li><li><p><strong>Atomic Longs (</strong><code class="language-kotlin">atomicLong</code>): Like atomic integers but for <code class="language-kotlin">Long</code> values.</p></li><li><p><strong>Atomic References (</strong><code class="language-kotlin">atomic</code>): Used for reference types, ensuring atomic updates for objects.</p></li></ul>
+<p>These variables ensure that updates to a single variable are atomic, meaning they occur as a single, indivisible operation. This is critical in concurrent programming where multiple threads may try to update a variable simultaneously.</p>
+<h5 id="code-snippets">Code Snippets</h5>
+<p>Here's how you can declare and use atomic variables in Kotlin using AtomicFU:</p>
+<pre><code class="language-kotlin">import kotlinx.atomicfu.atomic
+
+// Atomic integer
+val counter = atomic(0)
+
+// Incrementing atomically
+counter.incrementAndGet()
+
+// Atomic reference
+val ref = atomic&lt;Any?&gt;(null)
+
+// Safely update the reference
+ref.compareAndSet(expect = null, update = Any())
+</code></pre>
+<p>AtomicFU provides functions like <code class="language-kotlin">incrementAndGet</code>, <code class="language-kotlin">getAndIncrement</code>, <code class="language-kotlin">compareAndSet</code>, etc., which are used to carry out thread-safe operations. The use of these functions helps prevent issues like race conditions, where the result of concurrent operations could depend on the execution sequence.</p>
+<h5 id="thread-safety">Thread Safety</h5>
+<p>By using atomic variables, you can ensure your program's state remains consistent even when accessed by multiple threads. This is because atomic operations are indivisible and the state can't be seen in an intermediate state.</p>
+<p>To sum it up, AtomicFU's atomic variables are strong tools for writing thread-safe concurrent code in Kotlin, offering a way to perform lock-free and efficient atomic operations.</p>
+<h5 id="atomic-operations-and-performance-with-atomicfu">Atomic Operations and Performance with AtomicFU</h5>
+<p>AtomicFU provides Kotlin developers with a set of atomic operations that substantially enhance performance, in particular for concurrent applications, by reducing the burden of traditional synchronization.</p>
+<h5 id="compare-and-set">Compare-and-Set:</h5>
+<p>The principal operation in atomic algorithms is <code class="language-kotlin">compareAndSet(expect, update)</code>. It atomically updates a value if it's equivalent to the expected value.</p>
+<pre><code class="language-kotlin">
+val counter = atomic(0)
+fun incrementIfEven() {
+    counter.compareAndSet(counter.value, counter.value + 1)
+}
+    </code></pre>
+<h5 id="get-and-increment">Get-and-Increment:</h5>
+<p>A typical atomic operation is <code class="language-kotlin">getAndIncrement()</code>, which is used for counters. It's more efficient than locking.</p>
+<pre><code class="language-kotlin">
+val counter = atomic(0)
+fun incrementCounter() {
+    counter.getAndIncrement()
+}
+    </code></pre>
+<h5 id="update-and-get">Update-and-Get:</h5>
+<p>The <code class="language-kotlin">updateAndGet { }</code> function applies a transformation atomically and returns the new value.</p>
+<pre><code class="language-kotlin">
+val ref = atomic(0)
+fun updateValue() {
+    ref.updateAndGet { it + 1 }
+}
+    </code></pre>
+<h5 id="performance-benefits">Performance Benefits:</h5>
+<p>Atomic operations using AtomicFU outperform traditional synchronization (e.g., <code class="language-kotlin">synchronized</code> blocks or <code class="language-kotlin">ReentrantLocks</code>) by avoiding blocking and reducing context switching. This is particularly beneficial in high-concurrency scenarios where contention for locks can create significant performance bottlenecks.</p>
+<p>In summary, AtomicFU provides Kotlin with lightweight atomic operations that offer a performance edge in concurrent programming by minimizing synchronization overhead and enabling lock-free algorithms.</p>
+<h5 id="integration-with-kotlin-coroutines-and-atomicfu">Integration with Kotlin Coroutines and AtomicFU</h5>
+<p>Kotlin Coroutines simplify <a class="theory-lookup not-relevant" href="/learn/step/38447" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, asynchronous refers to a programming technique that allows operations to be executed in a non-blocking and parallel manner, improving the responsiveness and scalability of an application. | Unlike synchronous or blocking code, asynchronous code does not wait for each operation to complete before moving on to the next one. Instead, it reacts to events such as when a computation is done, a resource becomes available, or a user clicks a button. Asynchronous programming in Kotlin can be achieved through various mechanisms such as callbacks, futures, and reactive extensions. However, one of the most popular and recommended approaches is using coroutines and suspending functions. Coroutines are lightweight threads that can be suspended and resumed, allowing for efficient and easy-to-read asynchronous code. Suspending functions are special functions that can be paused and resumed, making it easier to write asynchronous code that looks and behaves like synchronous code. Using asynchronous programming in Kotlin can help solve problems such as long-running operations that block the main thread and make the application unresponsive. By executing these operations asynchronously, the main thread can continue to handle user input and other events, ensuring a smooth and fast user experience.">asynchronous</a> programming by providing an abstraction over threads. However, when dealing with shared state in a concurrent environment, we need to ensure thread safety. That's where AtomicFU comes in. It provides lock-free and efficient atomic operations, which are crucial for concurrent programming.</p>
+<p>To manage shared state with Kotlin Coroutines and AtomicFU, let's look at the following example:</p>
+<pre><code class="language-kotlin">import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
+val counter = atomic(0)
+
+fun main() {
+    runBlocking {
+        val coroutines = List(100) {
+            GlobalScope.launch {
+                for (i in 1..1000) {
+                    counter.incrementAndGet()
+                }
+            }
+        }
+        coroutines.forEach { it.join() }
+        println(counter.value) // Should print 100000
+    }
+}
+</code></pre>
+<p>In this code snippet, <code class="language-kotlin">counter</code> is an atomic integer from AtomicFU. We launch 100 coroutines, each incrementing the counter 1000 times. The <code class="language-kotlin">incrementAndGet</code> function atomically increases the value and returns the new value, ensuring that even when accessed concurrently, the counter's integrity is maintained.</p>
+<p>With AtomicFU, we avoid the overhead of synchronization (like <code class="language-kotlin">synchronized</code> blocks or <code class="language-kotlin">ReentrantLock</code>), leading to better performance in highly concurrent applications. It's important to note that atomic operations are a low-level tool, and higher-level abstractions like channels or actors provided by Kotlin Coroutines should be preferred for complex concurrency problems.</p>
+<p>By combining Kotlin Coroutines with AtomicFU, developers can write concise, thread-safe code for managing shared state without the complexities of traditional concurrency mechanisms.</p>
+<h5 id="best-practices-and-use-cases-for-atomicfu">Best Practices and Use Cases for AtomicFU</h5>
+<p>AtomicFU is a Kotlin library designed for managing atomic operations and concurrent programming. It leverages Kotlin's language features to provide a safe and efficient way to perform lock-free operations.</p>
+<h5 id="when-to-use-atomicfu">When to Use AtomicFU:</h5>
+<ul><li><p>When working with concurrent data structures.</p></li><li><p>For implementing non-blocking algorithms.</p></li><li><p>When you need more control than what <code class="language-kotlin">synchronized</code> blocks or <code class="language-kotlin">ReentrantLock</code> offer.</p></li></ul>
+<h5 id="common-missteps">Common Missteps:</h5>
+<ul><li><p>Overusing atomics for non-concurrent scenarios leading to unnecessary complexity.</p></li><li><p>Lack of understanding of the hardware memory model can lead to subtle concurrency bugs.</p></li></ul>
+<h5 id="best-practices">Best Practices:</h5>
+<ol><li><p><strong>Minimize Shared State:</strong> Use atomic variables sparingly and only when necessary.</p></li><li><p><strong><a class="theory-lookup not-relevant" href="/learn/step/38447" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, immutable data refers to data that cannot be changed or modified once it has been initialized. | This helps ensure the integrity of the data and prevent unintended modification. Immutable data can be exposed in a safe and controlled manner through the use of read-only properties, which allow external code to access the data without allowing it to be modified. Immutable data is declared using the `val` keyword in Kotlin, as opposed to `var` which allows for reassignment of a new value. Immutability is helpful when you want to store items together without allowing them to be modified in the future. For example, you may have a list of pages in a book that cannot be changed. In contrast, mutable collections allow for operations that change the content of a collection by adding, removing, or updating stored items. For example, you may have a collection of favorite restaurants that can change over time. It is best practice to store values whose origin, purpose, and meaning are unclear in immutable variables, namely constants. Constants are denoted outside of a function or any other function and are completely immutable.">Immutable Data</a>:</strong> Combine atomic operations with immutable data structures to maintain <a class="theory-lookup not-relevant" href="/learn/step/38447" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, thread safety refers to the property of a program or system that ensures consistent and correct behavior when accessed by multiple threads, even when those threads access shared data or resources concurrently. | Classic collections like List, Set, and Map are not thread-safe, which means that concurrent access to these collections can result in unexpected behavior or errors. To achieve thread safety, Kotlin provides synchronized collections like CopyOnWriteArrayList and ConcurrentHashMap, which are designed to handle concurrent access and modifications. However, these collections can have a performance impact.">thread safety</a>.</p></li><li><p><strong>Avoid Blocking:</strong> Atomic operations are meant to be non-blocking; avoid mixing them with locks.</p></li></ol>
+<h5 id="code-snippet">Code Snippet:</h5>
+<pre><code class="language-kotlin">import kotlinx.atomicfu.atomic
+
+val count = atomic(0)
+
+fun incrementCounter() {
+    count.incrementAndGet()
+}
+</code></pre>
+<h5 id="real-world-scenarios">Real-World Scenarios:</h5>
+<ul><li><p><strong>High-Performance Counters:</strong> AtomicFU can be useful when you need to count events or tasks in a simultaneous multi-threaded environment.</p></li><li><p><strong>Concurrent Caches:</strong> When creating a cache accessed by multiple threads, atomic references can help manage the cache state without locking.</p></li><li><p><strong>Non-Blocking Data Structures:</strong> An example would be implementing a lock-free stack or queue.</p></li></ul>
+<p>In conclusion, AtomicFU is a powerful tool in the Kotlin environment for writing complex concurrent code. Apply AtomicFU skillfully and with a clear understanding of concurrent programming principles to realize its full potential.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>AtomicFU is a Kotlin library offering a set of tools for atomic operations, helping developers to write efficient lock-free concurrent code. It provides a more Kotlin-friendly approach to atomic operations, using inline functions and reducing runtime overhead compared to Java's <code class="language-kotlin">Atomic</code> classes. AtomicFU supports various atomic variables such as <code class="language-kotlin">AtomicInt</code>, <code class="language-kotlin">AtomicLong</code>, and <code class="language-kotlin">AtomicRef</code> along with thread-safe operations like <code class="language-kotlin">incrementAndGet</code>, <code class="language-kotlin">compareAndSet</code>, and <code class="language-kotlin">updateAndGet</code>. These operations are vital for maintaining thread safety and constancy in concurrent programming without the performance penalties that come with conventional synchronization methods.</p>
+<p>The integration of AtomicFU with Kotlin Coroutines allows effective shared state management in a concurrent environment, thus sidestepping the complexities related to synchronization. Atomic operations provided by AtomicFU are remarkably beneficial in high-concurrency scenarios, as they outperform conventional synchronization by reducing context switching and blocking.</p>
+<p>When using AtomicFU, best practices include minimizing shared state, combining atomic operations with immutable data structures, and avoiding blocking operations. AtomicFU is well-suited for concurrent data structures, non-blocking algorithms, and scenarios that demand more control than what traditional locking mechanisms offer. However, developers should avoid overusing atomic operations in non-concurrent scenarios, and must possess a good understanding of hardware memory models to prevent subtle concurrency bugs.</p>
+<p>Summing it up, AtomicFU is a valuable addition to the Kotlin environment for developers aiming to craft high-performance concurrent algorithms and data structures. It provides a means to conduct efficient and thread-safe atomic operations.</p>
+</div>

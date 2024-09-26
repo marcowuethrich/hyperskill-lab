@@ -6,7 +6,7 @@
 <pre><code class="language-kotlin">val southernCross = mutableListOf("Acrux", "Gacrux", "Imai", "Mimosa")
 println(southernCross.joinToString())   //  Acrux, Gacrux, Imai, Mimosa</code></pre>
 <p>Remember that <code class="language-kotlin">joinToString()</code> takes elements from a mutable list in the order in which they are stored and presents them as a comma-delimited string line.</p>
-<p>You can also use another delimiter to separate elements :</p>
+<p>You can also use another <a class="theory-lookup not-relevant" href="/learn/step/14902" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a delimiter is a character or a sequence of characters that separates the elements of a string. | It is used to split a string into substrings based on the specified delimiter. The default delimiter is a whitespace. By customizing the delimiter, you can read data differently. For instance, you can use a comma or a colon as a delimiter to read words or integer values separately. The `split()` function is used to divide a string into substrings by a separator, and it returns a list of those substrings.">delimiter</a> to separate elements :</p>
 <pre><code class="language-kotlin">println(southernCross.joinToString(" -&gt; "))   //  Acrux -&gt; Gacrux -&gt; Imai -&gt; Mimosa
 </code></pre>
 <h5 id="working-with-multiple-lists">Working with multiple lists</h5>

@@ -30,3 +30,7 @@ content:
   - Structural vs referential equality
   - Work with MutableLists
   - Functions as objects
+  - Channels
+  - AtomicFU
+  - Structured Concurrency   Cancellation
+  - Сontext and Dispatchers

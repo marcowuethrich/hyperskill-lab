@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Channels are non-blocking and handle suspensions
+  - text: There is no difference
+  - text: Channels are blocking while BlockingQueues are not
+  - text: Channels can hold more data
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/44484#comment
+status: Solved
+record: -1
+local_check: false

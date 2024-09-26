@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Meta-information about the coroutine
+  - text: Data structure that holds coroutine stack frames
+  - text: Data structure that holds information needed for execution
+  - text: Same as the coroutine scope
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20499#comment
+status: Solved
+record: -1
+local_check: false

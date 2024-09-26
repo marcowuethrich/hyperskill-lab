@@ -2,9 +2,9 @@ type: choice
 is_multiple_choice: false
 options:
   - text: "only every three digits, counting from the right."
-  - text: ' before or after a number.'
-  - text: "in any place inside a number, but not near other underscores."
-  - text: in any place inside a number.
+  - text: "in any place inside an integer (between digits), but not near other underscores."
+  - text: before or after an integer.
+  - text: in any place inside an integer (between digits).
 files:
   - name: src/Main.kt
     visible: true

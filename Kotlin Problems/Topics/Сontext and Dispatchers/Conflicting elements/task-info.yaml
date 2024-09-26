@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Both elements are added to context; which one will be used is not defined
+  - text: The first element of the same type takes priority
+  - text: An exception will be thrown
+  - text: "Both elements are added to context, which one will be used is defined by\
+    \ priority"
+  - text: The last element of the same type replaces the previous one
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20503#comment
+status: Solved
+record: -1
+local_check: false
