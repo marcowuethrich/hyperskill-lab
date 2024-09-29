@@ -1,0 +1,15 @@
+type: edu
+custom_name: Error!
+files:
+  - name: src/sorting/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/common/SortingToolStage5Test.kt
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/106/stages/578/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 29 Sep 2024 14:20:30 UTC"
+record: 5

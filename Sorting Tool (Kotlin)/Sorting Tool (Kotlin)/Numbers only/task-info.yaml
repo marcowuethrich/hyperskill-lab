@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/sorting/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/common/SortingToolStage1Test.kt
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/106/stages/574/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 29 Sep 2024 14:13:11 UTC"
+record: 1
