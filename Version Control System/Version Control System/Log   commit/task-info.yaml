@@ -1,0 +1,15 @@
+type: edu
+custom_name: Log & commit
+files:
+  - name: src/svcs/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/Tests.kt
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/177/stages/911/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 29 Sep 2024 14:51:46 UTC"
+record: 3
